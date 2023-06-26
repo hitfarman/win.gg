@@ -1,0 +1,7 @@
+**/.next
+**/public
+*.json
+*.config.js
+*.yaml
+*.md
+*.d.ts
