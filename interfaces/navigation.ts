@@ -4,3 +4,8 @@ export interface INavItem {
   href: string;
   variant?: NavItemVariant;
 }
+
+export interface ISocialMediaLink {
+  href: string;
+  icon: JSX.Element;
+}

@@ -9,3 +9,38 @@
   @apply hover:bg-win-primary-hover;
   @apply mb-1;
 }
+
+.win-primary-button {
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply px-2;
+  @apply py-1;
+  @apply bg-win-primary;
+  @apply hover:bg-win-primary-hover;
+  @apply text-white;
+  @apply transition-colors;
+  @apply border;
+  @apply border-transparent;
+}
+.win-secondary-button {
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply px-2;
+  @apply py-1;
+  @apply bg-transparent;
+  @apply hover:bg-win-primary-hover;
+  @apply text-white;
+  @apply transition-colors;
+  @apply border;
+  @apply border-win-primary;
+}
+
+.svg-icon-button {
+  @apply cursor-pointer;
+  @apply hover:bg-slate-200/30;
+  @apply p-2;
+  @apply rounded-full;
+  @apply transition-colors;
+}
