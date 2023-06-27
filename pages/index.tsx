@@ -10,6 +10,48 @@ const Home = () => {
       <div className="h-10 w-10 bg-win-gray">1</div>
       <div className="h-10 w-10 bg-win-slate">1</div>
       <div className="h-10 w-10 bg-win-white">1</div>
+
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
+      <div className="h-10 w-10 bg-win-primary">1</div>
+      <div className="h-10 w-10 bg-win-black">1</div>
+      <div className="h-10 w-10 bg-win-gray">1</div>
+      <div className="h-10 w-10 bg-win-slate">1</div>
+      <div className="h-10 w-10 bg-win-white">1</div>
     </div>
   );
 };
