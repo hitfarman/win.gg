@@ -1,59 +1,37 @@
+import { getFeaturedPostBySlug } from "@/apollo/posts";
+import FeaturedPosts from "@/components/FeaturedPosts";
+import FeaturedVideos from "@/components/FeaturedVideos";
+import { IFeaturedPost } from "@/interfaces/posts";
+import { GetStaticProps, NextPage } from "next";
 import React from "react";
 
-const Home = () => {
+type Props = {
+  featuredPosts: IFeaturedPost[];
+};
+
+const Home: NextPage<Props> = ({ featuredPosts }) => {
   return (
-    <div>
-      <h1 className="font-header">Testing fonts</h1>
-      <p className="font-header">Testing fonts again</p>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-      <div className="h-10 w-10 bg-win-primary">1</div>
-      <div className="h-10 w-10 bg-win-black">1</div>
-      <div className="h-10 w-10 bg-win-gray">1</div>
-      <div className="h-10 w-10 bg-win-slate">1</div>
-      <div className="h-10 w-10 bg-win-white">1</div>
-    </div>
+    <>
+      {JSON.stringify(featuredPosts, null, 2)}
+      <FeaturedPosts />
+      <FeaturedVideos />
+    </>
   );
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  let featuredPosts: IFeaturedPost[] = [];
+  try {
+    featuredPosts = [
+      await getFeaturedPostBySlug(
+        "new-lol-champion-naafiri-revealed-in-animated-cinematic"
+      )
+    ];
+  } catch (e) {
+    console.log("Fetching posts failed, with cause:", e);
+  }
+
+  return { props: { featuredPosts }, revalidate: 60 * 5 };
+};

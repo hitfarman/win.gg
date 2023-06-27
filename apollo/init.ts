@@ -1,5 +1,6 @@
 import {
   ApolloClient,
+  ApolloLink,
   DefaultOptions,
   HttpLink,
   InMemoryCache,
@@ -32,8 +33,24 @@ const httpLink = new HttpLink({
   uri: `https://${process.env.WP_API_DOMAIN}/graphql`
 });
 
+const authLink = new ApolloLink((operation, forward) => {
+  const basicAuth =
+    "Basic " +
+    btoa(
+      process.env.BASIC_AUTH_USERNAME + ":" + process.env.BASIC_AUTH_PASSWORD
+    );
+
+  operation.setContext({
+    headers: {
+      authorization: basicAuth
+    }
+  });
+
+  return forward(operation);
+});
+
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: from([errorLink, httpLink]),
+  link: from([errorLink, authLink, httpLink]),
   defaultOptions
 });

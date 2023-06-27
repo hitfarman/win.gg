@@ -25,3 +25,27 @@ export interface IPostDetails {
     };
   };
 }
+
+export interface IFeaturedPost {
+  date: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  categories: {
+    nodes: {
+      name: string;
+    };
+  };
+  featuredImage: {
+    node: {
+      altText: string;
+      sourceUrl: string;
+    };
+  };
+  author: {
+    node: {
+      firstName: string;
+      lastName: string;
+    };
+  };
+}
