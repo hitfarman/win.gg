@@ -20,19 +20,19 @@ const navItems: INavItem[] = [
   { title: "POKÉMON", href: "/pokemon" },
   { title: "GTA", href: "/gta" },
   { title: "TWITCH", href: "/twitch" },
-  { title: "REVIEWS", href: "/reviews" }
+  { title: "REVIEWS", href: "/reviews", variant: "button" }
 ];
 
 const Header = () => {
   const { pathname } = useRouter();
   return (
     <header className="fixed inset-x-0 top-0 z-10 bg-black">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 py-7 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="relative">
           <Image className="block h-8 w-auto" src={winLogo} alt="win.gg" />
         </div>
 
-        <nav className="hidden flex-1 items-center justify-center gap-4 md:flex ">
+        <nav className="hidden h-full flex-1 items-center justify-center gap-4 md:flex ">
           {navItems.map((item) => (
             <NavItem
               key={item.title}

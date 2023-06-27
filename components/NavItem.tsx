@@ -11,9 +11,9 @@ const NavItem: FC<Props> = ({ item, isSelected }) => {
   return (
     <Link
       href={item.href}
-      className={`${
-        isSelected ? "border-b-win-primary" : ""
-      } border-b border-black pb-1 font-header text-sm transition-colors hover:border-b-2 hover:border-b-win-primary`}
+      className={`border-b border-transparent pb-1 font-header text-sm font-semibold transition-colors hover:border-b-win-primary ${
+        item.variant === "button" ? "win-nav-button" : ""
+      } ${isSelected ? "border-b-win-primary" : ""}`}
     >
       {item.title}
     </Link>
