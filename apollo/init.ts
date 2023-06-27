@@ -29,7 +29,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: `proxy/graphql`
+  uri: `https://${process.env.WP_API_DOMAIN}/graphql`
 });
 
 export const client = new ApolloClient({
