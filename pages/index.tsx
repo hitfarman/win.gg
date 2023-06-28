@@ -7,6 +7,7 @@ import FeaturedVideos from "@/components/FeaturedVideos";
 import PostList from "@/components/PostList";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IFeaturedPost } from "@/interfaces/posts";
+import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
 
@@ -18,13 +19,15 @@ type Props = {
   homeDescription: string;
   homeTags: IFeaturedTag[];
   featuredVideos: IFeaturedVideo[];
+  featuredReviews: IFeaturedReview[];
 };
 
 const Home: NextPage<Props> = ({
   featuredPosts,
   homeDescription,
   featuredVideos,
-  homeTags
+  homeTags,
+  featuredReviews
 }) => {
   return (
     <>
@@ -36,7 +39,7 @@ const Home: NextPage<Props> = ({
         </div>
         <div className="md:w-4/12">
           <FeaturedTags tags={homeTags} />
-          <FeaturedReviews />
+          <FeaturedReviews reviews={featuredReviews} />
         </div>
       </div>
       {JSON.stringify(homeDescription, null, 2)}
@@ -49,6 +52,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   let featuredPosts: IFeaturedPost[] = [];
   let featuredVideos: IFeaturedVideo[] = [];
+  let featuredReviews: IFeaturedReview[] = [];
   let homeTags: IFeaturedTag[] = [];
   let options: IAllOptionsResponse["options"] | null = null;
   let homeDescription = "";
@@ -65,6 +69,15 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: optionTag.slug,
       term_id: optionTag.term_id
     }));
+    featuredReviews = [
+      options["featured_review_1"],
+      options["featured_review_2"],
+      options["featured_review_3"]
+    ].map((review) => ({
+      id: review.ID,
+      name: review.post_title,
+      slug: review.post_name
+    }));
 
     const featuredPostSlugs = options["homepage-featured-articles"].map(
       (post) => post.post_name
@@ -76,7 +89,13 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   return {
-    props: { featuredPosts, homeDescription, homeTags, featuredVideos },
+    props: {
+      featuredPosts,
+      homeDescription,
+      homeTags,
+      featuredVideos,
+      featuredReviews
+    },
     revalidate: 60 * 5
   };
 };

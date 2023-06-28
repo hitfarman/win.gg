@@ -1,28 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 import FeaturedReviewItem from "./FeaturedReviewItem";
+import { IFeaturedReview } from "@/interfaces/reviews";
 
-type Props = {};
+type Props = {
+  reviews: IFeaturedReview[];
+};
 
-// TODO recieve props
-const reviews = [
-  {
-    name: "The best $800 gaming laptops on the market in 2023",
-    slug: "the-best-800-gaming-laptops-on-the-market-in-2023",
-    id: 1
-  },
-  {
-    name: "The best gaming mousepads to buy in 2023",
-    slug: "the-best-gaming-mousepads-to-buy-in-2023",
-    id: 2
-  },
-  {
-    name: "Maono PD400X and DM30 microphone review",
-    slug: "maono-pd400x-and-dm30-microphone-review3",
-    id: 3
-  }
-];
-
-const FeaturedReviews = (props: Props) => {
+const FeaturedReviews: FC<Props> = ({ reviews }) => {
   return (
     <div>
       <h3 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
