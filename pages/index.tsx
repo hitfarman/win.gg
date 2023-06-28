@@ -4,20 +4,29 @@ import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedVideos from "@/components/FeaturedVideos";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IFeaturedPost } from "@/interfaces/posts";
-import axios from "axios";
+import { IFeaturedTag } from "@/interfaces/tags";
+import { IFeaturedVideo } from "@/interfaces/videos";
+
 import { GetStaticProps, NextPage } from "next";
 import React from "react";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
   homeDescription: string;
+  homeTags: IFeaturedTag[];
+  featuredVideos: IFeaturedVideo[];
 };
 
-const Home: NextPage<Props> = ({ featuredPosts, homeDescription }) => {
+const Home: NextPage<Props> = ({
+  featuredPosts,
+  homeDescription,
+  featuredVideos,
+  homeTags
+}) => {
   return (
     <>
       <FeaturedPosts featuredPosts={featuredPosts} />
-      <FeaturedVideos />
+      <FeaturedVideos featuredVideos={featuredVideos} />
       {JSON.stringify(homeDescription, null, 2)}
     </>
   );
@@ -27,6 +36,8 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   let featuredPosts: IFeaturedPost[] = [];
+  let featuredVideos: IFeaturedVideo[] = [];
+  let homeTags: IFeaturedTag[] = [];
   let options: IAllOptionsResponse["options"] | null = null;
   let homeDescription = "";
   try {
@@ -37,6 +48,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
   if (options) {
     homeDescription = options["homepage-description"];
+    homeTags = options["default-tags"].map((optionTag) => ({
+      name: optionTag.name,
+      slug: optionTag.slug,
+      term_id: optionTag.term_id
+    }));
 
     const featuredPostSlugs = options["homepage-featured-articles"].map(
       (post) => post.post_name
@@ -47,5 +63,8 @@ export const getStaticProps: GetStaticProps = async () => {
     );
   }
 
-  return { props: { featuredPosts, homeDescription }, revalidate: 60 * 5 };
+  return {
+    props: { featuredPosts, homeDescription, homeTags, featuredVideos },
+    revalidate: 60 * 5
+  };
 };
