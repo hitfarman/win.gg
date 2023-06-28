@@ -1,9 +1,19 @@
 export interface IPost {
+  id: string;
   title: string;
-  content: string;
-  uri: string;
-  date: string;
   slug: string;
+  date: string;
+  excerpt: string;
+  author: { node: { firstName: string; lastName: string } };
+  featuredImage: { node: { altText: string; sourceUrl: string } };
+  categories: { nodes: { name: string }[] };
+}
+
+export interface IPaginatedPostsResponse {
+  posts: {
+    edges: { node: IPost }[];
+    pageInfo: { hasNextPage: boolean; endCursor: string };
+  };
 }
 
 export interface IPostDetails {

@@ -1,16 +1,44 @@
 import { gql } from "@apollo/client";
 import { client } from "@/apollo/init";
-import { IFeaturedPost, IPost, IPostDetails } from "@/interfaces/posts";
+import {
+  IFeaturedPost,
+  IPaginatedPostsResponse,
+  IPost,
+  IPostDetails
+} from "@/interfaces/posts";
 
-export const GET_POSTS = gql`
-  query GetAllPosts {
-    posts {
-      nodes {
-        title
-        content
-        uri
-        date
-        slug
+export const GET_PAGINATED_POSTS = gql`
+  query getPosts($first: Int!, $after: String) {
+    posts(first: $first, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          title
+          slug
+          date
+          excerpt
+          author {
+            node {
+              firstName
+              lastName
+            }
+          }
+          featuredImage {
+            node {
+              altText
+              sourceUrl
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+        }
       }
     }
   }
@@ -68,9 +96,15 @@ const GET_FEATURED_POST_BY_SLUG = gql`
   }
 `;
 
-export const getAllPosts = async (): Promise<IPost[]> => {
-  const response = await client.query({ query: GET_POSTS });
-  return response.data.posts.nodes as IPost[];
+export const getPaginatedPosts = async (
+  first: number,
+  after: string | null
+): Promise<IPaginatedPostsResponse> => {
+  const response = await client.query({
+    query: GET_PAGINATED_POSTS,
+    variables: { first, after }
+  });
+  return response.data as IPaginatedPostsResponse;
 };
 
 export const getPostBySlug = async (slug: string): Promise<IPostDetails> => {

@@ -1,4 +1,4 @@
-import { getFeaturedPostBySlug } from "@/apollo/posts";
+import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedReviews from "@/components/FeaturedReviews";
@@ -6,7 +6,7 @@ import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideos from "@/components/FeaturedVideos";
 import PostList from "@/components/PostList";
 import { IAllOptionsResponse } from "@/interfaces/options";
-import { IFeaturedPost } from "@/interfaces/posts";
+import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
@@ -20,6 +20,7 @@ type Props = {
   homeTags: IFeaturedTag[];
   featuredVideos: IFeaturedVideo[];
   featuredReviews: IFeaturedReview[];
+  paginatedPosts: IPaginatedPostsResponse | null;
 };
 
 const Home: NextPage<Props> = ({
@@ -27,15 +28,16 @@ const Home: NextPage<Props> = ({
   homeDescription,
   featuredVideos,
   homeTags,
-  featuredReviews
+  featuredReviews,
+  paginatedPosts
 }) => {
   return (
     <>
       <FeaturedPosts featuredPosts={featuredPosts} />
       <FeaturedVideos featuredVideos={featuredVideos} />
-      <div className="flex flex-col py-10 md:flex-row">
+      <div className="flex flex-col gap-10 py-10 md:flex-row">
         <div className="flex-1">
-          <PostList />
+          <PostList paginatedPosts={paginatedPosts} />
         </div>
         <div className="md:w-4/12">
           <FeaturedTags tags={homeTags} />
@@ -56,6 +58,8 @@ export const getStaticProps: GetStaticProps = async () => {
   let homeTags: IFeaturedTag[] = [];
   let options: IAllOptionsResponse["options"] | null = null;
   let homeDescription = "";
+  let paginatedPosts: IPaginatedPostsResponse | null = null;
+
   try {
     options = await getAllOptions();
   } catch (e) {
@@ -88,13 +92,20 @@ export const getStaticProps: GetStaticProps = async () => {
     );
   }
 
+  try {
+    paginatedPosts = await getPaginatedPosts(20, null);
+  } catch (e) {
+    console.log("Fetching paginated posts failed with cause:", e);
+  }
+
   return {
     props: {
       featuredPosts,
       homeDescription,
       homeTags,
       featuredVideos,
-      featuredReviews
+      featuredReviews,
+      paginatedPosts
     },
     revalidate: 60 * 5
   };
