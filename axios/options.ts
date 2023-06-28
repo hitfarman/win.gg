@@ -1,9 +1,7 @@
 import { IAllOptionsResponse } from "@/interfaces/options";
-import { apiNext } from "./init";
+import { apiSSR } from "./init";
 
-export const getAllOptions = async (): Promise<
-  IAllOptionsResponse["options"]
-> => {
-  const response = await apiNext.get<IAllOptionsResponse>("/options");
-  return response.data.options;
+export const getAllOptions = async (): Promise<IAllOptionsResponse> => {
+  const response = await apiSSR.get<IAllOptionsResponse>("/options/all");
+  return response.data;
 };

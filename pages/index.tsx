@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let featuredVideos: IFeaturedVideo[] = [];
   let featuredReviews: IFeaturedReview[] = [];
   let homeTags: IFeaturedTag[] = [];
-  let options: IAllOptionsResponse["options"] | null = null;
+  let options: IAllOptionsResponse | null = null;
   let homeDescription = "";
   let paginatedPosts: IPaginatedPostsResponse | null = null;
 

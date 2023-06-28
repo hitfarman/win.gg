@@ -34,60 +34,58 @@ export interface IOptionTag {
 }
 
 export interface IAllOptionsResponse {
-  options: {
-    "csgo-description": string;
-    "csgo-featured-articles": IOptionFeaturedPost[];
-    "csgo-tags": IOptionTag[];
+  "csgo-description": string;
+  "csgo-featured-articles": IOptionFeaturedPost[];
+  "csgo-tags": IOptionTag[];
 
-    "default-tags": IOptionTag[];
+  "default-tags": IOptionTag[];
 
-    "dota2-description": string;
-    "dota2-featured-articles": IOptionFeaturedPost[];
-    "dota2-tags": IOptionTag[];
+  "dota2-description": string;
+  "dota2-featured-articles": IOptionFeaturedPost[];
+  "dota2-tags": IOptionTag[];
 
-    "general-tags": IOptionTag[];
+  "general-tags": IOptionTag[];
 
-    "gta-description": string;
-    "gta-featured-articles": IOptionFeaturedPost[];
-    "gta-tags": IOptionTag[];
+  "gta-description": string;
+  "gta-featured-articles": IOptionFeaturedPost[];
+  "gta-tags": IOptionTag[];
 
-    "homepage-description": string;
-    "homepage-featured-articles": IOptionFeaturedPost[];
+  "homepage-description": string;
+  "homepage-featured-articles": IOptionFeaturedPost[];
 
-    "lol-description": string;
-    "lol-featured-articles": IOptionFeaturedPost[];
-    "lol-tags": IOptionTag[];
+  "lol-description": string;
+  "lol-featured-articles": IOptionFeaturedPost[];
+  "lol-tags": IOptionTag[];
 
-    "pokemon-description": string;
-    "pokemon-featured-articles": IOptionFeaturedPost[];
-    "pokemon-tags": IOptionTag[];
+  "pokemon-description": string;
+  "pokemon-featured-articles": IOptionFeaturedPost[];
+  "pokemon-tags": IOptionTag[];
 
-    "reviews-description": string;
-    "reviews-featured-articles": IOptionFeaturedPost[];
-    "reviews-tags": IOptionTag[];
+  "reviews-description": string;
+  "reviews-featured-articles": IOptionFeaturedPost[];
+  "reviews-tags": IOptionTag[];
 
-    "twitch-description": string;
-    "twitch-featured-articles": IOptionFeaturedPost[];
-    "twitch-tags": IOptionTag[];
+  "twitch-description": string;
+  "twitch-featured-articles": IOptionFeaturedPost[];
+  "twitch-tags": IOptionTag[];
 
-    "valorant-description": string;
-    "valorant-featured-articles": IOptionFeaturedPost[];
-    "valorant-tags": IOptionTag[];
+  "valorant-description": string;
+  "valorant-featured-articles": IOptionFeaturedPost[];
+  "valorant-tags": IOptionTag[];
 
-    "videos-tags": IOptionTag[];
+  "videos-tags": IOptionTag[];
 
-    featured_review_1: IOptionFeaturedPost;
-    featured_review_2: IOptionFeaturedPost;
-    featured_review_3: IOptionFeaturedPost;
+  featured_review_1: IOptionFeaturedPost;
+  featured_review_2: IOptionFeaturedPost;
+  featured_review_3: IOptionFeaturedPost;
 
-    featured_video_1: string;
-    featured_video_2: string;
-    featured_video_3: string;
-    featured_video_4: string;
-    featured_video_5: string;
-    featured_video_6: string;
-    featured_video_7: string;
-    featured_video_8: string;
-    featured_video_9: string;
-  };
+  featured_video_1: string;
+  featured_video_2: string;
+  featured_video_3: string;
+  featured_video_4: string;
+  featured_video_5: string;
+  featured_video_6: string;
+  featured_video_7: string;
+  featured_video_8: string;
+  featured_video_9: string;
 }

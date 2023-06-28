@@ -10,7 +10,7 @@ const apiParamsSSR: CreateAxiosDefaults = {
 };
 
 const apiParamsNext: CreateAxiosDefaults = {
-  baseURL: `http://localhost:3000/api`,
+  baseURL: `/api`,
   timeout: 20000
 };
 
