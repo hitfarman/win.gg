@@ -1,7 +1,10 @@
 import { getFeaturedPostBySlug } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import FeaturedPosts from "@/components/FeaturedPosts";
+import FeaturedReviews from "@/components/FeaturedReviews";
+import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideos from "@/components/FeaturedVideos";
+import PostList from "@/components/PostList";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IFeaturedPost } from "@/interfaces/posts";
 import { IFeaturedTag } from "@/interfaces/tags";
@@ -27,6 +30,15 @@ const Home: NextPage<Props> = ({
     <>
       <FeaturedPosts featuredPosts={featuredPosts} />
       <FeaturedVideos featuredVideos={featuredVideos} />
+      <div className="flex flex-col py-10 md:flex-row">
+        <div className="flex-1">
+          <PostList />
+        </div>
+        <div className="md:w-4/12">
+          <FeaturedTags tags={homeTags} />
+          <FeaturedReviews />
+        </div>
+      </div>
       {JSON.stringify(homeDescription, null, 2)}
     </>
   );
