@@ -1,20 +1,24 @@
 import { getFeaturedPostBySlug } from "@/apollo/posts";
+import { getAllOptions } from "@/axios/options";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedVideos from "@/components/FeaturedVideos";
+import { IAllOptionsResponse } from "@/interfaces/options";
 import { IFeaturedPost } from "@/interfaces/posts";
+import axios from "axios";
 import { GetStaticProps, NextPage } from "next";
 import React from "react";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
+  homeDescription: string;
 };
 
-const Home: NextPage<Props> = ({ featuredPosts }) => {
+const Home: NextPage<Props> = ({ featuredPosts, homeDescription }) => {
   return (
     <>
-      {JSON.stringify(featuredPosts, null, 2)}
-      <FeaturedPosts />
+      <FeaturedPosts featuredPosts={featuredPosts} />
       <FeaturedVideos />
+      {JSON.stringify(homeDescription, null, 2)}
     </>
   );
 };
@@ -23,15 +27,25 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   let featuredPosts: IFeaturedPost[] = [];
+  let options: IAllOptionsResponse["options"] | null = null;
+  let homeDescription = "";
   try {
-    featuredPosts = [
-      await getFeaturedPostBySlug(
-        "new-lol-champion-naafiri-revealed-in-animated-cinematic"
-      )
-    ];
+    options = await getAllOptions();
   } catch (e) {
-    console.log("Fetching posts failed, with cause:", e);
+    console.log("Fetching options failed in getStaticProps, with cause:", e);
   }
 
-  return { props: { featuredPosts }, revalidate: 60 * 5 };
+  if (options) {
+    homeDescription = options["homepage-description"];
+
+    const featuredPostSlugs = options["homepage-featured-articles"].map(
+      (post) => post.post_name
+    );
+    // TODO err handling
+    featuredPosts = await Promise.all(
+      featuredPostSlugs.map((slug) => getFeaturedPostBySlug(slug))
+    );
+  }
+
+  return { props: { featuredPosts, homeDescription }, revalidate: 60 * 5 };
 };

@@ -34,7 +34,7 @@ export interface IFeaturedPost {
   categories: {
     nodes: {
       name: string;
-    };
+    }[];
   };
   featuredImage: {
     node: {
