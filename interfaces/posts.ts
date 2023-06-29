@@ -12,7 +12,12 @@ export interface IPost {
 export interface IPaginatedPostsResponse {
   posts: {
     edges: { node: IPost }[];
-    pageInfo: { hasNextPage: boolean; endCursor: string };
+    pageInfo: {
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      endCursor: string;
+      startCursor: string;
+    };
   };
 }
 
@@ -58,4 +63,11 @@ export interface IFeaturedPost {
       lastName: string;
     };
   };
+}
+
+export interface IPostQueryVariables {
+  first: number | null;
+  last: number | null;
+  before: string | null;
+  after: string | null;
 }

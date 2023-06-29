@@ -16,7 +16,8 @@ const PostCard: FC<Props> = ({ post }) => {
         src={post.featuredImage.node.sourceUrl}
         width={350}
         height={250}
-        className="w-full object-cover lg:h-[250px] lg:w-[350px]"
+        className="max-h-[300px] w-full object-cover lg:h-[250px] lg:w-[350px]"
+        sizes="(max-width: 1024px) 100vw, 25vw"
       />
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap gap-2">
@@ -39,7 +40,7 @@ const PostCard: FC<Props> = ({ post }) => {
           <p>{formatDate(post.date)}</p>
         </div>
         <div
-          className="text-sm text-gray-300"
+          className="max-h-16 overflow-hidden text-sm text-gray-300"
           dangerouslySetInnerHTML={{ __html: post.excerpt }}
         />
       </div>

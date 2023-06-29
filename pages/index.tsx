@@ -5,6 +5,7 @@ import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideos from "@/components/FeaturedVideos";
 import PostList from "@/components/PostList";
+import { POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
@@ -93,7 +94,12 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   try {
-    paginatedPosts = await getPaginatedPosts(20, null);
+    paginatedPosts = await getPaginatedPosts({
+      first: POSTS_PER_PAGE,
+      after: null,
+      before: null,
+      last: null
+    });
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);
   }

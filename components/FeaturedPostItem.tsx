@@ -22,9 +22,10 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
       <Image
         alt={featuredPost.featuredImage.node.altText}
         src={featuredPost.featuredImage.node.sourceUrl}
+        priority
         fill
         className="object-cover transition duration-500 group-hover:scale-110"
-        priority
+        sizes="(max-width: 1024px) 100vw, 50vw"
       />
       <div className="absolute inset-0 z-10 flex items-end bg-black/70 p-8">
         <div

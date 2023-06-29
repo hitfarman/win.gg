@@ -30,7 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: `https://${process.env.WP_API_DOMAIN}/graphql`
+  uri: `https://${process.env.NEXT_PUBLIC_WP_API_DOMAIN}/graphql`
 });
 
 const authLink = new ApolloLink((operation, forward) => {

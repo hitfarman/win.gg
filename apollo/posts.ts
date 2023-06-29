@@ -3,14 +3,21 @@ import { client } from "@/apollo/init";
 import {
   IFeaturedPost,
   IPaginatedPostsResponse,
-  IPost,
-  IPostDetails
+  IPostDetails,
+  IPostQueryVariables
 } from "@/interfaces/posts";
 
 export const GET_PAGINATED_POSTS = gql`
-  query getPosts($first: Int!, $after: String) {
-    posts(first: $first, after: $after) {
+  query getPosts(
+    $first: Int = 0
+    $after: String = ""
+    $before: String = ""
+    $last: Int = 0
+  ) {
+    posts(first: $first, after: $after, before: $before, last: $last) {
       pageInfo {
+        startCursor
+        hasPreviousPage
         hasNextPage
         endCursor
       }
@@ -97,12 +104,11 @@ const GET_FEATURED_POST_BY_SLUG = gql`
 `;
 
 export const getPaginatedPosts = async (
-  first: number,
-  after: string | null
+  variables: IPostQueryVariables
 ): Promise<IPaginatedPostsResponse> => {
   const response = await client.query({
     query: GET_PAGINATED_POSTS,
-    variables: { first, after }
+    variables
   });
   return response.data as IPaginatedPostsResponse;
 };
