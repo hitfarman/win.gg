@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const SvgTwitterIcon = (props: Props) => {
+const SvgTwitterIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
