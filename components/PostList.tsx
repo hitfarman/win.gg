@@ -23,8 +23,7 @@ const PostList: FC<Props> = ({ paginatedPosts }) => {
   const {
     loading,
     data: posts,
-    refetch: refetchPosts,
-    updateQuery: updatePosts
+    refetch: refetchPosts
   } = useQuery<IPaginatedPostsResponse>(GET_PAGINATED_POSTS, {
     variables: queryVars || {},
     ssr: false,
