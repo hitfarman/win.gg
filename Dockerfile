@@ -35,7 +35,7 @@ ARG BASIC_AUTH_USERNAME
 ARG BASIC_AUTH_PASSWORD
 
 RUN echo "WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
-RUN echo "NEXT_PUBLIC_WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
+    echo "NEXT_PUBLIC_WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
     echo "BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME" >> ./.env.production && \
     echo "BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD" >> ./.env.production 
 
