@@ -13,8 +13,15 @@ export const GET_PAGINATED_POSTS = gql`
     $after: String = ""
     $before: String = ""
     $last: Int = 0
+    $categoryName: String = ""
   ) {
-    posts(first: $first, after: $after, before: $before, last: $last) {
+    posts(
+      first: $first
+      after: $after
+      before: $before
+      last: $last
+      where: { categoryName: $categoryName }
+    ) {
       pageInfo {
         startCursor
         hasPreviousPage

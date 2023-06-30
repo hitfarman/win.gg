@@ -71,5 +71,5 @@ export interface IPostQueryVariables {
   last: number | null;
   before: string | null;
   after: string | null;
-  where?: { categoryName: string };
+  categoryName?: string;
 }
