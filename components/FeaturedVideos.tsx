@@ -10,7 +10,7 @@ const FeaturedVideos: FC<Props> = ({ featuredVideos }) => {
   return (
     <div className="full-bleed-gray mt-10 bg-win-gray pb-5 pt-10">
       <div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-3">
-        {featuredVideos.slice(0, 3).map((video) => (
+        {featuredVideos.map((video) => (
           <LazyYoutubeVideo
             key={video.url}
             url={video.url}

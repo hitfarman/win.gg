@@ -4,6 +4,7 @@ import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideos from "@/components/FeaturedVideos";
+import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import PostList from "@/components/PostList";
 import { POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
@@ -35,7 +36,7 @@ const Home: NextPage<Props> = ({
   return (
     <>
       <FeaturedPosts featuredPosts={featuredPosts} />
-      <FeaturedVideos featuredVideos={featuredVideos} />
+      <FeaturedVideos featuredVideos={featuredVideos.slice(0, 3)} />
       <div className="flex flex-col gap-10 py-10 md:flex-row">
         <div className="flex-1">
           <PostList paginatedPosts={paginatedPosts} />
@@ -43,6 +44,7 @@ const Home: NextPage<Props> = ({
         <div className="md:w-4/12">
           <FeaturedTags tags={homeTags} />
           <FeaturedReviews reviews={featuredReviews} />
+          <FeaturedVideosSecondary featuredVideos={featuredVideos.slice(3)} />
         </div>
       </div>
       {JSON.stringify(homeDescription, null, 2)}
