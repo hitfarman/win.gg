@@ -2,6 +2,7 @@ import { IFeaturedPost } from "@/interfaces/posts";
 import React, { FC } from "react";
 import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
+import Link from "next/link";
 
 type Props = {
   featuredPost: IFeaturedPost;
@@ -33,9 +34,17 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             variant === "main" ? "gap-3" : "gap-1.5"
           }`}
         >
-          <button className="win-primary-button w-max font-header text-sm font-bold">
-            {featuredPost.categories.nodes[0].name}
-          </button>
+          <div className="flex flex-wrap gap-3">
+            {featuredPost.categories.nodes.map((category) => (
+              <Link
+                key={`${category.slug}-featured-post-id`}
+                href={`/category/${category.slug}`}
+                className="win-primary-button w-max font-header text-sm font-bold"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </div>
           <h3
             className={`font-header text-4xl font-semibold ${
               variant === "secondary" ? "text-lg" : ""

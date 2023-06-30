@@ -43,6 +43,7 @@ export const GET_PAGINATED_POSTS = gql`
           categories {
             nodes {
               name
+              slug
             }
           }
         }
@@ -85,6 +86,7 @@ const GET_FEATURED_POST_BY_SLUG = gql`
       categories {
         nodes {
           name
+          slug
         }
       }
       featuredImage {

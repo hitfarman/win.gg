@@ -24,7 +24,7 @@ const PostCard: FC<Props> = ({ post }) => {
           {post.categories.nodes.map((category) => (
             <Link
               className="win-secondary-button font-header text-xs"
-              href={`/category/${category.name}`}
+              href={`/category/${category.slug}`}
               key={category.name}
             >
               {category.name}

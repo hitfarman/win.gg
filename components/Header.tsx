@@ -6,11 +6,12 @@ import { useRouter } from "next/router";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import NavItem from "./NavItem";
 import Sidebar from "./Sidebar";
+import Link from "next/link";
 
 const navItems: INavItem[] = [
   { title: "CSGO", href: "/csgo" },
-  { title: "DOTA 2", href: "/dota" },
-  { title: "LOL", href: "/league-of-legends" },
+  { title: "DOTA 2", href: "/dota2" },
+  { title: "LOL", href: "/lol" },
   { title: "VALORANT", href: "/valorant" },
   { title: "POKÉMON", href: "/pokemon" },
   { title: "GTA", href: "/gta" },
@@ -28,9 +29,11 @@ const Header = () => {
       <header className="fixed inset-x-0 top-0 z-20 bg-black">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <div className="relative">
-            <Image className="block h-8 w-auto" src={winLogo} alt="win.gg" />
-          </div>
+          <Link href="/" className="cursor-pointer">
+            <div className="relative">
+              <Image className="block h-8 w-auto" src={winLogo} alt="win.gg" />
+            </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden h-full flex-1 items-center justify-center gap-4 md:flex ">

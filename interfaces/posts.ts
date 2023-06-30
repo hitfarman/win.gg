@@ -6,7 +6,7 @@ export interface IPost {
   excerpt: string;
   author: { node: { firstName: string; lastName: string } };
   featuredImage: { node: { altText: string; sourceUrl: string } };
-  categories: { nodes: { name: string }[] };
+  categories: { nodes: { name: string; slug: string }[] };
 }
 
 export interface IPaginatedPostsResponse {
@@ -49,6 +49,7 @@ export interface IFeaturedPost {
   categories: {
     nodes: {
       name: string;
+      slug: string;
     }[];
   };
   featuredImage: {
