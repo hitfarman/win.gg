@@ -1,1 +1,3 @@
-export interface IFeaturedVideo {}
+export interface IFeaturedVideo {
+  url: string;
+}

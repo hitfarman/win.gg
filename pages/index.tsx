@@ -84,6 +84,12 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: review.post_name
     }));
 
+    featuredVideos = Object.keys(options)
+      .filter((key) => key.includes("featured_video_"))
+      .map((key) => ({
+        url: (options![key as keyof IAllOptionsResponse] || "") as string
+      }));
+
     const featuredPostSlugs = options["homepage-featured-articles"].map(
       (post) => post.post_name
     );
