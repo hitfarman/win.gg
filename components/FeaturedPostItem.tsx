@@ -57,7 +57,10 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             <p>{"//"}</p>
             <p>{authorName}</p>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: featuredPost.excerpt }} />
+          <div
+            className="max-h-[52px] overflow-hidden"
+            dangerouslySetInnerHTML={{ __html: featuredPost.excerpt }}
+          />
         </div>
       </div>
     </div>

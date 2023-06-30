@@ -8,12 +8,16 @@ import PostSkeleton from "./PostSkeleton";
 import { useQuery } from "@apollo/client";
 import { GET_PAGINATED_POSTS } from "@/apollo/posts";
 import { POSTS_PER_PAGE } from "@/constants/posts";
+import { useRouter } from "next/router";
 
 type Props = {
   paginatedPosts: IPaginatedPostsResponse | null;
+  categorySlug?: string;
 };
 
-const PostList: FC<Props> = ({ paginatedPosts }) => {
+const PostList: FC<Props> = ({ paginatedPosts, categorySlug }) => {
+  const { query } = useRouter();
+
   // Constant
   const postSkeletons = new Array(POSTS_PER_PAGE).fill(0);
   // State
@@ -42,7 +46,8 @@ const PostList: FC<Props> = ({ paginatedPosts }) => {
             ? posts.posts.pageInfo.endCursor
             : null,
         before: null,
-        last: null
+        last: null,
+        categoryName: categorySlug || ""
       });
     } else {
       setQueryVars({
@@ -54,7 +59,8 @@ const PostList: FC<Props> = ({ paginatedPosts }) => {
             : posts
             ? posts.posts.pageInfo.startCursor
             : null,
-        last: POSTS_PER_PAGE
+        last: POSTS_PER_PAGE,
+        categoryName: categorySlug || ""
       });
     }
     setSkipUseQuery(false);
@@ -65,6 +71,10 @@ const PostList: FC<Props> = ({ paginatedPosts }) => {
       refetchPosts();
     }
   }, [queryVars, refetchPosts]);
+
+  useEffect(() => {
+    setSkipUseQuery(true);
+  }, [query]);
 
   // Memo
   const hasPrevious = useMemo<boolean | undefined>(() => {
@@ -81,7 +91,6 @@ const PostList: FC<Props> = ({ paginatedPosts }) => {
   return (
     <>
       <div>
-        {loading}
         {loading &&
           postSkeletons.map((_skeleton, i) => <PostSkeleton key={i} />)}
         {!loading &&
