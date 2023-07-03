@@ -2,6 +2,7 @@ import { getCategoryInfoBySlug, getCategorySlugs } from "@/apollo/categories";
 import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import CategorySeo from "@/components/CategorySeo";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedTags from "@/components/FeaturedTags";
@@ -50,6 +51,7 @@ const CategoryPage: NextPage<Props> = ({
 }) => {
   return (
     <>
+      <CategorySeo categoryInfo={categoryInfo} />
       <FeaturedPosts featuredPosts={featuredPosts} />
       <div className="mt-10">
         <Breadcrumbs

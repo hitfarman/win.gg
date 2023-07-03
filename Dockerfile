@@ -33,9 +33,11 @@ ENV BUILD_STANDALONE true
 ARG WP_API_DOMAIN
 ARG BASIC_AUTH_USERNAME
 ARG BASIC_AUTH_PASSWORD
+ARG FE_DOMAIN
 
 RUN echo "WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
     echo "NEXT_PUBLIC_WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
+    echo "NEXT_PUBLIC_FE_DOMAIN=$FE_DOMAIN" >> ./.env.production && \
     echo "BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME" >> ./.env.production && \
     echo "BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD" >> ./.env.production 
 
