@@ -9,3 +9,8 @@ export interface ISocialMediaLink {
   href: string;
   icon: JSX.Element;
 }
+
+export interface IBreadcrumb {
+  text: string;
+  url: string;
+}

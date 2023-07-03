@@ -13,9 +13,10 @@ import { useRouter } from "next/router";
 type Props = {
   paginatedPosts: IPaginatedPostsResponse | null;
   categorySlug?: string;
+  title?: string;
 };
 
-const PostList: FC<Props> = ({ paginatedPosts, categorySlug }) => {
+const PostList: FC<Props> = ({ paginatedPosts, categorySlug, title }) => {
   const { query } = useRouter();
 
   // Constant
@@ -90,6 +91,11 @@ const PostList: FC<Props> = ({ paginatedPosts, categorySlug }) => {
 
   return (
     <>
+      {title && (
+        <h3 className="mb-10 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+          {title}
+        </h3>
+      )}
       <div>
         {loading &&
           postSkeletons.map((_skeleton, i) => <PostSkeleton key={i} />)}

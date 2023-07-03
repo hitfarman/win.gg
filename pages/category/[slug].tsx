@@ -1,13 +1,14 @@
-import { getCategorySlugs } from "@/apollo/categories";
+import { getCategoryInfoBySlug, getCategorySlugs } from "@/apollo/categories";
 import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import PostList from "@/components/PostList";
 import { POSTS_PER_PAGE } from "@/constants/posts";
-import { ICategorySlug } from "@/interfaces/categories";
+import { ICategoryInfo, ICategorySlug } from "@/interfaces/categories";
 import {
   IAllOptionsResponse,
   IOptionFeaturedPost,
@@ -34,6 +35,7 @@ type Props = {
   featuredReviews: IFeaturedReview[];
   paginatedPosts: IPaginatedPostsResponse | null;
   slug: string;
+  categoryInfo: ICategoryInfo | null;
 };
 
 const CategoryPage: NextPage<Props> = ({
@@ -43,14 +45,24 @@ const CategoryPage: NextPage<Props> = ({
   categoryTags,
   featuredReviews,
   paginatedPosts,
-  slug
+  slug,
+  categoryInfo
 }) => {
   return (
     <>
       <FeaturedPosts featuredPosts={featuredPosts} />
-      <div className="flex flex-col gap-10 py-10 md:flex-row">
+      <div className="mt-10">
+        <Breadcrumbs
+          crumbs={categoryInfo ? categoryInfo.seo.breadcrumbs : []}
+        />
+      </div>
+      <div className="flex flex-col gap-10 py-5 md:flex-row">
         <div className="flex-1">
-          <PostList paginatedPosts={paginatedPosts} categorySlug={slug} />
+          <PostList
+            paginatedPosts={paginatedPosts}
+            categorySlug={slug}
+            title={categoryInfo?.name}
+          />
         </div>
         <div className="md:w-4/12">
           <FeaturedTags tags={categoryTags} />
@@ -97,6 +109,7 @@ export const getStaticProps: GetStaticProps = async (
   let options: IAllOptionsResponse | null = null;
   let categoryDescription = "";
   let paginatedPosts: IPaginatedPostsResponse | null = null;
+  let categoryInfo: ICategoryInfo | null = null;
 
   try {
     options = await getAllOptions();
@@ -153,6 +166,15 @@ export const getStaticProps: GetStaticProps = async (
     console.log("Fetching paginated posts failed with cause:", e);
   }
 
+  try {
+    categoryInfo = await getCategoryInfoBySlug(slug);
+    categoryInfo.seo.breadcrumbs = [
+      { text: categoryInfo.name, url: `/category/${slug}` }
+    ];
+  } catch (e) {
+    console.log("Fetching category info failed with cause:", e);
+  }
+
   return {
     props: {
       featuredPosts,
@@ -161,7 +183,8 @@ export const getStaticProps: GetStaticProps = async (
       featuredVideos,
       featuredReviews,
       paginatedPosts,
-      slug
+      slug,
+      categoryInfo
     },
     revalidate: 60 * 5
   };

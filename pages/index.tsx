@@ -39,7 +39,7 @@ const Home: NextPage<Props> = ({
       <FeaturedVideos featuredVideos={featuredVideos.slice(0, 3)} />
       <div className="flex flex-col gap-10 py-10 md:flex-row">
         <div className="flex-1">
-          <PostList paginatedPosts={paginatedPosts} />
+          <PostList paginatedPosts={paginatedPosts} title="Latest news" />
         </div>
         <div className="md:w-4/12">
           <FeaturedTags tags={homeTags} />
