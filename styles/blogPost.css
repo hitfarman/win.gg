@@ -1,0 +1,32 @@
+.parsed-blog-post a {
+  @apply text-win-primary;
+  @apply cursor-pointer;
+}
+.parsed-blog-post a:hover {
+  @apply text-win-primary-hover;
+}
+
+.parsed-blog-post h2 {
+  @apply font-header;
+  @apply text-2xl;
+  @apply font-semibold;
+  @apply pb-2;
+}
+
+.parsed-blog-post p {
+  @apply text-sm;
+  @apply pb-2;
+  @apply leading-6;
+}
+
+@media screen and (min-width: 768px) {
+  .parsed-blog-post h2 {
+    @apply text-3xl;
+  }
+
+  .parsed-blog-post p {
+    @apply pb-2;
+    @apply text-base;
+    @apply leading-7;
+  }
+}

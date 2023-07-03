@@ -73,7 +73,7 @@ const CategoryPage: NextPage<Props> = ({
         </div>
       </div>
 
-      <div dangerouslySetInnerHTML={{ __html: categoryDescription }}></div>
+      <div dangerouslySetInnerHTML={{ __html: categoryDescription }} />
     </>
   );
 };

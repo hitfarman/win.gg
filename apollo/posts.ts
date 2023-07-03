@@ -3,6 +3,7 @@ import { client } from "@/apollo/init";
 import {
   IFeaturedPost,
   IPaginatedPostsResponse,
+  IPostBySlugResponse,
   IPostDetails,
   IPostQueryVariables
 } from "@/interfaces/posts";
@@ -62,21 +63,32 @@ export const GET_PAGINATED_POSTS = gql`
 const GET_POST_BY_SLUG = gql`
   query GetPostBySlug($slug: ID!) {
     post(id: $slug, idType: SLUG) {
-      content
-      date
-      slug
-      title
-      status
-      featuredImage {
-        node {
-          sourceUrl
+      categories {
+        edges {
+          node {
+            slug
+            name
+          }
         }
       }
       author {
         node {
-          firstName
           lastName
-          email
+          firstName
+        }
+      }
+      slug
+      seo {
+        fullHead
+      }
+      title
+      date
+      content
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+          title
         }
       }
     }
@@ -123,11 +135,11 @@ export const getPaginatedPosts = async (
 };
 
 export const getPostBySlug = async (slug: string): Promise<IPostDetails> => {
-  const response = await client.query({
+  const response = await client.query<IPostBySlugResponse>({
     query: GET_POST_BY_SLUG,
     variables: { slug }
   });
-  return response.data.post as IPostDetails;
+  return response.data.post;
 };
 
 export const getFeaturedPostBySlug = async (

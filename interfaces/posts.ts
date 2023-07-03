@@ -21,22 +21,31 @@ export interface IPaginatedPostsResponse {
   };
 }
 
+export interface IPostBySlugResponse {
+  post: IPostDetails;
+}
 export interface IPostDetails {
-  content: string;
-  date: string;
-  slug: string;
-  title: string;
-  status: string;
-  featuredImage: {
-    node: {
-      sourceUrl: string;
-    };
+  categories: {
+    edges: { node: { slug: string; name: string } }[];
   };
   author: {
     node: {
-      firstName: string;
       lastName: string;
-      email: string;
+      firstName: string;
+    };
+  };
+  slug: string;
+  seo: {
+    fullHead: string;
+  };
+  title: string;
+  date: string;
+  content: string;
+  featuredImage: {
+    node: {
+      altText: string;
+      sourceUrl: string;
+      title: string;
     };
   };
 }

@@ -10,7 +10,7 @@ type Props = {
 const Breadcrumbs: FC<Props> = ({ crumbs }) => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-4">
+      <ol role="list" className="flex items-center space-x-1 sm:space-x-4">
         <li>
           <div>
             <Link href="/" className="text-gray-400 hover:text-gray-500">
@@ -28,7 +28,7 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
               />
               <Link
                 href={url}
-                className={`ml-4 text-sm font-medium transition-colors ${
+                className={`ml-1 text-xs font-medium transition-colors sm:ml-4 sm:text-sm ${
                   i === crumbs.length - 1
                     ? "text-gray-300 hover:text-gray-500"
                     : "text-gray-500 hover:text-gray-700"

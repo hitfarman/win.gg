@@ -47,7 +47,7 @@ const Home: NextPage<Props> = ({
           <FeaturedVideosSecondary featuredVideos={featuredVideos.slice(3)} />
         </div>
       </div>
-      {JSON.stringify(homeDescription, null, 2)}
+      <div dangerouslySetInnerHTML={{ __html: homeDescription }} />
     </>
   );
 };
