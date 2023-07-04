@@ -19,6 +19,15 @@
   @apply leading-6;
 }
 
+.parsed-blog-post
+  figure.wp-block-embed.is-provider-twitter
+  .wp-block-embed__wrapper {
+  @apply flex;
+  @apply justify-center;
+  @apply w-full;
+  @apply my-5;
+}
+
 @media screen and (min-width: 768px) {
   .parsed-blog-post h2 {
     @apply text-3xl;

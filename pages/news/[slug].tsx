@@ -21,6 +21,8 @@ import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import parse from "html-react-parser";
 import { replaceImage } from "@/utils/replaceImage";
+import RecommendedPosts from "@/components/RecommendedPosts";
+import Head from "next/head";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -39,6 +41,10 @@ const PostPage: NextPage<Props> = ({
 }) => {
   return (
     <>
+      <Head>
+        {parse(post.seo.fullHead)}
+        <script async src="https://platform.twitter.com/widgets.js" />
+      </Head>
       <Breadcrumbs
         crumbs={[
           {
@@ -96,7 +102,7 @@ const PostPage: NextPage<Props> = ({
           <FeaturedVideosSecondary featuredVideos={featuredVideos} />
         </div>
       </div>
-      <div>{JSON.stringify(featuredPosts, null, 10)}</div>
+      <RecommendedPosts posts={featuredPosts} />
     </>
   );
 };
