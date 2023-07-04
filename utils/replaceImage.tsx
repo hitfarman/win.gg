@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const replaceImage = (domNode: DOMNode) => {
   // DOMnode type is not correct
-  const { name, attribs } = domNode as any;
+  const { name, attribs, children } = domNode as any;
 
   if (attribs && /lyMe/.test(attribs.class)) {
     console.log(`https://www.youtube.com/watch?v=${attribs.id}`);
@@ -32,6 +32,16 @@ export const replaceImage = (domNode: DOMNode) => {
           alt={attribs.alt ? attribs.alt : "Blog post image"}
           className="mx-auto"
         />
+      </div>
+    );
+  }
+
+  if (name === "iframe" && attribs.src && /clips.twitch.tv/.test(attribs.src)) {
+    console.log("what is the node here", attribs);
+    attribs.src = `${attribs.src}&parent=${process.env.NEXT_PUBLIC_FE_DOMAIN}`;
+    return (
+      <div className="flex justify-center py-5">
+        <iframe {...attribs}>{children}</iframe>
       </div>
     );
   }

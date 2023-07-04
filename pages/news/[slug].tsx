@@ -23,6 +23,7 @@ import parse from "html-react-parser";
 import { replaceImage } from "@/utils/replaceImage";
 import RecommendedPosts from "@/components/RecommendedPosts";
 import Head from "next/head";
+import Script from "next/script";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -41,10 +42,9 @@ const PostPage: NextPage<Props> = ({
 }) => {
   return (
     <>
-      <Head>
-        {parse(post.seo.fullHead)}
-        <script async src="https://platform.twitter.com/widgets.js" />
-      </Head>
+      <Script src="https://platform.twitter.com/widgets.js" />
+      <Script src="https://player.twitch.tv/js/embed/v1.js" />
+      <Head>{parse(post.seo.fullHead)}</Head>
       <Breadcrumbs
         crumbs={[
           {
