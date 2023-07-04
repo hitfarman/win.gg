@@ -3,12 +3,19 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
+import { useRouter } from "next/router";
 
 type Props = {
   post: IPost;
 };
 
 const PostCard: FC<Props> = ({ post }) => {
+  const router = useRouter();
+
+  const goToPostPage = () => {
+    router.push(`/news/${post.slug}`);
+  };
+
   return (
     <div className="flex flex-col gap-10 pb-5 lg:flex-row">
       <Image
@@ -16,9 +23,11 @@ const PostCard: FC<Props> = ({ post }) => {
         src={post.featuredImage.node.sourceUrl}
         width={350}
         height={250}
-        className="max-h-[300px] w-full object-cover lg:h-[250px] lg:w-[350px]"
+        className="max-h-[300px] w-full cursor-pointer object-cover transition-opacity hover:opacity-70 lg:h-[250px] lg:w-[350px]"
         sizes="(max-width: 1024px) 100vw, 25vw"
+        onClick={goToPostPage}
       />
+
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap gap-2">
           {post.categories.nodes.map((category) => (
@@ -31,7 +40,12 @@ const PostCard: FC<Props> = ({ post }) => {
             </Link>
           ))}
         </div>
-        <h3 className="font-header text-2xl font-semibold">{post.title}</h3>
+        <h3
+          className="cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-primary"
+          onClick={goToPostPage}
+        >
+          {post.title}
+        </h3>
         <div className="flex gap-2 text-sm font-bold text-gray-500">
           <p>
             By {`${post.author.node.firstName} ${post.author.node.lastName}`}

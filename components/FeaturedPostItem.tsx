@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Props = {
   featuredPost: IFeaturedPost;
@@ -13,6 +14,11 @@ type Props = {
 const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
   const authorName = `${featuredPost.author.node.firstName} ${featuredPost.author.node.lastName}`;
   const date = formatDate(featuredPost.date);
+  const router = useRouter();
+
+  const goToPostPage = () => {
+    router.push(`/news/${featuredPost.slug}`);
+  };
 
   return (
     <div
@@ -28,11 +34,15 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
         className="object-cover transition duration-500 group-hover:scale-110"
         sizes="(max-width: 1024px) 100vw, 50vw"
       />
-      <div className="absolute inset-0 z-10 flex items-end bg-black/70 p-8">
+      <div
+        className="absolute inset-0 z-10 flex items-end bg-black/70 p-8"
+        onClick={goToPostPage}
+      >
         <div
           className={`flex flex-col ${
             variant === "main" ? "gap-3" : "gap-1.5"
           }`}
+          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-wrap gap-3">
             {featuredPost.categories.nodes.map((category) => (
@@ -46,9 +56,10 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             ))}
           </div>
           <h3
-            className={`font-header text-4xl font-semibold ${
+            className={`cursor-pointer font-header text-4xl font-semibold transition-colors hover:text-win-primary ${
               variant === "secondary" ? "text-lg" : ""
             }`}
+            onClick={goToPostPage}
           >
             {featuredPost.title}
           </h3>
