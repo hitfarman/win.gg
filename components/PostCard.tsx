@@ -7,9 +7,10 @@ import { useRouter } from "next/router";
 
 type Props = {
   post: IPost;
+  variant?: "fixed-vertical";
 };
 
-const PostCard: FC<Props> = ({ post }) => {
+const PostCard: FC<Props> = ({ post, variant }) => {
   const router = useRouter();
 
   const goToPostPage = () => {
@@ -17,13 +18,17 @@ const PostCard: FC<Props> = ({ post }) => {
   };
 
   return (
-    <div className="flex flex-col gap-10 pb-5 lg:flex-row">
+    <div
+      className={`flex flex-col gap-10 pb-5  ${
+        variant === "fixed-vertical" ? "" : "lg:flex-row"
+      }`}
+    >
       <Image
         alt={post.featuredImage.node.altText}
         src={post.featuredImage.node.sourceUrl}
         width={350}
         height={250}
-        className="max-h-[300px] w-full cursor-pointer object-cover transition-opacity hover:opacity-70 lg:h-[250px] lg:w-[350px]"
+        className=" max-h-[300px] min-h-[160px] w-full cursor-pointer object-cover transition-opacity hover:opacity-70 lg:h-[250px] lg:w-[350px]"
         sizes="(max-width: 1024px) 100vw, 25vw"
         onClick={goToPostPage}
       />

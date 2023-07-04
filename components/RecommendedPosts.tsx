@@ -1,5 +1,6 @@
 import { IFeaturedPost } from "@/interfaces/posts";
 import React, { FC } from "react";
+import PostCard from "./PostCard";
 
 type Props = {
   posts: IFeaturedPost[];
@@ -11,7 +12,15 @@ const RecommendedPosts: FC<Props> = ({ posts }) => {
       <h3 className="mb-10 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
         Recommended
       </h3>
-      <div>{posts.map((post) => post.title)}</div>
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        {posts.map((post, i) => (
+          <PostCard
+            post={{ ...post, id: `${i}-recommended-post` }}
+            variant="fixed-vertical"
+            key={`${i}-recommended-post`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
