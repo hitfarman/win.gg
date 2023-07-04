@@ -24,6 +24,7 @@ import { replaceImage } from "@/utils/replaceImage";
 import RecommendedPosts from "@/components/RecommendedPosts";
 import Head from "next/head";
 import Script from "next/script";
+import { calculateReadingTime } from "@/utils/calculateReadingTime";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -91,7 +92,13 @@ const PostPage: NextPage<Props> = ({
             <p>{formatDate(post.date)}</p>
           </div>
 
-          <div className="mb-5">Reading time: 2min</div>
+          <div className="mb-5 w-max rounded-md bg-win-gray px-4 py-2 text-sm font-semibold">
+            Reading time:{" "}
+            {calculateReadingTime(post.content) === 0
+              ? "<1"
+              : calculateReadingTime(post.content)}{" "}
+            min
+          </div>
           <div className="parsed-blog-post">
             {parse(post.content, { replace: replaceImage })}
           </div>

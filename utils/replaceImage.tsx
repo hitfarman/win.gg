@@ -7,8 +7,6 @@ export const replaceImage = (domNode: DOMNode) => {
   const { name, attribs, children } = domNode as any;
 
   if (attribs && /lyMe/.test(attribs.class)) {
-    console.log(`https://www.youtube.com/watch?v=${attribs.id}`);
-
     const youtubeId = attribs.id.split("_")[1];
 
     return (
@@ -37,7 +35,6 @@ export const replaceImage = (domNode: DOMNode) => {
   }
 
   if (name === "iframe" && attribs.src && /clips.twitch.tv/.test(attribs.src)) {
-    console.log("what is the node here", attribs);
     attribs.src = `${attribs.src}&parent=${process.env.NEXT_PUBLIC_FE_DOMAIN}`;
     return (
       <div className="flex justify-center py-5">
