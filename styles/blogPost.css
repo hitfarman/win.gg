@@ -19,6 +19,13 @@
   @apply leading-6;
 }
 
+.parsed-blog-post ul {
+  list-style: initial;
+  @apply pl-4;
+  @apply pb-5;
+  @apply font-light;
+}
+
 .parsed-blog-post
   figure.wp-block-embed.is-provider-twitter
   .wp-block-embed__wrapper {

@@ -43,9 +43,20 @@ const PostPage: NextPage<Props> = ({
 }) => {
   return (
     <>
-      <Script src="https://platform.twitter.com/widgets.js" />
-      <Script src="https://player.twitch.tv/js/embed/v1.js" />
-      <Head>{parse(post.seo.fullHead)}</Head>
+      <Head>
+        {parse(post.seo.fullHead)}
+        {/* TODO is there a consistent way to do this with next/script? */}
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          onLoad={() => console.log("LOADED TWITTER HERE")}
+        />
+        <script
+          async
+          src="https://player.twitch.tv/js/embed/v1.js"
+          onLoad={() => console.log("LOADED TWITCH")}
+        />
+      </Head>
       <Breadcrumbs
         crumbs={[
           {
