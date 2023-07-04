@@ -38,7 +38,16 @@ export const replaceImage = (domNode: DOMNode) => {
     attribs.src = `${attribs.src}&parent=${process.env.NEXT_PUBLIC_FE_DOMAIN}`;
     return (
       <div className="flex justify-center py-5">
-        <iframe {...attribs}>{children}</iframe>
+        <iframe
+          allowFullScreen
+          loading="lazy"
+          src={attribs.src || ""}
+          height={attribs.height || 300}
+          width={attribs.width || 600}
+          className="border-none"
+        >
+          {children}
+        </iframe>
       </div>
     );
   }
