@@ -23,8 +23,18 @@ import parse from "html-react-parser";
 import { replaceImage } from "@/utils/replaceImage";
 import RecommendedPosts from "@/components/RecommendedPosts";
 import Head from "next/head";
-import Script from "next/script";
 import { calculateReadingTime } from "@/utils/calculateReadingTime";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  RedditShareButton,
+  RedditIcon,
+  TwitterShareButton,
+  TwitterIcon
+} from "next-share";
+import { useRouter } from "next/router";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -41,21 +51,15 @@ const PostPage: NextPage<Props> = ({
   featuredVideos,
   post
 }) => {
+  const { asPath } = useRouter();
+  const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
   return (
     <>
       <Head>
         {parse(post.seo.fullHead)}
         {/* TODO is there a consistent way to do this with next/script? */}
-        <script
-          async
-          src="https://platform.twitter.com/widgets.js"
-          onLoad={() => console.log("LOADED TWITTER HERE")}
-        />
-        <script
-          async
-          src="https://player.twitch.tv/js/embed/v1.js"
-          onLoad={() => console.log("LOADED TWITCH")}
-        />
+        <script async src="https://platform.twitter.com/widgets.js" />
+        <script async src="https://player.twitch.tv/js/embed/v1.js" />
       </Head>
       <Breadcrumbs
         crumbs={[
@@ -104,13 +108,30 @@ const PostPage: NextPage<Props> = ({
             <p>{formatDate(post.date)}</p>
           </div>
 
-          <div className="mb-5 w-max rounded-md bg-win-gray px-4 py-2 text-sm font-semibold">
-            Reading time:{" "}
-            {calculateReadingTime(post.content) === 0
-              ? "<1"
-              : calculateReadingTime(post.content)}{" "}
-            min
+          <div className="mb-5 flex flex-wrap gap-2">
+            <div className="my-2 flex flex-wrap gap-2">
+              <FacebookShareButton url={shareUrl}>
+                <FacebookIcon size={32} round className="win-social-icon" />
+              </FacebookShareButton>
+              <TwitterShareButton url={shareUrl}>
+                <TwitterIcon size={32} round className="win-social-icon" />
+              </TwitterShareButton>
+              <PinterestShareButton media="" url={shareUrl}>
+                <PinterestIcon size={32} round className="win-social-icon" />
+              </PinterestShareButton>
+              <RedditShareButton url={shareUrl}>
+                <RedditIcon size={32} round className="win-social-icon" />
+              </RedditShareButton>
+            </div>
+            <div className="my-2 w-max rounded-md bg-win-gray px-4 py-2 text-sm  font-semibold">
+              Reading time:{" "}
+              {calculateReadingTime(post.content) === 0
+                ? "<1"
+                : calculateReadingTime(post.content)}{" "}
+              min
+            </div>
           </div>
+
           <div className="parsed-blog-post">
             {parse(post.content, { replace: replaceImage })}
           </div>

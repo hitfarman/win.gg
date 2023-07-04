@@ -1,0 +1,8 @@
+.win-social-icon circle {
+  @apply fill-win-primary;
+}
+
+.win-social-icon:hover {
+  @apply scale-110;
+  @apply transition-transform;
+}

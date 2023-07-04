@@ -2,6 +2,7 @@
 @import "@/styles/containers.css";
 @import "@/styles/blogPost.css";
 @import "@/styles/linearLoading.css";
+@import "@/styles/socialIcons.css";
 
 @tailwind base;
 @tailwind components;
