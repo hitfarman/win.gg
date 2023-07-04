@@ -1,6 +1,7 @@
 @import "@/styles/buttons.css";
 @import "@/styles/containers.css";
 @import "@/styles/blogPost.css";
+@import "@/styles/linearLoading.css";
 
 @tailwind base;
 @tailwind components;

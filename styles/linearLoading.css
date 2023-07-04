@@ -1,0 +1,23 @@
+.linear-loading-fade-in {
+  animation: fadeIn 2s linear forwards;
+}
+.linear-loading-animation {
+  animation: slide 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

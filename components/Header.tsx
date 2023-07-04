@@ -1,5 +1,5 @@
 import { INavItem } from "@/interfaces/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import winLogo from "@/assets/img/win-gg-white.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import NavItem from "./NavItem";
 import Sidebar from "./Sidebar";
 import Link from "next/link";
+import LinearLoading from "./LinearLoading";
 
 const navItems: INavItem[] = [
   { title: "CSGO", href: "/csgo" },
@@ -23,6 +24,23 @@ const Header = () => {
   const { pathname } = useRouter();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleStart = () => setIsLoading(true);
+    const handleStop = () => setIsLoading(false);
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleStop);
+    router.events.on("routeChangeError", handleStop);
+
+    return () => {
+      router.events.off("routeChangeStart", () => handleStart);
+      router.events.off("routeChangeComplete", handleStop);
+      router.events.off("routeChangeError", handleStop);
+    };
+  }, [router]);
 
   return (
     <>
@@ -55,6 +73,7 @@ const Header = () => {
             />
           </div>
         </div>
+        {isLoading && <LinearLoading />}
       </header>
       <Sidebar
         isSidebarOpen={isSidebarOpen}
