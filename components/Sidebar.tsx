@@ -1,39 +1,18 @@
-import { INavItem, ISocialMediaLink } from "@/interfaces/navigation";
+import { INavItem } from "@/interfaces/navigation";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { FC, Fragment } from "react";
 import winLogo from "@/assets/img/win-gg-white.png";
 import Image from "next/image";
-import SvgFacebookIcon from "./SvgFacebookIcon";
-import SvgYoutubeIcon from "./SvgYoutubeIcon";
-import SvgInstagramIcon from "./SvgInstagramIcon";
-import SvgTwitterIcon from "./SvgTwitterIcon";
-import SvgTiktokIcon from "./SvgTiktokIcon";
-import SvgRssIcon from "./SvgRssIcon";
 import SocialMediaLink from "./SocialMediaLink";
+import NavSocialLinks from "./NavSocialLinks";
 
 type Props = {
   isSidebarOpen: boolean;
   closeSidebar: () => void;
   navItems: INavItem[];
 };
-
-const socialMediaLinks: ISocialMediaLink[] = [
-  { href: "https://www.youtube.com/c/wingg", icon: <SvgYoutubeIcon /> },
-  {
-    href: "https://www.instagram.com/officialwingg/",
-    icon: <SvgInstagramIcon />
-  },
-  {
-    href: "https://www.facebook.com/officialWINgg/",
-    icon: <SvgFacebookIcon />
-  },
-  { href: "https://twitter.com/officialWINgg", icon: <SvgTwitterIcon /> },
-  { href: "https://www.tiktok.com/@official_wingg", icon: <SvgTiktokIcon /> },
-  // TODO RSS href missing on official page
-  { href: "#", icon: <SvgRssIcon /> }
-];
 
 const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
   return (
@@ -115,11 +94,7 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                     Contact
                   </Link>
                 </div>
-                <div className="mb-3 flex justify-center gap-2">
-                  {socialMediaLinks.map((link) => (
-                    <SocialMediaLink key={link.href} {...link} />
-                  ))}
-                </div>
+                <NavSocialLinks />
               </div>
             </Dialog.Panel>
           </Transition.Child>
