@@ -14,7 +14,7 @@ const footerNavItems: INavItem[] = [
 
 const Footer = () => {
   return (
-    <footer className="full-bleed-black bg-black pb-5">
+    <footer className="full-bleed-black bg-black py-5">
       <div className="mb-5 flex flex-wrap items-center justify-between border-b-2 border-b-white">
         {/* Logo */}
         <Link href="/" className="cursor-pointer">

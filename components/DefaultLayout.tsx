@@ -9,7 +9,7 @@ type Props = {
 
 const DefaultLayout: FC<Props> = ({ children }) => {
   return (
-    <div className="mx-auto flex min-h-screen max-w-7xl flex-col p-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen max-w-7xl flex-col p-4 pb-0 sm:px-6 lg:px-8">
       <Header />
       <main className="flex-[1_1_0] pt-24">{children}</main>
       <Footer />
