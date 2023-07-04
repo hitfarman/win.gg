@@ -3,7 +3,6 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
-import { useRouter } from "next/router";
 
 type Props = {
   post: IPost;
@@ -11,16 +10,12 @@ type Props = {
 };
 
 const PostCard: FC<Props> = ({ post, variant }) => {
-  const router = useRouter();
-
-  const goToPostPage = () => {
-    router.push(`/news/${post.slug}`);
-  };
-
   return (
     <div
-      className={`grid grid-cols-1 grid-rows-[275px_1fr] gap-10 pb-5 lg:grid-rows-[220px_1fr]  ${
-        variant === "fixed-vertical" ? "" : "lg:grid-cols-2"
+      className={`grid grid-cols-1 grid-rows-[275px_1fr] gap-10 pb-5 ${
+        variant === "fixed-vertical"
+          ? "lg:grid-rows-[220px_1fr]"
+          : "lg:grid-cols-2 lg:grid-rows-1"
       }`}
     >
       <Link href={`/news/${post.slug}`} className="h-full">
