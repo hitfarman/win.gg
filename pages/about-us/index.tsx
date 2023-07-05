@@ -47,8 +47,12 @@ const AboutUsPage: NextPage<Props> = ({ pageInfo }) => {
         About us
       </h1>
       <div className="parsed-wp-content mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-        <Image src={heroImg} alt="About us" className="object-contain" />
-        <div>
+        <Image
+          src={heroImg}
+          alt="About us"
+          className="order-2 object-contain md:order-1"
+        />
+        <div className="order-1 md:order-2">
           <p>
             First of all, we love that you’re interested in learning more about
             us! If you’re looking to contact us, please visit our{" "}
