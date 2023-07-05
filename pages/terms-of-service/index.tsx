@@ -4,6 +4,7 @@ import { getPageInfoBySlug } from "@/apollo/pageInfo";
 import { IPageInfo } from "@/interfaces/pageInfo";
 import { GetStaticProps, NextPage } from "next";
 import parse from "html-react-parser";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -11,16 +12,22 @@ type Props = {
 
 const TermsAndServicesPage: NextPage<Props> = ({ pageInfo }) => {
   return (
-    <div className="parsed-wp-content">
+    <>
       <Head>{parse(pageInfo.seo.fullHead)}</Head>
-      <h1 className="mb-5">TERMS OF SERVICE</h1>
+      <Breadcrumbs
+        crumbs={[{ text: "Terms of service", url: "/terms-of-service" }]}
+      />
+      <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+        Terms of Service
+      </h1>
+
       <div
-        className="mb-10"
+        className="parsed-wp-content mb-10"
         dangerouslySetInnerHTML={{
           __html: pageInfo.content
         }}
       />
-    </div>
+    </>
   );
 };
 
