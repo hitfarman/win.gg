@@ -171,7 +171,7 @@ export const getStaticProps: GetStaticProps = async (
   try {
     categoryInfo = await getCategoryInfoBySlug(slug);
     categoryInfo.seo.breadcrumbs = [
-      { text: categoryInfo.name, url: `/category/${slug}` }
+      { text: categoryInfo.name, url: `/${slug}` }
     ];
   } catch (e) {
     console.log("Fetching category info failed with cause:", e);

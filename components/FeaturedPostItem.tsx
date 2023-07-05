@@ -48,7 +48,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             {featuredPost.categories.nodes.map((category) => (
               <Link
                 key={`${category.slug}-featured-post-id`}
-                href={`/category/${category.slug}`}
+                href={`/${category.slug}`}
                 className="win-primary-button w-max font-header text-sm font-bold"
               >
                 {category.name}

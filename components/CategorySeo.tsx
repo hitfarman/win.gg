@@ -19,11 +19,11 @@ const CategorySeo: FC<Props> = ({ categoryInfo }) => {
         />
         <meta
           property="og:url"
-          content={`https://${process.env.NEXT_PUBLIC_FE_DOMAIN}/category/${categoryInfo?.slug}/`}
+          content={`https://${process.env.NEXT_PUBLIC_FE_DOMAIN}/${categoryInfo?.slug}/`}
         />
         <link
           rel="canonical"
-          href={`https://${process.env.NEXT_PUBLIC_FE_DOMAIN}/category/${categoryInfo?.slug}/`}
+          href={`https://${process.env.NEXT_PUBLIC_FE_DOMAIN}/${categoryInfo?.slug}/`}
         />
       </Head>
     </>

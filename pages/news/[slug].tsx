@@ -65,7 +65,7 @@ const PostPage: NextPage<Props> = ({
         crumbs={[
           {
             text: post.categories.edges[0].node.name,
-            url: `/category/${post?.categories.edges[0].node.slug}`
+            url: `/${post?.categories.edges[0].node.slug}`
           },
           {
             text: post.title,
@@ -88,7 +88,7 @@ const PostPage: NextPage<Props> = ({
             {post.categories.edges.map((category) => (
               <Link
                 key={`${category.node.name}-category-btn`}
-                href={`/category/${category.node.slug}`}
+                href={`/${category.node.slug}`}
                 className="win-primary-button"
               >
                 {category.node.name}

@@ -66,7 +66,7 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                 {navItems.map((item) => (
                   <Link
                     key={item.title}
-                    href={`/category${item.href}`}
+                    href={`${item.href}`}
                     className={`px-2 py-1 font-semibold transition-colors hover:bg-slate-200/30    ${
                       item.variant === "button" ? "hover:bg-win-primary/90" : ""
                     }`}
