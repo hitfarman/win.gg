@@ -9,7 +9,7 @@ type Props = {
   pageInfo: IPageInfo;
 };
 
-const ContactPage: NextPage<Props> = ({ pageInfo }) => {
+const PrivacyPolicyPage: NextPage<Props> = ({ pageInfo }) => {
   return (
     <div>
       <Head>{parse(pageInfo.seo.fullHead)}</Head>
@@ -21,13 +21,13 @@ const ContactPage: NextPage<Props> = ({ pageInfo }) => {
   );
 };
 
-export default ContactPage;
+export default PrivacyPolicyPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   let pageInfo: IPageInfo | null = null;
 
   try {
-    pageInfo = await getPageInfoBySlug("contact");
+    pageInfo = await getPageInfoBySlug("privacy-policy");
   } catch (e) {
     console.log("Fetching pageInfo failed in getStaticProps, with cause:", e);
   }

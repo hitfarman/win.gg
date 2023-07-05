@@ -132,7 +132,7 @@ const PostPage: NextPage<Props> = ({
             </div>
           </div>
 
-          <div className="parsed-blog-post">
+          <div className="parsed-wp-content">
             {parse(post.content, { replace: replaceImage })}
           </div>
         </div>
