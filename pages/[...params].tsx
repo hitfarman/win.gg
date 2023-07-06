@@ -1,5 +1,6 @@
 import { getCategoryInfoBySlug, getCategorySlugs } from "@/apollo/categories";
 import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
+import { getAllTagSlugs } from "@/apollo/tags";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CategorySeo from "@/components/CategorySeo";
@@ -17,7 +18,7 @@ import {
 } from "@/interfaces/options";
 import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
-import { IFeaturedTag } from "@/interfaces/tags";
+import { IFeaturedTag, ITagSlug } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
 import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
 import { getFeaturedOptionKeyNamesByCategorySlug } from "@/utils/getFeaturedOptionKeyNamesByCategorySlug";
@@ -36,7 +37,6 @@ type Props = {
   featuredVideos: IFeaturedVideo[];
   featuredReviews: IFeaturedReview[];
   paginatedPosts: IPaginatedPostsResponse | null;
-  slug: string;
   categoryInfo: ICategoryInfo | null;
 };
 
@@ -47,7 +47,6 @@ const CategoryPage: NextPage<Props> = ({
   categoryTags,
   featuredReviews,
   paginatedPosts,
-  slug,
   categoryInfo
 }) => {
   return (
@@ -82,18 +81,30 @@ export default CategoryPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let categories: ICategorySlug[] = [];
+  let tags: ITagSlug[] = [];
   try {
     categories = await getCategorySlugs();
   } catch (e) {
-    console.log("Fetching categories failed, generating paths with []");
+    console.log(
+      "Fetching categories failed, generating paths for categories with []",
+      e
+    );
   }
 
-  const paths: { params: { params: string[] } }[] = categories.map(
-    (category) => ({
-      params: { params: [category.node.slug] }
-    })
-  );
+  try {
+    tags = await getAllTagSlugs();
+  } catch (e) {
+    console.log("Fetching tags failed, generating paths for tags with []", e);
+  }
 
+  const paths: { params: { params: string[] } }[] = [
+    ...tags.map((tag) => ({
+      params: { params: [tag.slug] }
+    })),
+    ...categories.map((category) => ({
+      params: { params: [category.node.slug] }
+    }))
+  ];
   return {
     paths,
     fallback: "blocking"
@@ -188,7 +199,6 @@ export const getStaticProps: GetStaticProps = async (
       featuredVideos,
       featuredReviews,
       paginatedPosts,
-      slug: categorySlug,
       categoryInfo
     },
     revalidate: 60 * 5
