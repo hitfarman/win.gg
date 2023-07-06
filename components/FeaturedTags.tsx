@@ -16,7 +16,7 @@ const FeaturedTags: FC<Props> = ({ tags }) => {
         {tags.map((tag) => (
           <Link
             key={tag.term_id}
-            href={`/tags/${tag.slug}`}
+            href={`/${tag.slug}`}
             className="win-primary-button text-sm lowercase"
           >
             #{tag.name}

@@ -33,7 +33,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         <div className="flex flex-wrap gap-2">
           {post.categories.nodes.map((category) => (
             <Link
-              className="win-secondary-button font-header text-xs"
+              className="win-primary-button font-header text-xs"
               href={`/${category.slug}`}
               key={category.name}
             >
