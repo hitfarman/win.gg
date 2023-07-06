@@ -88,9 +88,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     console.log("Fetching categories failed, generating paths with []");
   }
 
-  const paths: { params: { slug: string } }[] = categories.map((category) => ({
-    params: { slug: category.node.slug }
-  }));
+  const paths: { params: { params: string[] } }[] = categories.map(
+    (category) => ({
+      params: { params: [category.node.slug] }
+    })
+  );
 
   return {
     paths,
@@ -101,8 +103,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
-  const { slug } = context.params as { slug: string };
+  const { params } = context.params as { params: string[] };
   // TODO what if requested slug is not found?
+  const categorySlug = params[0];
 
   let featuredPosts: IFeaturedPost[] = [];
   let featuredVideos: IFeaturedVideo[] = [];
@@ -120,7 +123,8 @@ export const getStaticProps: GetStaticProps = async (
   }
 
   if (options) {
-    const categoryOptionsTag = getFeaturedOptionKeyNamesByCategorySlug(slug);
+    const categoryOptionsTag =
+      getFeaturedOptionKeyNamesByCategorySlug(categorySlug);
     categoryDescription = categoryOptionsTag.description
       ? (options[categoryOptionsTag.description] as string)
       : "";
@@ -162,16 +166,16 @@ export const getStaticProps: GetStaticProps = async (
       after: null,
       before: null,
       last: null,
-      categoryName: slug
+      categoryName: categorySlug
     });
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);
   }
 
   try {
-    categoryInfo = await getCategoryInfoBySlug(slug);
+    categoryInfo = await getCategoryInfoBySlug(categorySlug);
     categoryInfo.seo.breadcrumbs = [
-      { text: categoryInfo.name, url: `/${slug}` }
+      { text: categoryInfo.name, url: `/${categorySlug}` }
     ];
   } catch (e) {
     console.log("Fetching category info failed with cause:", e);
@@ -185,7 +189,7 @@ export const getStaticProps: GetStaticProps = async (
       featuredVideos,
       featuredReviews,
       paginatedPosts,
-      slug,
+      slug: categorySlug,
       categoryInfo
     },
     revalidate: 60 * 5

@@ -8,17 +8,32 @@ import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
-
-import { GetStaticProps, NextPage } from "next";
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  NextPage
+} from "next";
 import React from "react";
 
-const Home: NextPage<IHomePageProps> = (props) => {
+const PaginatedHomepage: NextPage<IHomePageProps> = (props) => {
   return <HomePage {...props} />;
 };
 
-export default Home;
+export default PaginatedHomepage;
 
-export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: "blocking"
+  };
+};
+
+export const getStaticProps: GetStaticProps<IHomePageProps> = async ({
+  params
+}: GetStaticPropsContext) => {
+  const { pageNumber } = params as { pageNumber: string };
+
   let featuredPosts: IFeaturedPost[] = [];
   let featuredVideos: IFeaturedVideo[] = [];
   let featuredReviews: IFeaturedReview[] = [];

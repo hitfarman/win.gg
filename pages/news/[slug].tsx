@@ -83,6 +83,7 @@ const PostPage: NextPage<Props> = ({
             title={post.featuredImage.node.title}
             className="mb-5"
             priority
+            key={post.featuredImage.node.sourceUrl}
           />
           <div className="mb-5 flex flex-wrap">
             {post.categories.edges.map((category) => (
