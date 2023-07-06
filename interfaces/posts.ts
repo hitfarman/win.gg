@@ -13,10 +13,11 @@ export interface IPaginatedPostsResponse {
   posts: {
     edges: { node: IPost }[];
     pageInfo: {
-      hasNextPage: boolean;
-      hasPreviousPage: boolean;
-      endCursor: string;
-      startCursor: string;
+      offsetPagination: {
+        hasMore: boolean;
+        hasPrevious: boolean;
+        total: number;
+      };
     };
   };
 }
@@ -76,9 +77,7 @@ export interface IFeaturedPost {
 }
 
 export interface IPostQueryVariables {
-  first: number | null;
-  last: number | null;
-  before: string | null;
-  after: string | null;
+  offset?: number;
+  size?: number;
   categoryName?: string;
 }

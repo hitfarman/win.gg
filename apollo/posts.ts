@@ -7,27 +7,26 @@ import {
   IPostDetails,
   IPostQueryVariables
 } from "@/interfaces/posts";
+import { POSTS_PER_PAGE } from "@/constants/posts";
 
 export const GET_PAGINATED_POSTS = gql`
-  query getPosts(
-    $first: Int = 0
-    $after: String = ""
-    $before: String = ""
-    $last: Int = 0
+  query getPaginatedPosts(
+    $offset: Int = 0
+    $size: Int = ${POSTS_PER_PAGE}
     $categoryName: String = ""
   ) {
     posts(
-      first: $first
-      after: $after
-      before: $before
-      last: $last
-      where: { categoryName: $categoryName }
+      where: {
+        categoryName: $categoryName
+        offsetPagination: { offset: $offset, size: $size }
+      }
     ) {
       pageInfo {
-        startCursor
-        hasPreviousPage
-        hasNextPage
-        endCursor
+        offsetPagination {
+          hasMore
+          hasPrevious
+          total
+        }
       }
       edges {
         node {

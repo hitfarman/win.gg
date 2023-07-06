@@ -67,10 +67,8 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
 
   try {
     paginatedPosts = await getPaginatedPosts({
-      first: POSTS_PER_PAGE,
-      after: null,
-      before: null,
-      last: null
+      offset: 0,
+      size: POSTS_PER_PAGE
     });
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);

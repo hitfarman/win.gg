@@ -19,6 +19,7 @@ import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
+import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
 import { getFeaturedOptionKeyNamesByCategorySlug } from "@/utils/getFeaturedOptionKeyNamesByCategorySlug";
 import {
   GetStaticPaths,
@@ -62,7 +63,6 @@ const CategoryPage: NextPage<Props> = ({
         <div className="flex-1">
           <PostList
             paginatedPosts={paginatedPosts}
-            categorySlug={slug}
             title={categoryInfo?.name}
           />
         </div>
@@ -106,6 +106,7 @@ export const getStaticProps: GetStaticProps = async (
   const { params } = context.params as { params: string[] };
   // TODO what if requested slug is not found?
   const categorySlug = params[0];
+  const pageNumber = params[2];
 
   let featuredPosts: IFeaturedPost[] = [];
   let featuredVideos: IFeaturedVideo[] = [];
@@ -162,10 +163,8 @@ export const getStaticProps: GetStaticProps = async (
 
   try {
     paginatedPosts = await getPaginatedPosts({
-      first: POSTS_PER_PAGE,
-      after: null,
-      before: null,
-      last: null,
+      size: POSTS_PER_PAGE,
+      offset: pageNumber ? calculatePaginationOffset(Number(pageNumber)) : 0,
       categoryName: categorySlug
     });
   } catch (e) {

@@ -8,6 +8,7 @@ import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
+import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -23,8 +24,14 @@ const PaginatedHomepage: NextPage<IHomePageProps> = (props) => {
 export default PaginatedHomepage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: { params: { pageNumber: string } }[] = [
+    2, 3, 4, 5, 6, 7, 8, 9, 10
+  ].map((pageNumber) => ({
+    params: { pageNumber: `${pageNumber}` }
+  }));
+
   return {
-    paths: [],
+    paths,
     fallback: "blocking"
   };
 };
@@ -82,10 +89,8 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async ({
 
   try {
     paginatedPosts = await getPaginatedPosts({
-      first: POSTS_PER_PAGE,
-      after: null,
-      before: null,
-      last: null
+      size: POSTS_PER_PAGE,
+      offset: calculatePaginationOffset(Number(pageNumber))
     });
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);
