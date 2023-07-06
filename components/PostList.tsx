@@ -1,8 +1,8 @@
 import { IPaginatedPostsResponse } from "@/interfaces/posts";
 import React, { FC } from "react";
 import PostCard from "./PostCard";
-import { generatePageNumbers } from "@/utils/generatePageNumbers";
 import { useRouter } from "next/router";
+import PaginationNumbers from "./PaginationNumbers";
 
 type Props = {
   paginatedPosts: IPaginatedPostsResponse | null;
@@ -64,7 +64,17 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
           <p>Sorry, there are currently no posts available!</p>
         )}
       </div>
-      <div className="flex gap-5">
+
+      <PaginationNumbers
+        className="mt-5 flex flex-wrap justify-center gap-2 text-xs sm:hidden"
+        changePage={changePage}
+        pageNumber={pageNumber}
+        siblingCount={1}
+        total={
+          paginatedPosts?.posts.pageInfo.offsetPagination.total || pageNumber
+        }
+      />
+      <div className="mt-5 flex justify-center gap-5">
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasPrevious && (
           <button
             className="win-secondary-button"
@@ -73,29 +83,15 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
             Previous
           </button>
         )}
-        <div className="flex gap-2">
-          {generatePageNumbers({
-            siblingCount: 1,
-            currentPage: pageNumber,
-            totalCount:
-              paginatedPosts?.posts.pageInfo.offsetPagination.total ||
-              pageNumber
-          }).map((page, i) => (
-            <button
-              key={`${page}-pagination-button-${
-                typeof page === "string" ? i : ""
-              }`}
-              className={`win-secondary-button ${
-                page === pageNumber ? "bg-win-primary-hover" : ""
-              }`}
-              onClick={() => {
-                if (typeof page === "number") changePage("direct", page);
-              }}
-            >
-              {page}
-            </button>
-          ))}
-        </div>
+        <PaginationNumbers
+          className="hidden gap-2 sm:flex"
+          changePage={changePage}
+          pageNumber={pageNumber}
+          siblingCount={1}
+          total={
+            paginatedPosts?.posts.pageInfo.offsetPagination.total || pageNumber
+          }
+        />
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasMore && (
           <button
             className="win-secondary-button"
