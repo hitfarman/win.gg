@@ -1,6 +1,11 @@
 import { gql } from "@apollo/client";
 import { client } from "./init";
-import { IGetTagSlugsResponse, ITagSlug } from "@/interfaces/tags";
+import {
+  IGetTagSlugsResponse,
+  ITagInfo,
+  ITagInfoResponse,
+  ITagSlug
+} from "@/interfaces/tags";
 
 const GET_TAG_SLUGS = gql`
   query GetTagSlugs($after: String = "", $first: Int = 100) {
@@ -12,6 +17,22 @@ const GET_TAG_SLUGS = gql`
         hasNextPage
         endCursor
       }
+    }
+  }
+`;
+
+const GET_TAG_INFO_BY_SLUG = gql`
+  query GetTagInfoBySlug($slug: ID = "", $idType: TagIdType = SLUG) {
+    tag(idType: $idType, id: $slug) {
+      seo {
+        breadcrumbs {
+          text
+          url
+        }
+        fullHead
+      }
+      slug
+      name
     }
   }
 `;
@@ -40,11 +61,13 @@ export const getAllTagSlugs = async (): Promise<ITagSlug[]> => {
     after = res.tags.pageInfo.endCursor;
   }
 
-  console.log("WE FETCHED ALL THE TAG SLUGS", allTagSlugs);
-  console.log(
-    "WE FETCHED ALL THE TAG SLUGS AND THE LENGTH IS",
-    allTagSlugs.length
-  );
-
   return allTagSlugs;
+};
+
+export const getTagInfoBySlug = async (slug: string): Promise<ITagInfo> => {
+  const response = await client.query<ITagInfoResponse>({
+    query: GET_TAG_INFO_BY_SLUG,
+    variables: { slug }
+  });
+  return response.data.tag;
 };

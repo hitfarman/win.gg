@@ -78,12 +78,13 @@ const PostPage: NextPage<Props> = ({
           <Image
             width={800}
             height={350}
-            src={post.featuredImage.node.sourceUrl}
-            alt={post.featuredImage.node.altText}
-            title={post.featuredImage.node.title}
+            // TODO there is no featuredImage
+            src={post.featuredImage?.node.sourceUrl}
+            alt={post.featuredImage?.node.altText}
+            title={post.featuredImage?.node.title}
             className="mb-5"
             priority
-            key={post.featuredImage.node.sourceUrl}
+            key={post.featuredImage?.node.sourceUrl}
           />
           <div className="mb-5 flex flex-wrap">
             {post.categories.edges.map((category) => (

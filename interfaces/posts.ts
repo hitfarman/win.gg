@@ -80,4 +80,5 @@ export interface IPostQueryVariables {
   offset?: number;
   size?: number;
   categoryName?: string;
+  tag?: string;
 }

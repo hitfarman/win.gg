@@ -1,6 +1,6 @@
 import { getCategoryInfoBySlug, getCategorySlugs } from "@/apollo/categories";
 import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
-import { getAllTagSlugs } from "@/apollo/tags";
+import { getAllTagSlugs, getTagInfoBySlug } from "@/apollo/tags";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CategorySeo from "@/components/CategorySeo";
@@ -52,7 +52,9 @@ const CategoryPage: NextPage<Props> = ({
   return (
     <>
       <CategorySeo categoryInfo={categoryInfo} />
-      <FeaturedPosts featuredPosts={featuredPosts} />
+      {featuredPosts.length > 0 && (
+        <FeaturedPosts featuredPosts={featuredPosts} />
+      )}
       <div className="mt-10">
         <Breadcrumbs
           crumbs={categoryInfo ? categoryInfo.seo.breadcrumbs : []}
@@ -116,7 +118,7 @@ export const getStaticProps: GetStaticProps = async (
 ) => {
   const { params } = context.params as { params: string[] };
   // TODO what if requested slug is not found?
-  const categorySlug = params[0];
+  const slug = params[0];
   const pageNumber = params[2];
 
   let featuredPosts: IFeaturedPost[] = [];
@@ -129,78 +131,138 @@ export const getStaticProps: GetStaticProps = async (
   let categoryInfo: ICategoryInfo | null = null;
 
   try {
+    categoryInfo = await getCategoryInfoBySlug(slug);
+  } catch (e) {
+    console.log("Fetching category info failed with cause:", e);
+  }
+
+  try {
     options = await getAllOptions();
   } catch (e) {
     console.log("Fetching options failed in getStaticProps, with cause:", e);
   }
 
-  if (options) {
-    const categoryOptionsTag =
-      getFeaturedOptionKeyNamesByCategorySlug(categorySlug);
-    categoryDescription = categoryOptionsTag.description
-      ? (options[categoryOptionsTag.description] as string)
-      : "";
-    categoryTags = (options[categoryOptionsTag.tags] as IOptionTag[]).map(
-      (optionTag) => ({
+  if (categoryInfo) {
+    categoryInfo.seo.breadcrumbs = [
+      { text: categoryInfo.name, url: `/${slug}` }
+    ];
+
+    if (options) {
+      const categoryOptionsTag = getFeaturedOptionKeyNamesByCategorySlug(slug);
+      categoryDescription = categoryOptionsTag.description
+        ? (options[categoryOptionsTag.description] as string)
+        : "";
+      categoryTags = (options[categoryOptionsTag.tags] as IOptionTag[]).map(
+        (optionTag) => ({
+          name: optionTag.name,
+          slug: optionTag.slug,
+          term_id: optionTag.term_id
+        })
+      );
+      featuredReviews = [
+        options["featured_review_1"],
+        options["featured_review_2"],
+        options["featured_review_3"]
+      ].map((review) => ({
+        id: review.ID,
+        name: review.post_title,
+        slug: review.post_name
+      }));
+
+      featuredVideos = Object.keys(options)
+        .filter((key) => key.includes("featured_video_"))
+        .map((key) => ({
+          url: (options![key as keyof IAllOptionsResponse] || "") as string
+        }));
+
+      const featuredPostSlugs = (
+        options[
+          categoryOptionsTag["featured-articles"]
+        ] as IOptionFeaturedPost[]
+      ).map((post) => post.post_name);
+      // TODO err handling
+      featuredPosts = await Promise.all(
+        featuredPostSlugs.map((slug) => getFeaturedPostBySlug(slug))
+      );
+    }
+
+    try {
+      paginatedPosts = await getPaginatedPosts({
+        size: POSTS_PER_PAGE,
+        offset: pageNumber ? calculatePaginationOffset(Number(pageNumber)) : 0,
+        categoryName: slug
+      });
+    } catch (e) {
+      console.log("Fetching paginated posts failed with cause:", e);
+    }
+
+    return {
+      props: {
+        featuredPosts,
+        categoryDescription,
+        categoryTags,
+        featuredVideos,
+        featuredReviews,
+        paginatedPosts,
+        categoryInfo
+      },
+      revalidate: 60 * 5
+    };
+  } else {
+    if (options) {
+      categoryTags = options["default-tags"].map((optionTag) => ({
         name: optionTag.name,
         slug: optionTag.slug,
         term_id: optionTag.term_id
-      })
-    );
-    featuredReviews = [
-      options["featured_review_1"],
-      options["featured_review_2"],
-      options["featured_review_3"]
-    ].map((review) => ({
-      id: review.ID,
-      name: review.post_title,
-      slug: review.post_name
-    }));
-
-    featuredVideos = Object.keys(options)
-      .filter((key) => key.includes("featured_video_"))
-      .map((key) => ({
-        url: (options![key as keyof IAllOptionsResponse] || "") as string
       }));
 
-    const featuredPostSlugs = (
-      options[categoryOptionsTag["featured-articles"]] as IOptionFeaturedPost[]
-    ).map((post) => post.post_name);
-    // TODO err handling
-    featuredPosts = await Promise.all(
-      featuredPostSlugs.map((slug) => getFeaturedPostBySlug(slug))
-    );
-  }
+      featuredReviews = [
+        options["featured_review_1"],
+        options["featured_review_2"],
+        options["featured_review_3"]
+      ].map((review) => ({
+        id: review.ID,
+        name: review.post_title,
+        slug: review.post_name
+      }));
 
-  try {
-    paginatedPosts = await getPaginatedPosts({
-      size: POSTS_PER_PAGE,
-      offset: pageNumber ? calculatePaginationOffset(Number(pageNumber)) : 0,
-      categoryName: categorySlug
-    });
-  } catch (e) {
-    console.log("Fetching paginated posts failed with cause:", e);
-  }
+      featuredVideos = Object.keys(options)
+        .filter((key) => key.includes("featured_video_"))
+        .map((key) => ({
+          url: (options![key as keyof IAllOptionsResponse] || "") as string
+        }));
+    }
 
-  try {
-    categoryInfo = await getCategoryInfoBySlug(categorySlug);
-    categoryInfo.seo.breadcrumbs = [
-      { text: categoryInfo.name, url: `/${categorySlug}` }
-    ];
-  } catch (e) {
-    console.log("Fetching category info failed with cause:", e);
-  }
+    try {
+      paginatedPosts = await getPaginatedPosts({
+        size: POSTS_PER_PAGE,
+        offset: pageNumber ? calculatePaginationOffset(Number(pageNumber)) : 0,
+        tag: slug
+      });
+    } catch (e) {
+      console.log("Fetching paginated posts failed with cause:", e);
+    }
 
-  return {
-    props: {
-      featuredPosts,
-      categoryDescription,
-      categoryTags,
-      featuredVideos,
-      featuredReviews,
-      paginatedPosts,
-      categoryInfo
-    },
-    revalidate: 60 * 5
-  };
+    try {
+      categoryInfo = await getTagInfoBySlug(slug);
+      categoryInfo.seo.breadcrumbs = [
+        { text: categoryInfo.name, url: `/${slug}` }
+      ];
+    } catch (e) {
+      console.log("Fetching category info failed with cause:", e);
+    }
+
+    return {
+      props: {
+        featuredPosts,
+        categoryDescription,
+        categoryTags,
+        featuredVideos,
+        featuredReviews,
+        paginatedPosts,
+        categoryInfo
+      },
+      revalidate: 60 * 5
+    };
+  }
 };

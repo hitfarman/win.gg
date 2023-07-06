@@ -20,7 +20,7 @@ const GET_CATEGORY_SLUGS = gql`
   }
 `;
 
-const GET_CATEGORY_INFO_BY_SLUGS = gql`
+const GET_CATEGORY_INFO_BY_SLUG = gql`
   query GetCategoryBySlug($slug: ID = "") {
     category(id: $slug, idType: SLUG) {
       name
@@ -47,7 +47,7 @@ export const getCategoryInfoBySlug = async (
   slug: string
 ): Promise<ICategoryInfo> => {
   const response = await client.query<ICategoryInfoResponse>({
-    query: GET_CATEGORY_INFO_BY_SLUGS,
+    query: GET_CATEGORY_INFO_BY_SLUG,
     variables: { slug }
   });
   return response.data.category;

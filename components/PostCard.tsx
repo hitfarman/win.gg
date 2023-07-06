@@ -20,8 +20,8 @@ const PostCard: FC<Props> = ({ post, variant }) => {
     >
       <Link href={`/news/${post.slug}`} className="h-full">
         <Image
-          alt={post.featuredImage.node.altText}
-          src={post.featuredImage.node.sourceUrl}
+          alt={post.featuredImage?.node.altText}
+          src={post.featuredImage?.node.sourceUrl}
           width={350}
           height={250}
           className="h-full w-full object-cover transition-opacity hover:opacity-70"

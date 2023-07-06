@@ -14,9 +14,11 @@ export const GET_PAGINATED_POSTS = gql`
     $offset: Int = 0
     $size: Int = ${POSTS_PER_PAGE}
     $categoryName: String = ""
+    $tag: String = ""
   ) {
     posts(
       where: {
+        tag: $tag
         categoryName: $categoryName
         offsetPagination: { offset: $offset, size: $size }
       }
