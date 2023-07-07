@@ -1,6 +1,10 @@
 import { getPaginatedPosts } from "@/apollo/posts";
 import { getAuthorBySlug } from "@/apollo/users";
 import { getAllOptions } from "@/axios/options";
+import FeaturedReviews from "@/components/FeaturedReviews";
+import FeaturedTags from "@/components/FeaturedTags";
+import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
+import PostList from "@/components/PostList";
 import { POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IPaginatedPostsResponse } from "@/interfaces/posts";
@@ -13,7 +17,11 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import Head from "next/head";
 import React from "react";
+import parse from "html-react-parser";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import Image from "next/image";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -23,8 +31,54 @@ type Props = {
   author: IAuthor;
 };
 
-const AuthorPage: NextPage<Props> = (props) => {
-  return <div>{JSON.stringify(props, null, 10)}</div>;
+const AuthorPage: NextPage<Props> = ({
+  author,
+  featuredReviews,
+  featuredTags,
+  featuredVideos,
+  paginatedPosts
+}) => {
+  return (
+    <>
+      <Head>{parse(author.seo.fullHead)}</Head>
+      <div className="my-10">
+        <Breadcrumbs
+          crumbs={[{ text: author.name, url: `/news/author/${author.slug}` }]}
+        />
+      </div>
+      <h1 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+        {author.name}
+      </h1>
+      <div className="flex flex-col gap-5 border-b-2 border-b-white py-10 md:flex-row">
+        <Image
+          src={author.avatar.url}
+          alt={author.name}
+          width={100}
+          height={100}
+          className="rounded-full object-cover md:self-center"
+          priority
+        />
+        <div className="flex-1">
+          <h2 className="mb-2 font-header text-xl font-semibold sm:text-2xl">
+            About the author
+          </h2>
+          <p className="text-sm text-win-slate sm:text-base">
+            {author.description || `${author.name} ,author at WIN.gg`}
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col gap-10 py-10 md:flex-row">
+        <div className="flex-1">
+          <PostList paginatedPosts={paginatedPosts} title="" />
+        </div>
+        <div className="md:w-4/12">
+          <FeaturedTags tags={featuredTags} />
+          <FeaturedReviews reviews={featuredReviews} />
+          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default AuthorPage;

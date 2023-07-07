@@ -8,6 +8,7 @@ export interface IAuthor {
   seo: {
     fullHead: string;
   };
+  slug: string;
 }
 
 export interface IGetUsersBySlugResponse {

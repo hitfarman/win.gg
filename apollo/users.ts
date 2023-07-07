@@ -16,6 +16,7 @@ const GET_USERS_BY_SLUG = gql`
           seo {
             fullHead
           }
+          slug
         }
       }
     }
