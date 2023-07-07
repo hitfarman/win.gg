@@ -15,12 +15,14 @@ export const GET_PAGINATED_POSTS = gql`
     $size: Int = ${POSTS_PER_PAGE}
     $categoryName: String = ""
     $tag: String = ""
+    $authorName: String = ""
   ) {
     posts(
       where: {
         tag: $tag
         categoryName: $categoryName
         offsetPagination: { offset: $offset, size: $size }
+        authorName: $authorName
       }
     ) {
       pageInfo {
@@ -39,6 +41,7 @@ export const GET_PAGINATED_POSTS = gql`
           excerpt
           author {
             node {
+              slug
               firstName
               lastName
             }
@@ -74,6 +77,7 @@ const GET_POST_BY_SLUG = gql`
       }
       author {
         node {
+          slug
           lastName
           firstName
         }
@@ -117,6 +121,7 @@ const GET_FEATURED_POST_BY_SLUG = gql`
       }
       author {
         node {
+          slug
           firstName
           lastName
         }

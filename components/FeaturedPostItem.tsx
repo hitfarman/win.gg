@@ -66,7 +66,12 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           <div className="flex items-center gap-2 text-xs font-bold">
             <p>{date}</p>
             <p>{"//"}</p>
-            <p>{authorName}</p>
+            <Link
+              href={`/news/author/${featuredPost.author.node.slug}`}
+              className="transition-colors hover:text-gray-300"
+            >
+              {authorName}
+            </Link>
           </div>
           <div
             className="max-h-[52px] overflow-hidden"

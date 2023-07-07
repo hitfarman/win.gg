@@ -4,7 +4,7 @@ export interface IPost {
   slug: string;
   date: string;
   excerpt: string;
-  author: { node: { firstName: string; lastName: string } };
+  author: { node: { firstName: string; lastName: string; slug: string } };
   featuredImage: { node: { altText: string; sourceUrl: string } };
   categories: { nodes: { name: string; slug: string }[] };
 }
@@ -31,6 +31,7 @@ export interface IPostDetails {
   };
   author: {
     node: {
+      slug: string;
       lastName: string;
       firstName: string;
     };
@@ -70,6 +71,7 @@ export interface IFeaturedPost {
   };
   author: {
     node: {
+      slug: string;
       firstName: string;
       lastName: string;
     };
@@ -81,4 +83,5 @@ export interface IPostQueryVariables {
   size?: number;
   categoryName?: string;
   tag?: string;
+  authorName?: string;
 }
