@@ -1,5 +1,5 @@
 import { getCategoryInfoBySlug, getCategorySlugs } from "@/apollo/categories";
-import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
+import { getPaginatedPosts } from "@/apollo/posts";
 import { getAllTagSlugs, getTagInfoBySlug } from "@/apollo/tags";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -31,6 +31,10 @@ import {
 import React from "react";
 import parse from "html-react-parser";
 import { replaceImage } from "@/utils/replaceImage";
+import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
+import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
+import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
+import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -121,7 +125,6 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const { params } = context.params as { params: string[] };
-  // TODO what if requested slug is not found?
   const slug = params[0];
   const pageNumber = params[2];
 
@@ -146,7 +149,15 @@ export const getStaticProps: GetStaticProps = async (
     console.log("Fetching options failed in getStaticProps, with cause:", e);
   }
 
+  if (options) {
+    // These props are currently the same for both category and tags sub-pages
+    featuredReviews = extractFeaturedReviews(options);
+    featuredVideos = extractFeaturedVideos(options);
+  }
+
   if (categoryInfo) {
+    // The slug was for a category
+    // Run all logic for category
     categoryInfo.seo.breadcrumbs = [
       { text: categoryInfo.name, url: `/${slug}` }
     ];
@@ -156,37 +167,13 @@ export const getStaticProps: GetStaticProps = async (
       categoryDescription = categoryOptionsTag.description
         ? (options[categoryOptionsTag.description] as string)
         : "";
-      categoryTags = (options[categoryOptionsTag.tags] as IOptionTag[]).map(
-        (optionTag) => ({
-          name: optionTag.name,
-          slug: optionTag.slug,
-          term_id: optionTag.term_id
-        })
+      categoryTags = extractFeaturedTags(
+        options[categoryOptionsTag.tags] as IOptionTag[]
       );
-      featuredReviews = [
-        options["featured_review_1"],
-        options["featured_review_2"],
-        options["featured_review_3"]
-      ].map((review) => ({
-        id: review.ID,
-        name: review.post_title,
-        slug: review.post_name
-      }));
-
-      featuredVideos = Object.keys(options)
-        .filter((key) => key.includes("featured_video_"))
-        .map((key) => ({
-          url: (options![key as keyof IAllOptionsResponse] || "") as string
-        }));
-
-      const featuredPostSlugs = (
+      featuredPosts = await extractFeaturedPosts(
         options[
           categoryOptionsTag["featured-articles"]
         ] as IOptionFeaturedPost[]
-      ).map((post) => post.post_name);
-      // TODO err handling
-      featuredPosts = await Promise.all(
-        featuredPostSlugs.map((slug) => getFeaturedPostBySlug(slug))
       );
     }
 
@@ -199,42 +186,11 @@ export const getStaticProps: GetStaticProps = async (
     } catch (e) {
       console.log("Fetching paginated posts failed with cause:", e);
     }
-
-    return {
-      props: {
-        featuredPosts,
-        categoryDescription,
-        categoryTags,
-        featuredVideos,
-        featuredReviews,
-        paginatedPosts,
-        categoryInfo
-      },
-      revalidate: 60 * 5
-    };
   } else {
+    // The slug was for a tag
+    // Run all logic for tag
     if (options) {
-      categoryTags = options["default-tags"].map((optionTag) => ({
-        name: optionTag.name,
-        slug: optionTag.slug,
-        term_id: optionTag.term_id
-      }));
-
-      featuredReviews = [
-        options["featured_review_1"],
-        options["featured_review_2"],
-        options["featured_review_3"]
-      ].map((review) => ({
-        id: review.ID,
-        name: review.post_title,
-        slug: review.post_name
-      }));
-
-      featuredVideos = Object.keys(options)
-        .filter((key) => key.includes("featured_video_"))
-        .map((key) => ({
-          url: (options![key as keyof IAllOptionsResponse] || "") as string
-        }));
+      categoryTags = extractFeaturedTags(options["default-tags"]);
     }
 
     try {
@@ -255,18 +211,18 @@ export const getStaticProps: GetStaticProps = async (
     } catch (e) {
       console.log("Fetching category info failed with cause:", e);
     }
-
-    return {
-      props: {
-        featuredPosts,
-        categoryDescription,
-        categoryTags,
-        featuredVideos,
-        featuredReviews,
-        paginatedPosts,
-        categoryInfo
-      },
-      revalidate: 60 * 5
-    };
   }
+
+  return {
+    props: {
+      featuredPosts,
+      categoryDescription,
+      categoryTags,
+      featuredVideos,
+      featuredReviews,
+      paginatedPosts,
+      categoryInfo
+    },
+    revalidate: 60 * 5
+  };
 };
