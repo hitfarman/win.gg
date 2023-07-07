@@ -18,14 +18,15 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
   const changePage = (type: "next" | "prev" | "direct", to?: number) => {
     if (type === "next") {
       if (!pageParamIsInUrl) {
-        return push(`${asPath}/page/2`);
+        return push(
+          `${asPath}${asPath[asPath.length - 1] === "/" ? "" : "/"}page/2`
+        );
       }
 
       return push(
         asPath.replace(`/page/${pageNumber}`, `/page/${pageNumber + 1}`)
       );
     }
-
     if (type === "prev") {
       if (pageNumber === 2) {
         return push(asPath.replace(`/page/${pageNumber}`, "/"));
@@ -41,7 +42,9 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
       }
 
       if (!pageParamIsInUrl) {
-        return push(`${asPath}/page/${to}`);
+        return push(
+          `${asPath}${asPath[asPath.length - 1] === "/" ? "" : "/"}page/${to}`
+        );
       }
 
       return push(asPath.replace(`/page/${pageNumber}`, `/page/${to}`));

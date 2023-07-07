@@ -1,4 +1,4 @@
-import { getFeaturedPostBySlug, getPaginatedPosts } from "@/apollo/posts";
+import { getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import HomePage from "@/components/HomePage";
 import { POSTS_PER_PAGE } from "@/constants/posts";
@@ -8,7 +8,10 @@ import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
-
+import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
+import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
+import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
+import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { GetStaticProps, NextPage } from "next";
 import React from "react";
 
@@ -35,33 +38,14 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
 
   if (options) {
     homeDescription = options["homepage-description"];
-    homeTags = options["default-tags"].map((optionTag) => ({
-      name: optionTag.name,
-      slug: optionTag.slug,
-      term_id: optionTag.term_id
-    }));
-    featuredReviews = [
-      options["featured_review_1"],
-      options["featured_review_2"],
-      options["featured_review_3"]
-    ].map((review) => ({
-      id: review.ID,
-      name: review.post_title,
-      slug: review.post_name
-    }));
 
-    featuredVideos = Object.keys(options)
-      .filter((key) => key.includes("featured_video_"))
-      .map((key) => ({
-        url: (options![key as keyof IAllOptionsResponse] || "") as string
-      }));
+    homeTags = extractFeaturedTags(options["default-tags"]);
+    featuredReviews = extractFeaturedReviews(options);
 
-    const featuredPostSlugs = options["homepage-featured-articles"].map(
-      (post) => post.post_name
-    );
-    // TODO err handling
-    featuredPosts = await Promise.all(
-      featuredPostSlugs.map((slug) => getFeaturedPostBySlug(slug))
+    featuredVideos = extractFeaturedVideos(options);
+
+    featuredPosts = await extractFeaturedPosts(
+      options["homepage-featured-articles"]
     );
   }
 
