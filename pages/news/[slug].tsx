@@ -1,4 +1,4 @@
-import { getFeaturedPostBySlug, getPostBySlug } from "@/apollo/posts";
+import { getPostBySlug } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FeaturedReviews from "@/components/FeaturedReviews";
@@ -35,6 +35,10 @@ import {
   TwitterIcon
 } from "next-share";
 import { useRouter } from "next/router";
+import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
+import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
+import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
+import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -194,36 +198,16 @@ export const getServerSideProps: GetServerSideProps = async ({
       post?.categories.edges.length ? post.categories.edges[0].node.slug : ""
     );
 
-    featuredTags = (options[optionsTags.tags] as IOptionTag[]).map(
-      (optionTag) => ({
-        name: optionTag.name,
-        slug: optionTag.slug,
-        term_id: optionTag.term_id
-      })
+    featuredTags = extractFeaturedTags(
+      options[optionsTags.tags] as IOptionTag[]
     );
 
-    featuredReviews = [
-      options["featured_review_1"],
-      options["featured_review_2"],
-      options["featured_review_3"]
-    ].map((review) => ({
-      id: review.ID,
-      name: review.post_title,
-      slug: review.post_name
-    }));
+    featuredReviews = extractFeaturedReviews(options);
 
-    featuredVideos = Object.keys(options)
-      .filter((key) => key.includes("featured_video_"))
-      .map((key) => ({
-        url: (options![key as keyof IAllOptionsResponse] || "") as string
-      }));
+    featuredVideos = extractFeaturedVideos(options);
 
-    const featuredPostSlugs = (
+    featuredPosts = await extractFeaturedPosts(
       options[optionsTags["featured-articles"]] as IOptionFeaturedPost[]
-    ).map((post) => post.post_name);
-    // TODO err handling
-    featuredPosts = await Promise.all(
-      featuredPostSlugs.map((slug) => getFeaturedPostBySlug(slug))
     );
   }
 
