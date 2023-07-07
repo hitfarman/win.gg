@@ -29,6 +29,8 @@ import {
   NextPage
 } from "next";
 import React from "react";
+import parse from "html-react-parser";
+import { replaceImage } from "@/utils/replaceImage";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -74,7 +76,9 @@ const CategoryPage: NextPage<Props> = ({
         </div>
       </div>
 
-      <div dangerouslySetInnerHTML={{ __html: categoryDescription }} />
+      <div className="parsed-wp-content my-5">
+        {parse(categoryDescription, { replace: replaceImage })}
+      </div>
     </>
   );
 };

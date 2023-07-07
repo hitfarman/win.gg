@@ -6,6 +6,8 @@ import PostList from "@/components/PostList";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
+import parse from "html-react-parser";
+import { replaceImage } from "@/utils/replaceImage";
 
 const HomePage: FC<IHomePageProps> = ({
   featuredPosts,
@@ -29,7 +31,9 @@ const HomePage: FC<IHomePageProps> = ({
           <FeaturedVideosSecondary featuredVideos={featuredVideos.slice(3)} />
         </div>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: homeDescription }} />
+      <div className="parsed-wp-content my-5">
+        {parse(homeDescription, { replace: replaceImage })}
+      </div>
     </>
   );
 };
