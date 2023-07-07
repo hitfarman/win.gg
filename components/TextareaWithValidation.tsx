@@ -5,20 +5,19 @@ import { ChangeHandler } from "react-hook-form";
 type Props = {
   name: string;
   label: string;
-  type?: HTMLInputTypeAttribute;
   error?: string;
   onChange: ChangeHandler;
   onBlur: ChangeHandler;
 };
 
-const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
-  { name, label, error, type, onBlur, onChange },
+const Textarea: ForwardRefRenderFunction<HTMLTextAreaElement, Props> = (
+  { name, label, error, onBlur, onChange },
   ref
 ) => {
   return (
     <div>
       <div className="relative mt-2">
-        <input
+        <textarea
           id={name}
           name={name}
           placeholder={label}
@@ -29,7 +28,6 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
                : "border-transparent hover:border-b-win-primary"
            }`}
           ref={ref}
-          type={type || "text"}
           onChange={onChange}
           onBlur={onBlur}
         />
@@ -51,6 +49,6 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
   );
 };
 
-const InputWithValidation = React.forwardRef(Input);
+const TextareaWithValidation = React.forwardRef(Textarea);
 
-export default InputWithValidation;
+export default TextareaWithValidation;

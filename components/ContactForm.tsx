@@ -5,6 +5,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputWithValidation from "./InputWithValidation";
+import TextareaWithValidation from "./TextareaWithValidation";
 
 const ContactForm = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const ContactForm = () => {
           {...register("name")}
         />
         <InputWithValidation
-          label="Email"
+          label="E-mail"
           error={errors.email?.message}
           {...register("email")}
         />
@@ -39,7 +40,7 @@ const ContactForm = () => {
           error={errors.subject?.message}
           {...register("subject")}
         />
-        <InputWithValidation
+        <TextareaWithValidation
           label="Message"
           error={errors.message?.message}
           {...register("message")}
