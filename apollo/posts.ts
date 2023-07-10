@@ -82,6 +82,7 @@ const GET_POST_BY_SLUG = gql`
           firstName
         }
       }
+      databaseId
       slug
       seo {
         fullHead

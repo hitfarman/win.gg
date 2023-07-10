@@ -36,6 +36,7 @@ export interface IPostDetails {
       firstName: string;
     };
   };
+  databaseId: number;
   slug: string;
   seo: {
     fullHead: string;

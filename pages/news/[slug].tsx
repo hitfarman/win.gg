@@ -39,6 +39,9 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
+import { IReaction } from "@/interfaces/reactions";
+import { getReactionsByPostId } from "@/axios/reactions";
+import Reactions from "@/components/Reactions";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -46,6 +49,7 @@ type Props = {
   featuredReviews: IFeaturedReview[];
   featuredTags: IFeaturedTag[];
   post: IPostDetails;
+  reactions: IReaction[];
 };
 
 const PostPage: NextPage<Props> = ({
@@ -53,7 +57,8 @@ const PostPage: NextPage<Props> = ({
   featuredReviews,
   featuredTags,
   featuredVideos,
-  post
+  post,
+  reactions
 }) => {
   const { asPath } = useRouter();
   const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
@@ -144,6 +149,7 @@ const PostPage: NextPage<Props> = ({
           <div className="parsed-wp-content">
             {parse(post.content, { replace: replaceImage })}
           </div>
+          <Reactions postId={post.databaseId} reactions={reactions} />
         </div>
         <div className="md:w-4/12">
           <FeaturedTags tags={featuredTags} />
@@ -174,6 +180,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   let featuredTags: IFeaturedTag[] = [];
   let options: IAllOptionsResponse | null = null;
   let post: IPostDetails | null = null;
+  let reactions: IReaction[] = [];
 
   try {
     post = await getPostBySlug(slug);
@@ -211,6 +218,17 @@ export const getServerSideProps: GetServerSideProps = async ({
     );
   }
 
+  if (post) {
+    try {
+      reactions = await getReactionsByPostId(post.databaseId);
+    } catch (e) {
+      console.log(
+        `Fetching reactions by postId(${post.databaseId}) failed in getServerSideProps, with cause:`,
+        e
+      );
+    }
+  }
+
   return post
     ? {
         props: {
@@ -218,7 +236,8 @@ export const getServerSideProps: GetServerSideProps = async ({
           featuredVideos,
           featuredReviews,
           featuredTags,
-          post
+          post,
+          reactions
         }
       }
     : { notFound: true };
