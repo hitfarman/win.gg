@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputWithValidation from "./InputWithValidation";
 import TextareaWithValidation from "./TextareaWithValidation";
+import { sendContactMail } from "@/apollo/contact";
 
 const ContactForm = () => {
   const router = useRouter();
@@ -18,8 +19,11 @@ const ContactForm = () => {
   });
 
   const onSubmit: SubmitHandler<IContactFormData> = async (contactData) => {
-    console.log(contactData);
-    const response = await "";
+    const response = await sendContactMail(contactData);
+    console.log(
+      "The email has been sent successfully",
+      response.sendEmail.sent
+    );
   };
 
   return (

@@ -34,10 +34,12 @@ ARG WP_API_DOMAIN
 ARG BASIC_AUTH_USERNAME
 ARG BASIC_AUTH_PASSWORD
 ARG FE_DOMAIN
+ARG CONTACT_EMAIL
 
 RUN echo "WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
     echo "NEXT_PUBLIC_WP_API_DOMAIN=$WP_API_DOMAIN" >> ./.env.production && \
     echo "NEXT_PUBLIC_FE_DOMAIN=$FE_DOMAIN" >> ./.env.production && \
+    echo "NEXT_PUBLIC_CONTACT_EMAIL=$CONTACT_EMAIL" >> ./.env.production && \
     echo "BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME" >> ./.env.production && \
     echo "BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD" >> ./.env.production 
 
