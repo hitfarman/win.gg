@@ -14,7 +14,7 @@ const ThankYouPage = () => {
           I will review your message and reply soon.
         </h2>
         <Link href="/" className="win-primary-button">
-          Go to home
+          Back to home
         </Link>
       </div>
     </div>
