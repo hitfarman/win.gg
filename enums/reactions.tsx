@@ -10,3 +10,12 @@ export const emojiLookup = {
 };
 
 export type EmojiId = "11" | "14" | "26" | "28" | "42" | "64";
+
+export const reactionOrder = {
+  11: 3,
+  14: 2,
+  26: 6,
+  28: 5,
+  42: 4,
+  64: 1
+};
