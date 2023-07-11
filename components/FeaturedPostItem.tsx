@@ -4,6 +4,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
 
 type Props = {
   featuredPost: IFeaturedPost;
@@ -75,7 +76,9 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           </div>
           <div
             className="max-h-[52px] overflow-hidden"
-            dangerouslySetInnerHTML={{ __html: featuredPost.excerpt }}
+            dangerouslySetInnerHTML={{
+              __html: truncateMetaDesc(featuredPost.seo.metaDesc)
+            }}
           />
         </div>
       </div>

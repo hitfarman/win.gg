@@ -29,7 +29,9 @@ const SEARCH_BY_QUERY = gql`
           title
           slug
           date
-          excerpt
+          seo {
+            metaDesc
+          }
           author {
             node {
               slug

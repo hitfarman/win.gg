@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
+import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
 
 type Props = {
   post: IPost;
@@ -59,7 +60,9 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         </div>
         <div
           className="max-h-16 overflow-hidden text-sm text-gray-300"
-          dangerouslySetInnerHTML={{ __html: post.excerpt }}
+          dangerouslySetInnerHTML={{
+            __html: truncateMetaDesc(post.seo.metaDesc)
+          }}
         />
       </div>
     </div>

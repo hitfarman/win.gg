@@ -38,7 +38,9 @@ export const GET_PAGINATED_POSTS = gql`
           title
           slug
           date
-          excerpt
+          seo {
+            metaDesc
+          }
           author {
             node {
               slug
@@ -107,7 +109,9 @@ const GET_FEATURED_POST_BY_SLUG = gql`
       date
       slug
       title
-      excerpt
+      seo {
+        metaDesc
+      }
       categories {
         nodes {
           name
