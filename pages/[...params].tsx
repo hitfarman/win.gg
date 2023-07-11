@@ -209,6 +209,10 @@ export const getStaticProps: GetStaticProps = async (
     } catch (e) {
       console.log("Fetching category info failed with cause:", e);
     }
+
+    if (!categoryInfo) {
+      return { notFound: true };
+    }
   }
 
   return {
