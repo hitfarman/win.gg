@@ -1,12 +1,14 @@
-import { IOptionTag } from "@/interfaces/options";
+import { FeaturedOptionTags } from "@/interfaces/options";
 import { IFeaturedTag } from "@/interfaces/tags";
 
 export const extractFeaturedTags = (
-  optionTags: IOptionTag[]
+  optionTags: FeaturedOptionTags
 ): IFeaturedTag[] => {
-  return optionTags.map((optionTag) => ({
-    name: optionTag.name,
-    slug: optionTag.slug,
-    term_id: optionTag.term_id
-  }));
+  return optionTags
+    ? optionTags.map((optionTag) => ({
+        name: optionTag.name,
+        slug: optionTag.slug,
+        term_id: optionTag.term_id
+      }))
+    : [];
 };

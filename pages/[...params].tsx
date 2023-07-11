@@ -12,6 +12,8 @@ import PostList from "@/components/PostList";
 import { POSTS_PER_PAGE } from "@/constants/posts";
 import { ICategoryInfo, ICategorySlug } from "@/interfaces/categories";
 import {
+  FeaturedArticles,
+  FeaturedOptionTags,
   IAllOptionsResponse,
   IOptionFeaturedPost,
   IOptionTag
@@ -168,12 +170,10 @@ export const getStaticProps: GetStaticProps = async (
         ? (options[categoryOptionsTag.description] as string)
         : "";
       categoryTags = extractFeaturedTags(
-        options[categoryOptionsTag.tags] as IOptionTag[]
+        options[categoryOptionsTag.tags] as FeaturedOptionTags
       );
       featuredPosts = await extractFeaturedPosts(
-        options[
-          categoryOptionsTag["featured-articles"]
-        ] as IOptionFeaturedPost[]
+        options[categoryOptionsTag["featured-articles"]] as FeaturedArticles
       );
     }
 

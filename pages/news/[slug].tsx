@@ -5,6 +5,8 @@ import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import {
+  FeaturedArticles,
+  FeaturedOptionTags,
   IAllOptionsResponse,
   IOptionFeaturedPost,
   IOptionTag
@@ -206,7 +208,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     );
 
     featuredTags = extractFeaturedTags(
-      options[optionsTags.tags] as IOptionTag[]
+      options[optionsTags.tags] as FeaturedOptionTags
     );
 
     featuredReviews = extractFeaturedReviews(options);
@@ -214,7 +216,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     featuredVideos = extractFeaturedVideos(options);
 
     featuredPosts = await extractFeaturedPosts(
-      options[optionsTags["featured-articles"]] as IOptionFeaturedPost[]
+      options[optionsTags["featured-articles"]] as FeaturedArticles
     );
   }
 

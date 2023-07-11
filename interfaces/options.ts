@@ -1,14 +1,14 @@
 export interface IOptionFeaturedPost {
-  ID: 98093;
+  ID: number;
   post_author: string;
   post_date: string;
   post_date_gmt: string;
   post_content: string;
   post_title: string;
-  post_excerpt: "Don't cross Dust 2 mid against this guy.";
-  post_status: "publish";
-  comment_status: "closed";
-  ping_status: "closed";
+  post_excerpt: string;
+  post_status: string;
+  comment_status: string;
+  ping_status: string;
   post_name: string;
   post_modified: string;
   post_modified_gmt: string;
@@ -33,47 +33,50 @@ export interface IOptionTag {
   filter: string;
 }
 
+export type FeaturedArticles = IOptionFeaturedPost[] | false;
+export type FeaturedOptionTags = IOptionTag[] | false;
+
 export interface IAllOptionsResponse {
   "csgo-description": string;
-  "csgo-featured-articles": IOptionFeaturedPost[];
-  "csgo-tags": IOptionTag[];
+  "csgo-featured-articles": FeaturedArticles;
+  "csgo-tags": FeaturedOptionTags;
 
-  "default-tags": IOptionTag[];
+  "default-tags": FeaturedOptionTags;
 
   "dota2-description": string;
-  "dota2-featured-articles": IOptionFeaturedPost[];
-  "dota2-tags": IOptionTag[];
+  "dota2-featured-articles": FeaturedArticles;
+  "dota2-tags": FeaturedOptionTags;
 
-  "general-tags": IOptionTag[];
+  "general-tags": FeaturedOptionTags;
 
   "gta-description": string;
-  "gta-featured-articles": IOptionFeaturedPost[];
-  "gta-tags": IOptionTag[];
+  "gta-featured-articles": FeaturedArticles;
+  "gta-tags": FeaturedOptionTags;
 
   "homepage-description": string;
-  "homepage-featured-articles": IOptionFeaturedPost[];
+  "homepage-featured-articles": FeaturedArticles;
 
   "lol-description": string;
-  "lol-featured-articles": IOptionFeaturedPost[];
-  "lol-tags": IOptionTag[];
+  "lol-featured-articles": FeaturedArticles;
+  "lol-tags": FeaturedOptionTags;
 
   "pokemon-description": string;
-  "pokemon-featured-articles": IOptionFeaturedPost[];
-  "pokemon-tags": IOptionTag[];
+  "pokemon-featured-articles": FeaturedArticles;
+  "pokemon-tags": FeaturedOptionTags;
 
   "reviews-description": string;
-  "reviews-featured-articles": IOptionFeaturedPost[];
-  "reviews-tags": IOptionTag[];
+  "reviews-featured-articles": FeaturedArticles;
+  "reviews-tags": FeaturedOptionTags;
 
   "twitch-description": string;
-  "twitch-featured-articles": IOptionFeaturedPost[];
-  "twitch-tags": IOptionTag[];
+  "twitch-featured-articles": FeaturedArticles;
+  "twitch-tags": FeaturedOptionTags;
 
   "valorant-description": string;
-  "valorant-featured-articles": IOptionFeaturedPost[];
-  "valorant-tags": IOptionTag[];
+  "valorant-featured-articles": FeaturedArticles;
+  "valorant-tags": FeaturedOptionTags;
 
-  "videos-tags": IOptionTag[];
+  "videos-tags": FeaturedOptionTags;
 
   featured_review_1: IOptionFeaturedPost;
   featured_review_2: IOptionFeaturedPost;
