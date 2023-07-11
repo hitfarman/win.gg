@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FC, Fragment } from "react";
 import winLogo from "@/assets/img/win-gg-white.png";
 import Image from "next/image";
-import SocialMediaLink from "./SocialMediaLink";
 import NavSocialLinks from "./NavSocialLinks";
 
 type Props = {

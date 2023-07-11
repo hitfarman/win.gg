@@ -8,6 +8,8 @@ import NavItem from "./NavItem";
 import Sidebar from "./Sidebar";
 import Link from "next/link";
 import LinearLoading from "./LinearLoading";
+import SearchInput from "./SearchInput";
+import { Transition } from "@headlessui/react";
 
 const navItems: INavItem[] = [
   { title: "CSGO", href: "/csgo" },
@@ -24,8 +26,11 @@ const Header = () => {
   const { pathname } = useRouter();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const containerClassname =
+    "flex mx-auto max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 absolute inset-0 right-4 sm:right-6 lg:right-8";
 
   useEffect(() => {
     const handleStart = () => setIsLoading(true);
@@ -44,34 +49,70 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-20 bg-black">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <Link href="/" className="cursor-pointer">
-            <div className="relative">
-              <Image className="block h-8 w-auto" src={winLogo} alt="win.gg" />
-            </div>
-          </Link>
-
-          {/* Navigation */}
-          <nav className="hidden h-full flex-1 items-center justify-center gap-4 md:flex ">
-            {navItems.map((item) => (
-              <NavItem
-                key={item.title}
-                item={item}
-                isSelected={pathname === item.href}
-              />
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3">
-            <MagnifyingGlassIcon className="h-5 w-5 cursor-pointer" />
-            <Bars3Icon
-              onClick={() => setIsSidebarOpen(true)}
-              className="h-5 w-5 cursor-pointer"
+      <header className={"fixed left-0 top-0 z-20 h-20 w-screen bg-black"}>
+        <div>
+          <Transition
+            as={"div"}
+            show={isSearchOpen}
+            enter="transition-opacity duration-300 delay-500"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-500"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            className={containerClassname}
+          >
+            <SearchInput
+              isOpen={isSearchOpen}
+              closeSearch={() => setIsSearchOpen(false)}
             />
-          </div>
+          </Transition>
+
+          <Transition
+            as={"div"}
+            show={!isSearchOpen}
+            enter="transition-opacity duration-300 delay-500"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-500"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            className={containerClassname}
+          >
+            {/* Logo */}
+            <Link href="/" className="cursor-pointer">
+              <div className="relative">
+                <Image
+                  className="block h-8 w-auto"
+                  src={winLogo}
+                  alt="win.gg"
+                />
+              </div>
+            </Link>
+
+            {/* Navigation */}
+            <nav className="hidden h-full flex-1 items-center justify-center gap-4 md:flex ">
+              {navItems.map((item) => (
+                <NavItem
+                  key={item.title}
+                  item={item}
+                  isSelected={pathname === item.href}
+                />
+              ))}
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center gap-3">
+              <MagnifyingGlassIcon
+                onClick={() => setIsSearchOpen(true)}
+                className="h-5 w-5 cursor-pointer"
+              />
+              <Bars3Icon
+                onClick={() => setIsSidebarOpen(true)}
+                className="h-5 w-5 cursor-pointer"
+              />
+            </div>
+          </Transition>
         </div>
         {isLoading && <LinearLoading />}
       </header>
