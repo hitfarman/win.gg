@@ -34,7 +34,10 @@ const Header = () => {
 
   useEffect(() => {
     const handleStart = () => setIsLoading(true);
-    const handleStop = () => setIsLoading(false);
+    const handleStop = () => {
+      setIsLoading(false);
+      setIsSearchOpen(false);
+    };
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleStop);
@@ -62,10 +65,7 @@ const Header = () => {
             leaveTo="opacity-0"
             className={containerClassname}
           >
-            <SearchInput
-              isOpen={isSearchOpen}
-              closeSearch={() => setIsSearchOpen(false)}
-            />
+            <SearchInput closeSearch={() => setIsSearchOpen(false)} />
           </Transition>
 
           <Transition

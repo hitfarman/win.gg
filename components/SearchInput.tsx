@@ -1,17 +1,26 @@
-import { Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 
 type Props = {
   closeSearch: () => void;
-  isOpen: boolean;
 };
 
-const SearchInput: FC<Props> = ({ closeSearch, isOpen }) => {
+const SearchInput: FC<Props> = ({ closeSearch }) => {
+  const router = useRouter();
   const [search, setSearch] = useState<string>("");
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (search) {
+      router.push(`/search/${search}`);
+    }
+  };
 
   return (
-    <form className="mx-auto flex w-full max-w-2xl items-center justify-center gap-2">
+    <form
+      onSubmit={handleSubmit}
+      className="mx-auto flex w-full max-w-2xl items-center justify-center gap-2"
+    >
       <input
         placeholder={"Search..."}
         className={`w-full flex-1 border border-transparent border-b-white bg-transparent py-1.5 text-white ring-0 transition-colors hover:border-b-win-primary focus:border-white focus:outline-none focus:ring-0 sm:text-sm sm:leading-6`}
