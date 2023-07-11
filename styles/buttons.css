@@ -23,6 +23,21 @@
   @apply border;
   @apply border-transparent;
 }
+
+.win-primary-button-yellow {
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply px-2;
+  @apply py-1;
+  @apply bg-transparent;
+  @apply hover:bg-win-yellow-hover;
+  @apply text-win-white;
+  @apply transition-colors;
+  @apply border;
+  @apply border-win-yellow;
+  @apply hover:border-win-yellow-hover;
+}
 .win-secondary-button {
   @apply flex;
   @apply items-center;

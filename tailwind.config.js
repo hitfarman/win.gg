@@ -10,6 +10,8 @@ module.exports = {
      colors: {
       "win-primary": "#6D67E4",
       "win-primary-hover":"#5851E0",
+      "win-yellow": "#FBCB46",
+      "win-yellow-hover": "#E1B63F",
       "win-black": "#151515",
       "win-gray": "#272727",
       "win-slate": "#B5B5B5",

@@ -5,6 +5,7 @@ import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
+import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 
 type Props = {
   featuredPost: IFeaturedPost;
@@ -16,6 +17,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
   const authorName = `${featuredPost.author.node.firstName} ${featuredPost.author.node.lastName}`;
   const date = formatDate(featuredPost.date);
   const router = useRouter();
+  const { buttonClassname, isReviewsPage } = useGetReviewsPageBtnColor();
 
   const goToPostPage = () => {
     router.push(`/news/${featuredPost.slug}`);
@@ -36,7 +38,9 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
         sizes="(max-width: 1024px) 100vw, 50vw"
       />
       <div
-        className="absolute inset-0 z-10 flex items-end bg-black/70 p-8"
+        className={`absolute inset-0 z-10 flex items-end bg-black/70  ${
+          variant === "main" ? "p-8" : "p-4"
+        }`}
         onClick={goToPostPage}
       >
         <div
@@ -50,20 +54,28 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
               <Link
                 key={`${category.slug}-featured-post-id`}
                 href={`/${category.slug}`}
-                className="win-primary-button w-max font-header text-sm font-bold"
+                className={`${buttonClassname} w-max`}
               >
                 {category.name}
               </Link>
             ))}
           </div>
           <h3
-            className={`cursor-pointer font-header text-4xl font-semibold transition-colors hover:text-win-primary ${
-              variant === "secondary" ? "text-lg" : ""
-            }`}
+            className={`cursor-pointer font-header  font-semibold transition-colors ${
+              isReviewsPage ? "hover:text-win-yellow" : "hover:text-win-primary"
+            } ${variant === "main" ? "text-4xl" : "text-base"}`}
             onClick={goToPostPage}
           >
             {featuredPost.title}
           </h3>
+
+          <div
+            className={`${variant === "main" ? "text-base" : "text-sm"}`}
+            dangerouslySetInnerHTML={{
+              __html: truncateMetaDesc(featuredPost.seo.metaDesc)
+            }}
+          />
+
           <div className="flex items-center gap-2 text-xs font-bold">
             <p>{date}</p>
             <p>{"//"}</p>
@@ -74,12 +86,6 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
               {authorName}
             </Link>
           </div>
-          <div
-            className="max-h-[52px] overflow-hidden"
-            dangerouslySetInnerHTML={{
-              __html: truncateMetaDesc(featuredPost.seo.metaDesc)
-            }}
-          />
         </div>
       </div>
     </div>
