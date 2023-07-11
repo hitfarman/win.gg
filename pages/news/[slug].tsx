@@ -7,9 +7,7 @@ import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import {
   FeaturedArticles,
   FeaturedOptionTags,
-  IAllOptionsResponse,
-  IOptionFeaturedPost,
-  IOptionTag
+  IAllOptionsResponse
 } from "@/interfaces/options";
 import { IFeaturedPost, IPostDetails } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";

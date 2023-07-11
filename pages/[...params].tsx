@@ -14,9 +14,7 @@ import { ICategoryInfo, ICategorySlug } from "@/interfaces/categories";
 import {
   FeaturedArticles,
   FeaturedOptionTags,
-  IAllOptionsResponse,
-  IOptionFeaturedPost,
-  IOptionTag
+  IAllOptionsResponse
 } from "@/interfaces/options";
 import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";

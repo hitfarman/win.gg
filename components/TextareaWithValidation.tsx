@@ -1,5 +1,5 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import React, { ForwardRefRenderFunction, HTMLInputTypeAttribute } from "react";
+import React, { ForwardRefRenderFunction } from "react";
 import { ChangeHandler } from "react-hook-form";
 
 type Props = {

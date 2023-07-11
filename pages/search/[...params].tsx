@@ -1,4 +1,3 @@
-import { getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FeaturedReviews from "@/components/FeaturedReviews";
@@ -14,8 +13,6 @@ import { IFeaturedVideo } from "@/interfaces/videos";
 import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import React from "react";
-import parse from "html-react-parser";
-import { replaceImage } from "@/utils/replaceImage";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";

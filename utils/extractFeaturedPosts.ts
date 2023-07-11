@@ -1,5 +1,5 @@
 import { getFeaturedPostBySlug } from "@/apollo/posts";
-import { FeaturedArticles, IOptionFeaturedPost } from "@/interfaces/options";
+import { FeaturedArticles } from "@/interfaces/options";
 import { IFeaturedPost } from "@/interfaces/posts";
 
 export const extractFeaturedPosts = async (

@@ -1,7 +1,7 @@
 import { IContactFormData } from "@/interfaces/contact";
 import { contactSchema } from "@/schemas/contact";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputWithValidation from "./InputWithValidation";
