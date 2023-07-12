@@ -1,6 +1,7 @@
 import { IFeaturedVideo } from "@/interfaces/videos";
 import React, { FC } from "react";
 import LazyYoutubeVideo from "./LazyYoutubeVideo";
+import Link from "next/link";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -20,7 +21,9 @@ const FeaturedVideos: FC<Props> = ({ featuredVideos }) => {
         ))}
       </div>
 
-      <button className="win-primary-button mx-auto">Show more videos</button>
+      <Link href="/news/videos" className="win-primary-button mx-auto w-max">
+        Show more videos
+      </Link>
     </div>
   );
 };
