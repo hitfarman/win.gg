@@ -15,7 +15,7 @@ const RecommendedPosts: FC<Props> = ({ posts }) => {
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         {posts.map((post, i) => (
           <PostCard
-            post={{ ...post, id: `${i}-recommended-post` }}
+            post={post}
             variant="fixed-vertical"
             key={`${i}-recommended-post`}
           />

@@ -61,6 +61,8 @@ export interface IPostDetails {
 }
 
 export interface IFeaturedPost {
+  id: string;
+  databaseId: number;
   date: string;
   slug: string;
   title: string;

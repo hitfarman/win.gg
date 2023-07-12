@@ -113,6 +113,8 @@ const GET_POST_BY_SLUG = gql`
 const GET_FEATURED_POST_BY_SLUG = gql`
   query GetPostBySlug($slug: ID!) {
     post(id: $slug, idType: SLUG) {
+      id
+      databaseId
       date
       slug
       title
