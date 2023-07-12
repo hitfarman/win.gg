@@ -47,7 +47,6 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           className={`flex flex-col ${
             variant === "main" ? "gap-3" : "gap-1.5"
           }`}
-          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-wrap gap-3">
             {featuredPost.categories.nodes.map((category) => (
@@ -55,6 +54,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
                 key={`${category.slug}-featured-post-id`}
                 href={`/${category.slug}`}
                 className={`${buttonClassname} w-max`}
+                onClick={(e) => e.stopPropagation()}
               >
                 {category.name}
               </Link>
@@ -82,6 +82,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             <Link
               href={`/news/author/${featuredPost.author.node.slug}`}
               className="transition-colors hover:text-gray-300"
+              onClick={(e) => e.stopPropagation()}
             >
               {authorName}
             </Link>
