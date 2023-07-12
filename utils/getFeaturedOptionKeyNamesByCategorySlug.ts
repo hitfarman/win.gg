@@ -9,7 +9,8 @@ export const getFeaturedOptionKeyNamesByCategorySlug = (slug: string) => {
     "pokemon",
     "reviews",
     "twitch",
-    "valorant"
+    "valorant",
+    "general"
   ];
 
   if (specialSlugs.includes(slug)) {

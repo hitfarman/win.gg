@@ -35,6 +35,7 @@ export const GET_PAGINATED_POSTS = gql`
       edges {
         node {
           id
+          databaseId
           title
           slug
           date

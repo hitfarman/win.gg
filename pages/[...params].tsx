@@ -171,7 +171,8 @@ export const getStaticProps: GetStaticProps = async (
         options[categoryOptionsTag.tags] as FeaturedOptionTags
       );
       featuredPosts = await extractFeaturedPosts(
-        options[categoryOptionsTag["featured-articles"]] as FeaturedArticles
+        options[categoryOptionsTag["featured-articles"]] as FeaturedArticles,
+        slug
       );
     }
 

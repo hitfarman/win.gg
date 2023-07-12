@@ -1,5 +1,6 @@
 export interface IPost {
   id: string;
+  databaseId: number;
   title: string;
   slug: string;
   date: string;

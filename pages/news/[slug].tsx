@@ -42,7 +42,6 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { IReaction } from "@/interfaces/reactions";
 import { getReactionsByPostId } from "@/axios/reactions";
 import Reactions from "@/components/Reactions";
-import Script from "next/script";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -237,7 +236,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     featuredVideos = extractFeaturedVideos(options);
 
     featuredPosts = await extractFeaturedPosts(
-      options[optionsTags["featured-articles"]] as FeaturedArticles
+      options[optionsTags["featured-articles"]] as FeaturedArticles,
+      post?.categories.edges[0].node.slug,
+      post?.databaseId
     );
   }
 
