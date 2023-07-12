@@ -95,7 +95,7 @@ const PostPage: NextPage<Props> = ({
             priority
             key={post.featuredImage?.node.sourceUrl}
           />
-          <div className="mb-5 flex flex-wrap">
+          <div className="mb-5 flex flex-wrap gap-2">
             {post.categories.edges.map((category) => (
               <Link
                 key={`${category.node.name}-category-btn`}
@@ -103,6 +103,15 @@ const PostPage: NextPage<Props> = ({
                 className="win-primary-button"
               >
                 {category.node.name}
+              </Link>
+            ))}
+            {post.tags.nodes.map((tag) => (
+              <Link
+                key={`${tag.name}-tag-btn`}
+                href={`/${tag.slug}`}
+                className="win-primary-button"
+              >
+                {tag.name}
               </Link>
             ))}
           </div>

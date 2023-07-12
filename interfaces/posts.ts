@@ -51,6 +51,12 @@ export interface IPostDetails {
       title: string;
     };
   };
+  tags: {
+    nodes: {
+      name: string;
+      slug: string;
+    }[];
+  };
 }
 
 export interface IFeaturedPost {

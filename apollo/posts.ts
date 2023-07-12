@@ -99,6 +99,12 @@ const GET_POST_BY_SLUG = gql`
           title
         }
       }
+      tags {
+        nodes {
+          name
+          slug
+        }
+      }
     }
   }
 `;
