@@ -14,6 +14,16 @@ export const getFeaturedOptionKeyNamesByCategorySlug = (slug: string) => {
   ];
 
   if (specialSlugs.includes(slug)) {
+    // Have to do this because of gta category
+    if (slug === "general") {
+      return {
+        description: null,
+        "featured-articles":
+          "general-featured-articles" as keyof IAllOptionsResponse,
+        tags: "general-tags" as keyof IAllOptionsResponse
+      };
+    }
+
     return {
       description: `${slug}-description` as keyof IAllOptionsResponse,
       "featured-articles":
