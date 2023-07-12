@@ -15,7 +15,7 @@ import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
 import { getFeaturedOptionKeyNamesByCategorySlug } from "@/utils/getFeaturedOptionKeyNamesByCategorySlug";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
@@ -42,6 +42,7 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { IReaction } from "@/interfaces/reactions";
 import { getReactionsByPostId } from "@/axios/reactions";
 import Reactions from "@/components/Reactions";
+import Script from "next/script";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -62,14 +63,27 @@ const PostPage: NextPage<Props> = ({
 }) => {
   const { asPath } = useRouter();
   const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
+
+  useEffect(() => {
+    const twitterScript = document.createElement("script");
+    twitterScript.src = "https://platform.twitter.com/widgets.js";
+    twitterScript.async = true;
+    document.body.appendChild(twitterScript);
+
+    const twitchScript = document.createElement("script");
+    twitchScript.src = "https://player.twitch.tv/js/embed/v1.js";
+    twitchScript.async = true;
+    document.body.appendChild(twitchScript);
+
+    return () => {
+      document.body.removeChild(twitterScript);
+      document.body.removeChild(twitchScript);
+    };
+  }, [asPath]);
+
   return (
     <>
-      <Head>
-        {parse(post.seo.fullHead)}
-        {/* TODO is there a consistent way to do this with next/script? */}
-        <script async src="https://platform.twitter.com/widgets.js" />
-        <script async src="https://player.twitch.tv/js/embed/v1.js" />
-      </Head>
+      <Head>{parse(post.seo.fullHead)}</Head>
       <Breadcrumbs
         crumbs={[
           {
