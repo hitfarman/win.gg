@@ -83,6 +83,7 @@ const GET_VIDEOS_BY_SLUG = gql`
         videoLink {
           youtubeLink
         }
+        slug
       }
     }
   }

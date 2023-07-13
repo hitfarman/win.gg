@@ -74,6 +74,7 @@ export interface IVideoDetails {
   videoLink: {
     youtubeLink: string;
   };
+  slug: string;
 }
 
 export interface IGetVideosBySlugResponse {
