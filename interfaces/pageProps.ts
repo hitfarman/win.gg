@@ -1,7 +1,7 @@
 import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
-import { IFeaturedVideo } from "@/interfaces/videos";
+import { IFeaturedVideo, IPaginatedVideosResponse } from "@/interfaces/videos";
 
 export interface IHomePageProps {
   featuredPosts: IFeaturedPost[];
@@ -10,4 +10,11 @@ export interface IHomePageProps {
   featuredVideos: IFeaturedVideo[];
   featuredReviews: IFeaturedReview[];
   paginatedPosts: IPaginatedPostsResponse | null;
+}
+
+export interface IVideosPageProps {
+  featuredTags: IFeaturedTag[];
+  featuredVideos: IFeaturedVideo[];
+  featuredReviews: IFeaturedReview[];
+  paginatedVideos: IPaginatedVideosResponse | null;
 }
