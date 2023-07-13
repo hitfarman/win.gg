@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
-import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
 import { IVideo } from "@/interfaces/videos";
 import LazyYoutubeVideo from "./LazyYoutubeVideo";
 
