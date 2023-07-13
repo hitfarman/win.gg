@@ -80,7 +80,7 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                 <div className="mb-8 flex justify-center gap-5">
                   <Link
                     onClick={closeSidebar}
-                    href="/about"
+                    href="/about-us"
                     className="win-secondary-button"
                   >
                     About
