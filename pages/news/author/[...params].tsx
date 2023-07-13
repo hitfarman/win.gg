@@ -40,7 +40,7 @@ const AuthorPage: NextPage<Props> = ({
 }) => {
   return (
     <>
-      <Head>{parse(author.seo.fullHead)}</Head>
+      <Head>{parse(author.seo.fullHead || "")}</Head>
       <div className="my-10">
         <Breadcrumbs
           crumbs={[{ text: author.name, url: `/news/author/${author.slug}` }]}

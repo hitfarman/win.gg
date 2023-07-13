@@ -44,8 +44,6 @@ const LazyYoutubeVideo: FC<Props> = ({ url, height, width }) => {
       </div>
     );
   }
-
-  return <div>YoutubeVideo</div>;
 };
 
 export default LazyYoutubeVideo;
