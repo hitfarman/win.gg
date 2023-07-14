@@ -1,5 +1,6 @@
 import { getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
+import { getPageSeoBySlug } from "@/axios/seo";
 import HomePage from "@/components/HomePage";
 import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
@@ -29,6 +30,7 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
   let options: IAllOptionsResponse | null = null;
   let homeDescription = "";
   let paginatedPosts: IPaginatedPostsResponse | null = null;
+  let pageSeo: string = "";
 
   try {
     options = await getAllOptions();
@@ -58,6 +60,12 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
     console.log("Fetching paginated posts failed with cause:", e);
   }
 
+  try {
+    pageSeo = (await getPageSeoBySlug("home-page")).yoast_head;
+  } catch (e) {
+    console.log("Fetching page seo failed with cause:", e);
+  }
+
   return {
     props: {
       featuredPosts,
@@ -65,7 +73,8 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
       homeTags,
       featuredVideos,
       featuredReviews,
-      paginatedPosts
+      paginatedPosts,
+      pageSeo
     },
     revalidate: DEFAULT_REVALIDATION_TIME
   };

@@ -10,6 +10,7 @@ export interface IHomePageProps {
   featuredVideos: IFeaturedVideo[];
   featuredReviews: IFeaturedReview[];
   paginatedPosts: IPaginatedPostsResponse | null;
+  pageSeo: string;
 }
 
 export interface IVideosPageProps {

@@ -17,6 +17,7 @@ import {
 import { GET_PAGINATED_POSTS } from "@/apollo/posts";
 import { useRouter } from "next/router";
 import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
+import Head from "next/head";
 
 const HomePage: FC<IHomePageProps> = ({
   featuredPosts,
@@ -24,7 +25,8 @@ const HomePage: FC<IHomePageProps> = ({
   featuredVideos,
   homeDescription,
   homeTags,
-  paginatedPosts
+  paginatedPosts,
+  pageSeo
 }) => {
   // State
   const router = useRouter();
@@ -34,15 +36,14 @@ const HomePage: FC<IHomePageProps> = ({
   const [queryVars, setQueryVars] = useState<IPostQueryVariables | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const {
-    loading,
-    data: posts,
-    refetch: refetchPosts
-  } = useQuery<IPaginatedPostsResponse>(GET_PAGINATED_POSTS, {
-    variables: queryVars || {},
-    ssr: false,
-    skip: skipUseQuery
-  });
+  const { loading, data: posts } = useQuery<IPaginatedPostsResponse>(
+    GET_PAGINATED_POSTS,
+    {
+      variables: queryVars || {},
+      ssr: false,
+      skip: skipUseQuery
+    }
+  );
 
   useEffect(() => {
     const filterParam = router.query.filter;
@@ -95,6 +96,7 @@ const HomePage: FC<IHomePageProps> = ({
 
   return (
     <>
+      <Head>{parse(pageSeo)}</Head>
       <FeaturedPosts featuredPosts={featuredPosts} />
       <FeaturedVideos featuredVideos={featuredVideos.slice(0, 3)} />
       <div className="flex flex-col gap-10 py-10 md:flex-row">

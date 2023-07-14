@@ -14,7 +14,7 @@ const BaseLayout: FC<Props> = ({ children }) => {
     <ErrorBoundary>
       <ApolloProvider client={client}>
         <Head>
-          <title>Win.gg - Your competitive edge in gaming and esports</title>
+          <title>WIN.gg - Your competitive edge in gaming and esports</title>
         </Head>
         <div
           className={`bg-win-black text-white ${montserrat.variable} ${roboto.variable} font-body`}
