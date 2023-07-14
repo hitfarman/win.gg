@@ -14,3 +14,8 @@ export interface IBreadcrumb {
   text: string;
   url: string;
 }
+
+export interface ISubNavItem {
+  label: string;
+  category: string;
+}

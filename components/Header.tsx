@@ -11,7 +11,7 @@ import LinearLoading from "./LinearLoading";
 import SearchInput from "./SearchInput";
 import { Transition } from "@headlessui/react";
 
-const navItems: INavItem[] = [
+export const navItems: INavItem[] = [
   { title: "CSGO", href: "/csgo" },
   { title: "DOTA 2", href: "/dota2" },
   { title: "LOL", href: "/lol" },
