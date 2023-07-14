@@ -12,7 +12,7 @@ const FeaturedReviewItem: FC<Props> = ({ index, name, slug }) => {
   const { isReviewsPage } = useGetReviewsPageBtnColor();
 
   return (
-    <Link href={`/reviews/${slug}`} className="flex items-center gap-5">
+    <Link href={`/news/${slug}`} className="flex items-center gap-5">
       <p
         className={`flex h-10 min-h-[40px] w-10 min-w-[40px] items-center justify-center rounded-full bg-transparent p-2 font-header text-lg font-bold text-white ring-1  ${
           isReviewsPage ? "ring-win-yellow" : "ring-win-primary"
