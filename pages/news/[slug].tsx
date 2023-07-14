@@ -1,4 +1,4 @@
-import { getPostBySlug } from "@/apollo/posts";
+import { getPaginatedPosts, getPostBySlug } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FeaturedReviews from "@/components/FeaturedReviews";
@@ -9,12 +9,21 @@ import {
   FeaturedOptionTags,
   IAllOptionsResponse
 } from "@/interfaces/options";
-import { IFeaturedPost, IPostDetails } from "@/interfaces/posts";
+import {
+  IFeaturedPost,
+  IPaginatedPostsResponse,
+  IPostDetails
+} from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
 import { getFeaturedOptionKeyNamesByCategorySlug } from "@/utils/getFeaturedOptionKeyNamesByCategorySlug";
-import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  NextPage
+} from "next";
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -186,14 +195,30 @@ const PostPage: NextPage<Props> = ({
 
 export default PostPage;
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  res
-}: GetServerSidePropsContext) => {
-  res.setHeader(
-    "Cache-control",
-    "public, s-maxage=300, stale-while-revalidate=30"
-  );
+export const getStaticPaths: GetStaticPaths = async () => {
+  let paginatedPosts: IPaginatedPostsResponse | null = null;
+  try {
+    paginatedPosts = await getPaginatedPosts({ offset: 0, size: 50 });
+  } catch (e) {
+    console.log(
+      "Fetching paginatedPosts failed, generating paths for blog posts with []",
+      e
+    );
+  }
+
+  const paths: { params: { slug: string } }[] =
+    paginatedPosts?.posts.edges.map((post) => ({
+      params: { slug: post.node.slug }
+    })) || [];
+  return {
+    paths,
+    fallback: "blocking"
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params
+}: GetStaticPropsContext) => {
   const { slug } = params as { slug: string };
 
   let featuredPosts: IFeaturedPost[] = [];
@@ -262,7 +287,8 @@ export const getServerSideProps: GetServerSideProps = async ({
           featuredTags,
           post,
           reactions
-        }
+        },
+        revalidate: 60 * 2
       }
     : { notFound: true };
 };
