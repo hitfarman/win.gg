@@ -1,7 +1,7 @@
 import { getPaginatedPosts } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import HomePage from "@/components/HomePage";
-import { POSTS_PER_PAGE } from "@/constants/posts";
+import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IHomePageProps } from "@/interfaces/pageProps";
 import { IFeaturedPost, IPaginatedPostsResponse } from "@/interfaces/posts";
@@ -90,6 +90,6 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async ({
       featuredReviews,
       paginatedPosts
     },
-    revalidate: 60 * 5
+    revalidate: DEFAULT_REVALIDATION_TIME
   };
 };

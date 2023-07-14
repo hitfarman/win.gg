@@ -51,6 +51,7 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { IReaction } from "@/interfaces/reactions";
 import { getReactionsByPostId } from "@/axios/reactions";
 import Reactions from "@/components/Reactions";
+import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -288,7 +289,7 @@ export const getStaticProps: GetStaticProps = async ({
           post,
           reactions
         },
-        revalidate: 60 * 2
+        revalidate: DEFAULT_REVALIDATION_TIME
       }
     : { notFound: true };
 };

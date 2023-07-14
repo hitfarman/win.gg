@@ -9,7 +9,7 @@ import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import PostList from "@/components/PostList";
-import { POSTS_PER_PAGE } from "@/constants/posts";
+import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { ICategoryInfo, ICategorySlug } from "@/interfaces/categories";
 import {
   FeaturedArticles,
@@ -226,6 +226,6 @@ export const getStaticProps: GetStaticProps = async (
       paginatedPosts,
       categoryInfo
     },
-    revalidate: 60 * 5
+    revalidate: DEFAULT_REVALIDATION_TIME
   };
 };

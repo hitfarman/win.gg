@@ -1,7 +1,7 @@
 import { getPaginatedVideos } from "@/apollo/videos";
 import { getAllOptions } from "@/axios/options";
 import VideosPage from "@/components/VideosPage";
-import { POSTS_PER_PAGE } from "@/constants/posts";
+import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IVideosPageProps } from "@/interfaces/pageProps";
 import { IFeaturedReview } from "@/interfaces/reviews";
@@ -77,6 +77,6 @@ export const getStaticProps: GetStaticProps<IVideosPageProps> = async ({
       featuredTags,
       paginatedVideos
     },
-    revalidate: 60 * 5
+    revalidate: DEFAULT_REVALIDATION_TIME
   };
 };

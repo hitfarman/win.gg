@@ -5,6 +5,7 @@ import { IPageInfo } from "@/interfaces/pageInfo";
 import { GetStaticProps, NextPage } from "next";
 import parse from "html-react-parser";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -57,6 +58,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       pageInfo
     },
-    revalidate: 60 * 15
+    revalidate: DEFAULT_REVALIDATION_TIME
   };
 };

@@ -9,7 +9,7 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { getPaginatedVideos } from "@/apollo/videos";
-import { POSTS_PER_PAGE } from "@/constants/posts";
+import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { IVideosPageProps } from "@/interfaces/pageProps";
 import VideosPage from "@/components/VideosPage";
 
@@ -54,6 +54,6 @@ export const getStaticProps: GetStaticProps = async () => {
       featuredTags,
       paginatedVideos
     },
-    revalidate: 60 * 5
+    revalidate: DEFAULT_REVALIDATION_TIME
   };
 };

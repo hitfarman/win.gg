@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactForm from "@/components/ContactForm";
 import Link from "next/link";
+import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -63,6 +64,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       pageInfo
     },
-    revalidate: 60 * 15
+    revalidate: DEFAULT_REVALIDATION_TIME
   };
 };
