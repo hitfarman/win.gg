@@ -23,8 +23,6 @@ export const navItems: INavItem[] = [
 ];
 
 const Header = () => {
-  const { pathname } = useRouter();
-
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -96,7 +94,7 @@ const Header = () => {
                 <NavItem
                   key={item.title}
                   item={item}
-                  isSelected={pathname === item.href}
+                  isSelected={router.pathname === item.href}
                 />
               ))}
             </nav>
