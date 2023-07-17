@@ -1,9 +1,8 @@
 import { IFeaturedPost } from "@/interfaces/posts";
-import React, { FC } from "react";
+import React, { FC, useRef } from "react";
 import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
 import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 
@@ -16,12 +15,8 @@ type Props = {
 const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
   const authorName = `${featuredPost.author.node.firstName} ${featuredPost.author.node.lastName}`;
   const date = formatDate(featuredPost.date);
-  const router = useRouter();
   const { buttonClassname, isReviewsPage } = useGetReviewsPageBtnColor();
-
-  const goToPostPage = () => {
-    router.push(`/news/${featuredPost.slug}`);
-  };
+  const outerLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   return (
     <div
@@ -41,6 +36,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
       <Link
         className={`absolute inset-0 z-10 flex items-end bg-black/70`}
         href={`/news/${featuredPost.slug}`}
+        ref={outerLinkRef}
       />
 
       <div
@@ -49,6 +45,11 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             ? "inset-x-8 bottom-8 gap-3"
             : "inset-x-4 bottom-4 gap-1.5"
         }`}
+        onClick={() => {
+          if (outerLinkRef.current) {
+            outerLinkRef.current.click();
+          }
+        }}
       >
         <div className="flex flex-wrap gap-3">
           {featuredPost.categories.nodes.map((category) => (
