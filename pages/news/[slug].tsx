@@ -76,75 +76,6 @@ const PostPage: NextPage<Props> = ({
 }) => {
   const { asPath } = useRouter();
   const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
-  const [reactId, setReactId] = useState<string | null>(null);
-  const [userReactedOn, setUserReactedOn] = useState<EmojiId | null>(null);
-  const [reactions, setReactions] = useState<IReaction[]>([]);
-  const [reactionsLoading, setReactionsLoading] = useState<boolean>(true);
-
-  const reactionClicked = async (emoji_id: EmojiId) => {
-    if (reactId) {
-      try {
-        const status = await reactToPost({
-          id: String(post.databaseId),
-          reactionId: Number(emoji_id),
-          react_id: reactId
-        });
-        let previousReaction: EmojiId | null;
-        if (status === 200) {
-          setUserReactedOn((prev) => {
-            previousReaction = prev;
-            return emoji_id;
-          });
-          setReactions((prev) => {
-            if (previousReaction === emoji_id) {
-              return prev;
-            } else {
-              if (!prev.find((reaction) => reaction.emoji_id === emoji_id)) {
-                prev.push({ count: 0, emoji_id });
-              }
-              return prev.map((reaction) =>
-                increaseOrDecreaseCountForReaction(
-                  reaction,
-                  previousReaction,
-                  emoji_id
-                )
-              );
-            }
-          });
-        }
-      } catch (e) {
-        return;
-      }
-    }
-  };
-
-  const getReactIdCookie = useCallback(async () => {
-    try {
-      const reactionCookie = (await getReactionCookie()).cookie;
-      setReactId(reactionCookie);
-    } catch (e) {
-      setReactId(null);
-      setReactionsLoading(false);
-    }
-  }, []);
-
-  const getReactions = useCallback(async () => {
-    if (reactId) {
-      setReactionsLoading(true);
-      try {
-        const reactionsRes = await getReactionsByPostId(
-          post.databaseId,
-          reactId
-        );
-        setReactions(reactionsRes.counts);
-        setUserReactedOn(reactionsRes.user.emoji_id);
-      } catch (e) {
-        setReactions([]);
-      } finally {
-        setReactionsLoading(false);
-      }
-    }
-  }, [reactId, post.databaseId]);
 
   useEffect(() => {
     const twitterScript = document.createElement("script");
@@ -162,14 +93,6 @@ const PostPage: NextPage<Props> = ({
       document.body.removeChild(twitchScript);
     };
   }, [asPath]);
-
-  useEffect(() => {
-    getReactIdCookie();
-  }, [getReactIdCookie]);
-
-  useEffect(() => {
-    getReactions();
-  }, [getReactions]);
 
   return (
     <>
@@ -262,12 +185,7 @@ const PostPage: NextPage<Props> = ({
           <div className="parsed-wp-content">
             {parse(post.content, { replace: replaceImage })}
           </div>
-          <Reactions
-            reactions={reactions}
-            reactionClicked={reactionClicked}
-            userReactedOn={userReactedOn}
-            loading={reactionsLoading}
-          />
+          <Reactions key={post.databaseId} postId={post.databaseId} />
         </div>
         <div className="md:w-4/12">
           <FeaturedTags tags={featuredTags} />
