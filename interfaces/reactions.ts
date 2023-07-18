@@ -5,3 +5,20 @@ export interface IReaction {
   count: number;
   order?: number;
 }
+
+export interface IGetReactionsResponse {
+  counts: IReaction[];
+  user: { emoji_id: EmojiId };
+}
+export interface IGetReactionCookieRes {
+  cookie: string;
+}
+
+export interface IReactToPostBody {
+  id: string;
+  reactionId: number;
+  react_id: string;
+}
+export interface IReactToPostRes {
+  req: { status: number };
+}
