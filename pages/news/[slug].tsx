@@ -24,7 +24,7 @@ import {
   GetStaticPropsContext,
   NextPage
 } from "next";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
@@ -48,16 +48,12 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
-import { IReaction } from "@/interfaces/reactions";
-import {
-  getReactionCookie,
-  getReactionsByPostId,
-  reactToPost
-} from "@/axios/reactions";
-import Reactions from "@/components/Reactions";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
-import { EmojiId } from "@/enums/reactions";
-import { increaseOrDecreaseCountForReaction } from "@/utils/increaseOrDecreaseCountForReaction";
+
+import dynamic from "next/dynamic";
+const Reactions = dynamic(() => import("@/components/Reactions"), {
+  ssr: false
+});
 
 type Props = {
   featuredPosts: IFeaturedPost[];
