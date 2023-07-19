@@ -8,7 +8,7 @@ export interface IReaction {
 
 export interface IGetReactionsResponse {
   counts: IReaction[];
-  user: { emoji_id: EmojiId };
+  user: { emoji_id: EmojiId } | null;
 }
 export interface IGetReactionCookieRes {
   cookie: string;
