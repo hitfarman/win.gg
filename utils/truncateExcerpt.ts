@@ -1,4 +1,4 @@
-export const truncateMetaDesc = (desc: string) => {
+export const truncateExcerpt = (desc: string) => {
   if (desc.length > 100) {
     return desc.substring(0, 100) + desc.substring(100).split(" ")[0] + "...";
   } else {

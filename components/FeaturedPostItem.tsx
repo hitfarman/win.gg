@@ -3,7 +3,7 @@ import React, { FC, useRef } from "react";
 import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
-import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
+import { truncateExcerpt } from "@/utils/truncateExcerpt";
 import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 
 type Props = {
@@ -76,7 +76,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
         <div
           className={`${variant === "main" ? "text-base" : "text-sm"}`}
           dangerouslySetInnerHTML={{
-            __html: truncateMetaDesc(featuredPost.seo.metaDesc)
+            __html: truncateExcerpt(featuredPost.excerpt)
           }}
         />
 

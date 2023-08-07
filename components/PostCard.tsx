@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
-import { truncateMetaDesc } from "@/utils/truncateMetaDesc";
+import { truncateExcerpt } from "@/utils/truncateExcerpt";
 import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 
 type Props = {
@@ -55,7 +55,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         <div
           className="max-h-16 overflow-hidden text-sm text-gray-300"
           dangerouslySetInnerHTML={{
-            __html: truncateMetaDesc(post.seo.metaDesc)
+            __html: truncateExcerpt(post.excerpt)
           }}
         />
         <div className="flex gap-2 text-sm font-bold text-gray-500">
