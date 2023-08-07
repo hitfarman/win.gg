@@ -4,18 +4,22 @@ import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 import { truncateExcerpt } from "@/utils/truncateExcerpt";
-import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 
 type Props = {
   featuredPost: IFeaturedPost;
   className?: string;
   variant: "main" | "secondary";
+  isReviewPage?: boolean;
 };
 
-const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
+const FeaturedPostItem: FC<Props> = ({
+  featuredPost,
+  className,
+  variant,
+  isReviewPage
+}) => {
   const authorName = `${featuredPost.author.node.firstName} ${featuredPost.author.node.lastName}`;
   const date = formatDate(featuredPost.date);
-  const { buttonClassname, isReviewsPage } = useGetReviewsPageBtnColor();
   const outerLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   return (
@@ -56,7 +60,9 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
             <Link
               key={`${category.slug}-featured-post-id`}
               href={`/${category.slug}`}
-              className={`${buttonClassname} w-max`}
+              className={`${
+                isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
+              } w-max`}
               onClick={(e) => e.stopPropagation()}
             >
               {category.name}
@@ -65,7 +71,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
         </div>
         <Link
           className={`cursor-pointer font-header  font-semibold transition-colors ${
-            isReviewsPage ? "hover:text-win-yellow" : "hover:text-win-primary"
+            isReviewPage ? "hover:text-win-yellow" : "hover:text-win-primary"
           } ${variant === "main" ? "text-4xl" : "text-base"}`}
           href={`/news/${featuredPost.slug}`}
           onClick={(e) => e.stopPropagation()}

@@ -17,9 +17,15 @@ type Props = {
     changePage: (type: "next" | "prev" | "direct", to?: number) => void;
     currentPage: number;
   };
+  isReviewPage?: boolean;
 };
 
-const PostList: FC<Props> = ({ paginatedPosts, title, subNavigationProps }) => {
+const PostList: FC<Props> = ({
+  paginatedPosts,
+  title,
+  subNavigationProps,
+  isReviewPage
+}) => {
   // Constant
   const postSkeletons = new Array(POSTS_PER_PAGE).fill(0);
   const { asPath, push } = useRouter();
@@ -87,7 +93,11 @@ const PostList: FC<Props> = ({ paginatedPosts, title, subNavigationProps }) => {
         <div>
           {paginatedPosts ? (
             paginatedPosts?.posts.edges.map((post) => (
-              <PostCard key={post.node.id} post={post.node} />
+              <PostCard
+                key={post.node.id}
+                post={post.node}
+                isReviewPage={isReviewPage}
+              />
             ))
           ) : (
             <p>Sorry, there are currently no posts available!</p>
@@ -107,11 +117,16 @@ const PostList: FC<Props> = ({ paginatedPosts, title, subNavigationProps }) => {
         total={
           paginatedPosts?.posts.pageInfo.offsetPagination.total || pageNumber
         }
+        isReviewPage={isReviewPage}
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasPrevious && (
           <button
-            className="win-secondary-button"
+            className={
+              isReviewPage
+                ? "win-secondary-button-yellow"
+                : "win-secondary-button"
+            }
             onClick={() => changePage("prev")}
           >
             Previous
@@ -129,10 +144,15 @@ const PostList: FC<Props> = ({ paginatedPosts, title, subNavigationProps }) => {
           total={
             paginatedPosts?.posts.pageInfo.offsetPagination.total || pageNumber
           }
+          isReviewPage={isReviewPage}
         />
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasMore && (
           <button
-            className="win-secondary-button"
+            className={
+              isReviewPage
+                ? "win-secondary-button-yellow"
+                : "win-secondary-button"
+            }
             onClick={() => changePage("next")}
           >
             Next

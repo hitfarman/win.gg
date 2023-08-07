@@ -4,15 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import { truncateExcerpt } from "@/utils/truncateExcerpt";
-import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 
 type Props = {
   post: IPost;
   variant?: "fixed-vertical";
+  isReviewPage?: boolean;
 };
 
-const PostCard: FC<Props> = ({ post, variant }) => {
-  const { buttonClassname, isReviewsPage } = useGetReviewsPageBtnColor();
+const PostCard: FC<Props> = ({ post, variant, isReviewPage }) => {
   return (
     <div
       className={`grid grid-cols-1 grid-rows-[275px_1fr] gap-10 pb-5 ${
@@ -36,7 +35,9 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         <div className="flex flex-wrap gap-2">
           {post.categories.nodes.map((category) => (
             <Link
-              className={buttonClassname}
+              className={
+                isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
+              }
               href={`/${category.slug}`}
               key={category.name}
             >
@@ -46,7 +47,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         </div>
         <Link
           className={`cursor-pointer font-header text-2xl font-semibold transition-colors ${
-            isReviewsPage ? "hover:text-win-yellow" : "hover:text-win-primary"
+            isReviewPage ? "hover:text-win-yellow" : "hover:text-win-primary"
           }`}
           href={`/news/${post.slug}`}
         >

@@ -7,6 +7,7 @@ type Props = {
   pageNumber: number;
   total: number;
   className?: string;
+  isReviewPage?: boolean;
 };
 
 const PaginationNumbers: FC<Props> = ({
@@ -14,7 +15,8 @@ const PaginationNumbers: FC<Props> = ({
   pageNumber,
   siblingCount,
   total,
-  className
+  className,
+  isReviewPage
 }) => {
   return (
     <div className={className || ""}>
@@ -25,8 +27,16 @@ const PaginationNumbers: FC<Props> = ({
       }).map((page, i) => (
         <button
           key={`${page}-pagination-button-${typeof page === "string" ? i : ""}`}
-          className={`win-secondary-button ${
-            page === pageNumber ? "bg-win-primary-hover" : ""
+          className={`${
+            isReviewPage
+              ? "win-secondary-button-yellow"
+              : "win-secondary-button"
+          } ${
+            page === pageNumber
+              ? isReviewPage
+                ? "bg-win-yellow-hover"
+                : "bg-win-primary-hover"
+              : ""
           }`}
           onClick={() => {
             if (typeof page === "number") changePage("direct", page);

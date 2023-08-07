@@ -35,6 +35,7 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
+import { useIsReviewsPage } from "@/hooks/useIsReviewsPage";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -55,11 +56,15 @@ const CategoryPage: NextPage<Props> = ({
   paginatedPosts,
   categoryInfo
 }) => {
+  const { isReviewPage } = useIsReviewsPage();
   return (
     <>
       <CategorySeo categoryInfo={categoryInfo} />
       {featuredPosts.length > 0 && (
-        <FeaturedPosts featuredPosts={featuredPosts} />
+        <FeaturedPosts
+          featuredPosts={featuredPosts}
+          isReviewPage={isReviewPage}
+        />
       )}
       <div className="mt-10">
         <Breadcrumbs
@@ -71,11 +76,15 @@ const CategoryPage: NextPage<Props> = ({
           <PostList
             paginatedPosts={paginatedPosts}
             title={categoryInfo?.name}
+            isReviewPage={isReviewPage}
           />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={categoryTags} />
-          <FeaturedReviews reviews={featuredReviews} />
+          <FeaturedTags isReviewPage={isReviewPage} tags={categoryTags} />
+          <FeaturedReviews
+            reviews={featuredReviews}
+            isReviewPage={isReviewPage}
+          />
           <FeaturedVideosSecondary featuredVideos={featuredVideos} />
         </div>
       </div>

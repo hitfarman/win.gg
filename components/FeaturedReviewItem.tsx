@@ -1,4 +1,3 @@
-import { useGetReviewsPageBtnColor } from "@/hooks/useIsReviewsPage";
 import Link from "next/link";
 import React, { FC } from "react";
 
@@ -6,16 +5,15 @@ type Props = {
   index: number;
   name: string;
   slug: string;
+  isReviewPage?: boolean;
 };
 
-const FeaturedReviewItem: FC<Props> = ({ index, name, slug }) => {
-  const { isReviewsPage } = useGetReviewsPageBtnColor();
-
+const FeaturedReviewItem: FC<Props> = ({ index, name, slug, isReviewPage }) => {
   return (
     <Link href={`/news/${slug}`} className="flex items-center gap-5">
       <p
         className={`flex h-10 min-h-[40px] w-10 min-w-[40px] items-center justify-center rounded-full bg-transparent p-2 font-header text-lg font-bold text-white ring-1  ${
-          isReviewsPage ? "ring-win-yellow" : "ring-win-primary"
+          isReviewPage ? "ring-win-yellow" : "ring-win-primary"
         }`}
       >
         {index}

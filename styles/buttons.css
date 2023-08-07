@@ -83,6 +83,19 @@
   @apply border;
   @apply border-win-primary;
 }
+.win-secondary-button-yellow {
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply px-2;
+  @apply py-1;
+  @apply bg-transparent;
+  @apply hover:bg-win-yellow-hover;
+  @apply text-white;
+  @apply transition-colors;
+  @apply border;
+  @apply border-win-yellow;
+}
 
 .svg-icon-button {
   @apply cursor-pointer;

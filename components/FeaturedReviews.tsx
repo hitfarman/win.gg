@@ -4,9 +4,10 @@ import { IFeaturedReview } from "@/interfaces/reviews";
 
 type Props = {
   reviews: IFeaturedReview[];
+  isReviewPage?: boolean;
 };
 
-const FeaturedReviews: FC<Props> = ({ reviews }) => {
+const FeaturedReviews: FC<Props> = ({ reviews, isReviewPage }) => {
   return (
     <div>
       <h3 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
@@ -14,7 +15,12 @@ const FeaturedReviews: FC<Props> = ({ reviews }) => {
       </h3>
       <div className="flex flex-col gap-5 py-10">
         {reviews.map((review, i) => (
-          <FeaturedReviewItem key={review.id} index={i + 1} {...review} />
+          <FeaturedReviewItem
+            key={review.id}
+            index={i + 1}
+            {...review}
+            isReviewPage={isReviewPage}
+          />
         ))}
       </div>
     </div>

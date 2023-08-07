@@ -72,6 +72,9 @@ const PostPage: NextPage<Props> = ({
 }) => {
   const { asPath } = useRouter();
   const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
+  const isReviewPage = !!post.categories.edges.find(
+    (category) => category.node.slug === "reviews"
+  );
 
   useEffect(() => {
     const twitterScript = document.createElement("script");
@@ -123,7 +126,9 @@ const PostPage: NextPage<Props> = ({
               <Link
                 key={`${category.node.name}-category-btn`}
                 href={`/${category.node.slug}`}
-                className="win-tag-button"
+                className={
+                  isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
+                }
               >
                 {category.node.name}
               </Link>
@@ -132,7 +137,9 @@ const PostPage: NextPage<Props> = ({
               <Link
                 key={`${tag.name}-tag-btn`}
                 href={`/${tag.slug}`}
-                className="win-tag-button"
+                className={
+                  isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
+                }
               >
                 {tag.name}
               </Link>
@@ -157,16 +164,40 @@ const PostPage: NextPage<Props> = ({
           <div className="mb-5 flex flex-wrap gap-2">
             <div className="my-2 flex flex-wrap gap-2">
               <FacebookShareButton url={shareUrl}>
-                <FacebookIcon size={32} round className="win-social-icon" />
+                <FacebookIcon
+                  size={32}
+                  round
+                  className={
+                    isReviewPage ? "win-social-icon-yellow" : "win-social-icon"
+                  }
+                />
               </FacebookShareButton>
               <TwitterShareButton url={shareUrl}>
-                <TwitterIcon size={32} round className="win-social-icon" />
+                <TwitterIcon
+                  size={32}
+                  round
+                  className={
+                    isReviewPage ? "win-social-icon-yellow" : "win-social-icon"
+                  }
+                />
               </TwitterShareButton>
               <PinterestShareButton media="" url={shareUrl}>
-                <PinterestIcon size={32} round className="win-social-icon" />
+                <PinterestIcon
+                  size={32}
+                  round
+                  className={
+                    isReviewPage ? "win-social-icon-yellow" : "win-social-icon"
+                  }
+                />
               </PinterestShareButton>
               <RedditShareButton url={shareUrl}>
-                <RedditIcon size={32} round className="win-social-icon" />
+                <RedditIcon
+                  size={32}
+                  round
+                  className={
+                    isReviewPage ? "win-social-icon-yellow" : "win-social-icon"
+                  }
+                />
               </RedditShareButton>
             </div>
             <div className="my-2 w-max rounded-md bg-win-gray px-4 py-2 text-sm  font-semibold">
@@ -178,18 +209,25 @@ const PostPage: NextPage<Props> = ({
             </div>
           </div>
 
-          <div className="parsed-wp-content">
+          <div
+            className={`parsed-wp-content ${
+              isReviewPage ? "yellow-links" : ""
+            }`}
+          >
             {parse(post.content, { replace: replaceImage })}
           </div>
           <Reactions key={post.databaseId} postId={post.databaseId} />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={featuredTags} />
-          <FeaturedReviews reviews={featuredReviews} />
+          <FeaturedTags tags={featuredTags} isReviewPage={isReviewPage} />
+          <FeaturedReviews
+            reviews={featuredReviews}
+            isReviewPage={isReviewPage}
+          />
           <FeaturedVideosSecondary featuredVideos={featuredVideos} />
         </div>
       </div>
-      <RecommendedPosts posts={featuredPosts} />
+      <RecommendedPosts posts={featuredPosts} isReviewPage={isReviewPage} />
     </>
   );
 };

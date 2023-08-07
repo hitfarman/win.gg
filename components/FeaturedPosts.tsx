@@ -1,16 +1,17 @@
 import { IFeaturedPost } from "@/interfaces/posts";
 import React, { FC } from "react";
-import FeaturedPostItem from "./FeaturedPostItem";
+import FeaturedPostItem from "@/components/FeaturedPostItem";
 
-type Props = { featuredPosts: IFeaturedPost[] };
+type Props = { featuredPosts: IFeaturedPost[]; isReviewPage?: boolean };
 
-const FeaturedPosts: FC<Props> = ({ featuredPosts }) => {
+const FeaturedPosts: FC<Props> = ({ featuredPosts, isReviewPage }) => {
   return (
     <div className="grid h-[1200px] grid-cols-12 gap-5 md:h-[500px]">
       <FeaturedPostItem
         featuredPost={featuredPosts[0]}
         className="col-span-12 md:col-span-7"
         variant="main"
+        isReviewPage={isReviewPage}
       />
       <div className="col-span-12 grid grid-cols-1 gap-5 md:col-span-5">
         {featuredPosts.slice(1).map((post) => (
@@ -18,6 +19,7 @@ const FeaturedPosts: FC<Props> = ({ featuredPosts }) => {
             key={post.slug}
             featuredPost={post}
             variant="secondary"
+            isReviewPage={isReviewPage}
           />
         ))}
       </div>
