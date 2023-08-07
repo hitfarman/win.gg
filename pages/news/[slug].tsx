@@ -123,7 +123,7 @@ const PostPage: NextPage<Props> = ({
               <Link
                 key={`${category.node.name}-category-btn`}
                 href={`/${category.node.slug}`}
-                className="win-primary-button"
+                className="win-tag-button"
               >
                 {category.node.name}
               </Link>
@@ -132,7 +132,7 @@ const PostPage: NextPage<Props> = ({
               <Link
                 key={`${tag.name}-tag-btn`}
                 href={`/${tag.slug}`}
-                className="win-primary-button"
+                className="win-tag-button"
               >
                 {tag.name}
               </Link>

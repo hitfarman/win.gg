@@ -23,7 +23,7 @@ const VideoCard: FC<Props> = ({ video }) => {
         <div className="flex flex-wrap gap-2">
           {video.categories.nodes.map((category) => (
             <Link
-              className="win-primary-button"
+              className="win-tag-button"
               href={`/${category.slug}`}
               key={category.name}
             >
