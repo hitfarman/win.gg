@@ -1,8 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { useRouter } from "next/router";
 import PaginationNumbers from "@/components/PaginationNumbers";
 import { IPaginatedVideosResponse } from "@/interfaces/videos";
 import VideoCard from "@/components/VideoCard";
+import Link from "next/link";
+import Head from "next/head";
 
 type Props = {
   paginatedVideos: IPaginatedVideosResponse | null;
@@ -10,49 +12,44 @@ type Props = {
 };
 
 const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
-  const { asPath, push } = useRouter();
+  const { asPath } = useRouter();
   const pageParamIsInUrl = /\/page\/\d+/.test(asPath);
   const pageNumber = pageParamIsInUrl ? parseInt(asPath.split("/page/")[1]) : 1;
-
-  // Methods
-  const changePage = (type: "next" | "prev" | "direct", to?: number) => {
-    if (type === "next") {
-      if (!pageParamIsInUrl) {
-        return push(
-          `${asPath}${asPath[asPath.length - 1] === "/" ? "" : "/"}page/2`
-        );
-      }
-
-      return push(
-        asPath.replace(`/page/${pageNumber}`, `/page/${pageNumber + 1}`)
-      );
+  const frontendOrigin = `http${
+    process.env.NODE_ENV === "production" ? "s" : ""
+  }://${process.env.NEXT_PUBLIC_FE_DOMAIN}`;
+  const nextLink = useMemo<string>(() => {
+    if (!pageParamIsInUrl) {
+      return `${frontendOrigin}${asPath}${
+        asPath[asPath.length - 1] === "/" ? "" : "/"
+      }page/2`;
     }
-    if (type === "prev") {
-      if (pageNumber === 2) {
-        return push(asPath.replace(`/page/${pageNumber}`, "/"));
-      }
-
-      return push(
-        asPath.replace(`/page/${pageNumber}`, `/page/${pageNumber - 1}`)
-      );
+    return `${frontendOrigin}${asPath.replace(
+      `/page/${pageNumber}`,
+      `/page/${pageNumber + 1}`
+    )}`;
+  }, [asPath, pageParamIsInUrl, pageNumber, frontendOrigin]);
+  const prevLink = useMemo<string>(() => {
+    if (pageNumber === 2) {
+      return `${frontendOrigin}${asPath.replace(`/page/${pageNumber}`, "/")}`;
     }
-    if (type === "direct") {
-      if (to === 1) {
-        return push(asPath.replace(`/page/${pageNumber}`, "/"));
-      }
 
-      if (!pageParamIsInUrl) {
-        return push(
-          `${asPath}${asPath[asPath.length - 1] === "/" ? "" : "/"}page/${to}`
-        );
-      }
-
-      return push(asPath.replace(`/page/${pageNumber}`, `/page/${to}`));
-    }
-  };
+    return `${frontendOrigin}${asPath.replace(
+      `/page/${pageNumber}`,
+      `/page/${pageNumber - 1}`
+    )}`;
+  }, [asPath, pageNumber, frontendOrigin]);
 
   return (
     <>
+      <Head>
+        {paginatedVideos?.videos.pageInfo.offsetPagination.hasMore && (
+          <link rel="next" href={nextLink} />
+        )}
+        {paginatedVideos?.videos.pageInfo.offsetPagination.hasPrevious && (
+          <link rel="prev" href={prevLink} />
+        )}
+      </Head>
       {title && (
         <h3 className="mb-10 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
           {title}
@@ -70,39 +67,35 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
 
       <PaginationNumbers
         className="mt-5 flex flex-wrap justify-center gap-2 text-xs sm:hidden"
-        changePage={changePage}
         pageNumber={pageNumber}
         siblingCount={1}
         total={
           paginatedVideos?.videos.pageInfo.offsetPagination.total || pageNumber
         }
+        pageParamIsInUrl={pageParamIsInUrl}
+        frontendOrigin={frontendOrigin}
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedVideos?.videos.pageInfo.offsetPagination.hasPrevious && (
-          <button
-            className="win-secondary-button"
-            onClick={() => changePage("prev")}
-          >
+          <Link className="win-secondary-button" href={prevLink}>
             Previous
-          </button>
+          </Link>
         )}
         <PaginationNumbers
           className="hidden gap-2 sm:flex"
-          changePage={changePage}
           pageNumber={pageNumber}
           siblingCount={1}
           total={
             paginatedVideos?.videos.pageInfo.offsetPagination.total ||
             pageNumber
           }
+          pageParamIsInUrl={pageParamIsInUrl}
+          frontendOrigin={frontendOrigin}
         />
         {paginatedVideos?.videos.pageInfo.offsetPagination.hasMore && (
-          <button
-            className="win-secondary-button"
-            onClick={() => changePage("next")}
-          >
+          <Link className="win-secondary-button" href={nextLink}>
             Next
-          </button>
+          </Link>
         )}
       </div>
     </>
