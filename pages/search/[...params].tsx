@@ -42,6 +42,7 @@ const SearchPage: NextPage<Props> = ({
       {/* SEO */}
       <Head>
         <title>{`You searched for ${searchQuery} - WIN.gg`}</title>
+        <meta name="robots" content="noindex, follow" />
       </Head>
 
       <div className="mt-10">
