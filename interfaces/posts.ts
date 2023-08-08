@@ -4,7 +4,7 @@ export interface IPost {
   title: string;
   slug: string;
   date: string;
-  excerpt: string;
+  excerpt: string | null;
   author: { node: { firstName: string; lastName: string; slug: string } };
   featuredImage: { node: { altText: string; sourceUrl: string } };
   categories: { nodes: { name: string; slug: string }[] };
@@ -66,7 +66,7 @@ export interface IFeaturedPost {
   date: string;
   slug: string;
   title: string;
-  excerpt: string;
+  excerpt: string | null;
   categories: {
     nodes: {
       name: string;

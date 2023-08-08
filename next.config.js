@@ -21,6 +21,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "steamcdn-a.akamaihd.net",
+        port: "",
+        pathname: "/**",
+      },
     ]
   },
   async rewrites() {
