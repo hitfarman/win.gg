@@ -1,4 +1,3 @@
-import { getPostBySlug } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FeaturedReviews from "@/components/FeaturedReviews";
@@ -9,21 +8,18 @@ import {
   FeaturedOptionTags,
   IAllOptionsResponse
 } from "@/interfaces/options";
-import { IFeaturedPost, IPostDetails } from "@/interfaces/posts";
+import { IFeaturedPost } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
 import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo, IVideoDetails } from "@/interfaces/videos";
 import { getFeaturedOptionKeyNamesByCategorySlug } from "@/utils/getFeaturedOptionKeyNamesByCategorySlug";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-import React, { useEffect } from "react";
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import parse from "html-react-parser";
-import { replaceImage } from "@/utils/replaceImage";
 import RecommendedPosts from "@/components/RecommendedPosts";
 import Head from "next/head";
-import { calculateReadingTime } from "@/utils/calculateReadingTime";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -39,9 +35,6 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
-import { IReaction } from "@/interfaces/reactions";
-import { getReactionsByPostId } from "@/axios/reactions";
-import Reactions from "@/components/Reactions";
 import { getVideoBySlug } from "@/apollo/videos";
 import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
 import { parseSeo } from "@/utils/parseSeo";

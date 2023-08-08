@@ -8,7 +8,7 @@ import { POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
-import { IFeaturedTag, ITagSlug } from "@/interfaces/tags";
+import { IFeaturedTag } from "@/interfaces/tags";
 import { IFeaturedVideo } from "@/interfaces/videos";
 import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
