@@ -38,16 +38,14 @@ const FeaturedPostItem: FC<Props> = ({
       />
 
       <Link
-        className={`absolute inset-0 z-10 flex items-end bg-black/70`}
+        className={`absolute inset-0 z-10 flex items-end`}
         href={`/news/${featuredPost.slug}`}
         ref={outerLinkRef}
       />
 
       <div
-        className={`absolute z-20 flex flex-col ${
-          variant === "main"
-            ? "inset-x-8 bottom-8 gap-3"
-            : "inset-x-4 bottom-4 gap-1.5"
+        className={`absolute inset-x-0 bottom-0 z-20 flex flex-col bg-gradient-to-t from-black/90 from-25% ${
+          variant === "main" ? "gap-3 p-8 pt-16" : " gap-1.5 p-4 pt-10"
         }`}
         onClick={() => {
           if (outerLinkRef.current) {
