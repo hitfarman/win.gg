@@ -1,0 +1,7 @@
+#rv_slb {
+  background-color: unset !important;
+  border: unset !important;
+}
+#rv_slb_content__close {
+  display: none !important;
+}

@@ -6,6 +6,7 @@ import { ApolloProvider } from "@apollo/client";
 import { client } from "@/apollo/init";
 import { useRouter } from "next/router";
 import { frontendOrigin } from "@/constants/general";
+import Script from "next/script";
 
 type Props = {
   children: ReactNode;
@@ -26,6 +27,7 @@ const BaseLayout: FC<Props> = ({ children }) => {
         >
           {children}
         </div>
+        <Script async src="//static.getclicky.com/101362758.js" />
       </ApolloProvider>
     </ErrorBoundary>
   );

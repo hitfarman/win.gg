@@ -3,6 +3,7 @@
 @import "@/styles/blogPost.css";
 @import "@/styles/linearLoading.css";
 @import "@/styles/socialIcons.css";
+@import "@/styles/ads.css";
 
 @tailwind base;
 @tailwind components;
