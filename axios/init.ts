@@ -10,7 +10,7 @@ const apiParams: CreateAxiosDefaults = {
 };
 
 const apiParamsSSR: CreateAxiosDefaults = {
-  baseURL: `https://${process.env.WP_API_DOMAIN}/wp-json`,
+  baseURL: `https://${process.env.NEXT_PUBLIC_WP_API_DOMAIN}/wp-json`,
   timeout: 20000,
   auth: {
     username: process.env.BASIC_AUTH_USERNAME || "",
