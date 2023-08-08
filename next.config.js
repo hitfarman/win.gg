@@ -44,6 +44,16 @@ const nextConfig = {
       }
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/ads.txt',
+        destination: 'https://spn-v1.revampcdn.com/publishers/win-gg/ads.txt',
+        permanent: false,
+        basePath: false
+      },
+    ]
+  },
   output: process.env.BUILD_STANDALONE === "true" ? "standalone" : undefined,
 };
 
