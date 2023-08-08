@@ -45,7 +45,7 @@ const FeaturedPostItem: FC<Props> = ({
 
       <div
         className={`absolute inset-x-0 bottom-0 z-20 flex flex-col bg-gradient-to-t from-black/90 from-25% ${
-          variant === "main" ? "gap-3 p-8 pt-16" : " gap-1.5 p-4 pt-10"
+          variant === "main" ? "gap-3 p-8" : " gap-1.5 p-4"
         }`}
         onClick={() => {
           if (outerLinkRef.current) {
@@ -86,7 +86,7 @@ const FeaturedPostItem: FC<Props> = ({
 
         <div className="flex items-center gap-2 text-xs font-bold">
           <p>{date}</p>
-          <p>{"//"}</p>
+          <p className="pb-0.5">|</p>
           <Link
             href={`/news/author/${featuredPost.author.node.slug}`}
             className="transition-colors hover:text-gray-300"
