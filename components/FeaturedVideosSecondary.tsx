@@ -15,6 +15,7 @@ const FeaturedVideosSecondary: FC<Props> = ({ featuredVideos }) => {
           url={video.url}
           height={250}
           width={350}
+          sizesForNextImg="(max-width: 768px) 100vw, 33vw"
         />
       ))}
     </div>

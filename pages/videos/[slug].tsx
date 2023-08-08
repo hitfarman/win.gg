@@ -136,6 +136,7 @@ const PostPage: NextPage<Props> = ({
               width={800}
               height={350}
               url={video.videoLink.youtubeLink}
+              sizesForNextImg="(max-width: 768px) 100vw,(max-width: 1024px) 50vw, 66vw"
             />
           </div>
         </div>

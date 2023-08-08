@@ -8,9 +8,15 @@ type Props = {
   url: string;
   width: number;
   height: number;
+  sizesForNextImg?: string;
 };
 
-const LazyYoutubeVideo: FC<Props> = ({ url, height, width }) => {
+const LazyYoutubeVideo: FC<Props> = ({
+  url,
+  height,
+  width,
+  sizesForNextImg
+}) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   if (isLoaded) {
@@ -37,6 +43,7 @@ const LazyYoutubeVideo: FC<Props> = ({ url, height, width }) => {
           width={width}
           height={height}
           className="h-full w-full object-cover"
+          sizes={sizesForNextImg}
         />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-black/40 px-2 py-1 text-white transition-all group-hover:scale-125 group-hover:bg-win-primary/70">
           <PlayIcon className="h-10 w-10" />

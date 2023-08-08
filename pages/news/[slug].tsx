@@ -115,17 +115,19 @@ const PostPage: NextPage<Props> = ({
       />
       <div className="flex flex-col gap-10 py-10 md:flex-row">
         <div className="flex-1">
-          <Image
-            width={800}
-            height={350}
-            // TODO there is no featuredImage
-            src={post.featuredImage?.node.sourceUrl}
-            alt={post.featuredImage?.node.altText}
-            title={post.featuredImage?.node.title}
-            className="mb-5"
-            priority
-            key={post.featuredImage?.node.sourceUrl}
-          />
+          <div className="relative mb-5 h-[350px] w-full md:max-w-[800px]">
+            <Image
+              // TODO there is no featuredImage
+              src={post.featuredImage?.node.sourceUrl}
+              alt={post.featuredImage?.node.altText}
+              title={post.featuredImage?.node.title}
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw,(max-width: 1024px) 50vw, 66vw"
+              fill
+              priority
+              key={post.featuredImage?.node.sourceUrl}
+            />
+          </div>
           <div className="mb-5 flex flex-wrap gap-2">
             {post.categories.edges.map((category) => (
               <Link
@@ -223,7 +225,7 @@ const PostPage: NextPage<Props> = ({
           </div>
           <Reactions key={post.databaseId} postId={post.databaseId} />
         </div>
-        <div className="md:w-4/12">
+        <div className="md:w-5/12 lg:w-4/12">
           <FeaturedTags tags={featuredTags} isReviewPage={isReviewPage} />
           <FeaturedReviews
             reviews={featuredReviews}
