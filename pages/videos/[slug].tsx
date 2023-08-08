@@ -1,8 +1,5 @@
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import {
   FeaturedArticles,
   FeaturedOptionTags,
@@ -38,6 +35,7 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { getVideoBySlug } from "@/apollo/videos";
 import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
 import { parseSeo } from "@/utils/parseSeo";
+import FeaturedSidebar from "@/components/FeaturedSidebar";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -141,9 +139,11 @@ const PostPage: NextPage<Props> = ({
           </div>
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={featuredTags} />
-          <FeaturedReviews reviews={featuredReviews} />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={featuredTags}
+            featuredVideos={featuredVideos}
+          />
         </div>
       </div>
       <RecommendedPosts posts={featuredPosts} />

@@ -1,9 +1,6 @@
 import { getPaginatedPosts } from "@/apollo/posts";
 import { getAuthorBySlug } from "@/apollo/users";
 import { getAllOptions } from "@/axios/options";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import PostList from "@/components/PostList";
 import { POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
@@ -23,6 +20,7 @@ import parse from "html-react-parser";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Image from "next/image";
 import { parseSeo } from "@/utils/parseSeo";
+import FeaturedSidebar from "@/components/FeaturedSidebar";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -77,9 +75,11 @@ const AuthorPage: NextPage<Props> = ({
           <PostList paginatedPosts={paginatedPosts} title="" />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={featuredTags} />
-          <FeaturedReviews reviews={featuredReviews} />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={featuredTags}
+            featuredVideos={featuredVideos}
+          />
         </div>
       </div>
     </>

@@ -1,9 +1,6 @@
 import { getPaginatedPosts, getPostBySlug } from "@/apollo/posts";
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import {
   FeaturedArticles,
   FeaturedOptionTags,
@@ -52,6 +49,7 @@ import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 
 import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
+import FeaturedSidebar from "@/components/FeaturedSidebar";
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
 });
@@ -226,12 +224,12 @@ const PostPage: NextPage<Props> = ({
           <Reactions key={post.databaseId} postId={post.databaseId} />
         </div>
         <div className="md:w-5/12 lg:w-4/12">
-          <FeaturedTags tags={featuredTags} isReviewPage={isReviewPage} />
-          <FeaturedReviews
-            reviews={featuredReviews}
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={featuredTags}
+            featuredVideos={featuredVideos}
             isReviewPage={isReviewPage}
           />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
         </div>
       </div>
       <RecommendedPosts posts={featuredPosts} isReviewPage={isReviewPage} />

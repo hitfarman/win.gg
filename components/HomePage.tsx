@@ -3,13 +3,11 @@ import React, { FC } from "react";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedVideos from "@/components/FeaturedVideos";
 import PostList from "@/components/PostList";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import parse from "html-react-parser";
 import { replaceImage } from "@/utils/replaceImage";
 import Head from "next/head";
 import { parseSeo } from "@/utils/parseSeo";
+import FeaturedSidebar from "./FeaturedSidebar";
 
 const HomePage: FC<IHomePageProps> = ({
   featuredPosts,
@@ -30,9 +28,11 @@ const HomePage: FC<IHomePageProps> = ({
           <PostList paginatedPosts={paginatedPosts} title="Latest news" />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={homeTags} />
-          <FeaturedReviews reviews={featuredReviews} />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos.slice(3)} />
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={homeTags}
+            featuredVideos={featuredVideos}
+          />
         </div>
       </div>
       <div className="parsed-wp-content my-5">

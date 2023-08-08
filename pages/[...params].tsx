@@ -5,9 +5,6 @@ import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CategorySeo from "@/components/CategorySeo";
 import FeaturedPosts from "@/components/FeaturedPosts";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import PostList from "@/components/PostList";
 import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { ICategoryInfo, ICategorySlug } from "@/interfaces/categories";
@@ -36,6 +33,7 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import { useIsReviewsPage } from "@/hooks/useIsReviewsPage";
+import FeaturedSidebar from "@/components/FeaturedSidebar";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -80,12 +78,12 @@ const CategoryPage: NextPage<Props> = ({
           />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags isReviewPage={isReviewPage} tags={categoryTags} />
-          <FeaturedReviews
-            reviews={featuredReviews}
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={categoryTags}
+            featuredVideos={featuredVideos}
             isReviewPage={isReviewPage}
           />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
         </div>
       </div>
 

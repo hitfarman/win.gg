@@ -1,8 +1,5 @@
 import { getAllOptions } from "@/axios/options";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import PostList from "@/components/PostList";
 import { POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
@@ -19,6 +16,7 @@ import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { useRouter } from "next/router";
 import { searchByQuery } from "@/apollo/search";
 import Head from "next/head";
+import FeaturedSidebar from "@/components/FeaturedSidebar";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -63,9 +61,11 @@ const SearchPage: NextPage<Props> = ({
           />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={featuredTags} />
-          <FeaturedReviews reviews={featuredReviews} />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={featuredTags}
+            featuredVideos={featuredVideos}
+          />
         </div>
       </div>
     </>

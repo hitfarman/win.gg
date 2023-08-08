@@ -1,11 +1,9 @@
 import { IVideosPageProps } from "@/interfaces/pageProps";
 import React, { FC } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FeaturedTags from "@/components/FeaturedTags";
-import FeaturedReviews from "@/components/FeaturedReviews";
-import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import Head from "next/head";
-import VideoList from "./VideoList";
+import VideoList from "@/components/VideoList";
+import FeaturedSidebar from "@/components/FeaturedSidebar";
 
 const VideosPage: FC<IVideosPageProps> = ({
   featuredReviews,
@@ -27,9 +25,11 @@ const VideosPage: FC<IVideosPageProps> = ({
           <VideoList paginatedVideos={paginatedVideos} />
         </div>
         <div className="md:w-4/12">
-          <FeaturedTags tags={featuredTags} />
-          <FeaturedReviews reviews={featuredReviews} />
-          <FeaturedVideosSecondary featuredVideos={featuredVideos} />
+          <FeaturedSidebar
+            featuredReviews={featuredReviews}
+            featuredTags={featuredTags}
+            featuredVideos={featuredVideos}
+          />
         </div>
       </div>
     </>
