@@ -22,6 +22,7 @@ import React from "react";
 import parse from "html-react-parser";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Image from "next/image";
+import { parseSeo } from "@/utils/parseSeo";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -40,7 +41,11 @@ const AuthorPage: NextPage<Props> = ({
 }) => {
   return (
     <>
-      <Head>{parse(author.seo.fullHead || "")}</Head>
+      <Head>
+        {parse(author.seo.fullHead || "", {
+          replace: parseSeo
+        })}
+      </Head>
       <div className="my-10">
         <Breadcrumbs
           crumbs={[{ text: author.name, url: `/news/author/${author.slug}` }]}

@@ -2,30 +2,19 @@ import Head from "next/head";
 import React, { FC } from "react";
 import parse from "html-react-parser";
 import { ICategoryInfo } from "@/interfaces/categories";
+import { parseSeo } from "@/utils/parseSeo";
 
 type Props = {
   categoryInfo: ICategoryInfo | null;
 };
 
 const CategorySeo: FC<Props> = ({ categoryInfo }) => {
-  const parsedCategorySeo = parse(categoryInfo?.seo.fullHead || "");
+  const parsedCategorySeo = parse(categoryInfo?.seo.fullHead || "", {
+    replace: parseSeo
+  });
   return (
     <>
-      <Head>
-        {parsedCategorySeo}
-        <meta
-          property="og:site_name"
-          content={`${process.env.NEXT_PUBLIC_FE_DOMAIN}`}
-        />
-        <meta
-          property="og:url"
-          content={`https://${process.env.NEXT_PUBLIC_FE_DOMAIN}/${categoryInfo?.slug}/`}
-        />
-        <link
-          rel="canonical"
-          href={`https://${process.env.NEXT_PUBLIC_FE_DOMAIN}/${categoryInfo?.slug}/`}
-        />
-      </Head>
+      <Head>{parsedCategorySeo}</Head>
     </>
   );
 };

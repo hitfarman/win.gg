@@ -13,6 +13,7 @@ import HeadOfVideoImg from "@/assets/img/head-of-video.png";
 import Link from "next/link";
 import AboutUsCard from "@/components/AboutUsCard";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
+import { parseSeo } from "@/utils/parseSeo";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -42,7 +43,11 @@ const aboutUsCards: IAboutUsCardInfo[] = [
 const AboutUsPage: NextPage<Props> = ({ pageInfo }) => {
   return (
     <>
-      <Head>{parse(pageInfo.seo.fullHead)}</Head>
+      <Head>
+        {parse(pageInfo.seo.fullHead, {
+          replace: parseSeo
+        })}
+      </Head>
       <Breadcrumbs crumbs={[{ text: "About us", url: "/about-us" }]} />
       <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
         About us

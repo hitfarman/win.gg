@@ -6,6 +6,7 @@ import { GetStaticProps, NextPage } from "next";
 import parse from "html-react-parser";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
+import { parseSeo } from "@/utils/parseSeo";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -14,7 +15,11 @@ type Props = {
 const PrivacyPolicyPage: NextPage<Props> = ({ pageInfo }) => {
   return (
     <>
-      <Head>{parse(pageInfo.seo.fullHead)}</Head>
+      <Head>
+        {parse(pageInfo.seo.fullHead, {
+          replace: parseSeo
+        })}
+      </Head>
       <Breadcrumbs
         crumbs={[{ text: "Privacy policy", url: "/privacy-policy" }]}
       />

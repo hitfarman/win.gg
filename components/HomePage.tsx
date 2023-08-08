@@ -9,6 +9,7 @@ import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
 import parse from "html-react-parser";
 import { replaceImage } from "@/utils/replaceImage";
 import Head from "next/head";
+import { parseSeo } from "@/utils/parseSeo";
 
 const HomePage: FC<IHomePageProps> = ({
   featuredPosts,
@@ -21,7 +22,7 @@ const HomePage: FC<IHomePageProps> = ({
 }) => {
   return (
     <>
-      <Head>{parse(pageSeo)}</Head>
+      <Head>{parse(pageSeo, { replace: parseSeo })}</Head>
       <FeaturedPosts featuredPosts={featuredPosts} />
       <FeaturedVideos featuredVideos={featuredVideos.slice(0, 3)} />
       <div className="flex flex-col gap-10 py-10 md:flex-row">

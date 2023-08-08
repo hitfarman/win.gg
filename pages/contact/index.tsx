@@ -8,6 +8,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactForm from "@/components/ContactForm";
 import Link from "next/link";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
+import { parseSeo } from "@/utils/parseSeo";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -16,7 +17,11 @@ type Props = {
 const ContactPage: NextPage<Props> = ({ pageInfo }) => {
   return (
     <div>
-      <Head>{parse(pageInfo.seo.fullHead)}</Head>
+      <Head>
+        {parse(pageInfo.seo.fullHead, {
+          replace: parseSeo
+        })}
+      </Head>
       <Breadcrumbs crumbs={[{ text: "Contact", url: "/contact" }]} />
       <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
         Contact

@@ -1,3 +1,4 @@
+import { frontendOrigin } from "@/constants/general";
 import { calculateNavLink } from "@/utils/calculateNavLink";
 import { generatePageNumbers } from "@/utils/generatePageNumbers";
 import Link from "next/link";
@@ -11,7 +12,6 @@ type Props = {
   className?: string;
   isReviewPage?: boolean;
   pageParamIsInUrl: boolean;
-  frontendOrigin: string;
 };
 
 const PaginationNumbers: FC<Props> = ({
@@ -20,8 +20,7 @@ const PaginationNumbers: FC<Props> = ({
   total,
   className,
   isReviewPage,
-  pageParamIsInUrl,
-  frontendOrigin
+  pageParamIsInUrl
 }) => {
   const { asPath } = useRouter();
   return (

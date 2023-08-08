@@ -44,6 +44,7 @@ import { getReactionsByPostId } from "@/axios/reactions";
 import Reactions from "@/components/Reactions";
 import { getVideoBySlug } from "@/apollo/videos";
 import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
+import { parseSeo } from "@/utils/parseSeo";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -65,7 +66,11 @@ const PostPage: NextPage<Props> = ({
 
   return (
     <>
-      <Head>{parse(video.seo.fullHead || "")}</Head>
+      <Head>
+        {parse(video.seo.fullHead || "", {
+          replace: parseSeo
+        })}
+      </Head>
       <Breadcrumbs
         crumbs={[
           {

@@ -51,6 +51,7 @@ import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 
 import dynamic from "next/dynamic";
+import { parseSeo } from "@/utils/parseSeo";
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
 });
@@ -95,7 +96,11 @@ const PostPage: NextPage<Props> = ({
 
   return (
     <>
-      <Head>{parse(post.seo.fullHead)}</Head>
+      <Head>
+        {parse(post.seo.fullHead, {
+          replace: parseSeo
+        })}
+      </Head>
       <Breadcrumbs
         crumbs={[
           {

@@ -5,6 +5,7 @@ import { IPaginatedVideosResponse } from "@/interfaces/videos";
 import VideoCard from "@/components/VideoCard";
 import Link from "next/link";
 import Head from "next/head";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   paginatedVideos: IPaginatedVideosResponse | null;
@@ -15,9 +16,7 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
   const { asPath } = useRouter();
   const pageParamIsInUrl = /\/page\/\d+/.test(asPath);
   const pageNumber = pageParamIsInUrl ? parseInt(asPath.split("/page/")[1]) : 1;
-  const frontendOrigin = `http${
-    process.env.NODE_ENV === "production" ? "s" : ""
-  }://${process.env.NEXT_PUBLIC_FE_DOMAIN}`;
+
   const nextLink = useMemo<string>(() => {
     if (!pageParamIsInUrl) {
       return `${frontendOrigin}${asPath}${
@@ -28,7 +27,7 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
       `/page/${pageNumber}`,
       `/page/${pageNumber + 1}`
     )}`;
-  }, [asPath, pageParamIsInUrl, pageNumber, frontendOrigin]);
+  }, [asPath, pageParamIsInUrl, pageNumber]);
   const prevLink = useMemo<string>(() => {
     if (pageNumber === 2) {
       return `${frontendOrigin}${asPath.replace(`/page/${pageNumber}`, "/")}`;
@@ -38,7 +37,7 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
       `/page/${pageNumber}`,
       `/page/${pageNumber - 1}`
     )}`;
-  }, [asPath, pageNumber, frontendOrigin]);
+  }, [asPath, pageNumber]);
 
   return (
     <>
@@ -73,7 +72,6 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
           paginatedVideos?.videos.pageInfo.offsetPagination.total || pageNumber
         }
         pageParamIsInUrl={pageParamIsInUrl}
-        frontendOrigin={frontendOrigin}
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedVideos?.videos.pageInfo.offsetPagination.hasPrevious && (
@@ -90,7 +88,6 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
             pageNumber
           }
           pageParamIsInUrl={pageParamIsInUrl}
-          frontendOrigin={frontendOrigin}
         />
         {paginatedVideos?.videos.pageInfo.offsetPagination.hasMore && (
           <Link className="win-secondary-button" href={nextLink}>

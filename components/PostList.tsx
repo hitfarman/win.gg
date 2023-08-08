@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import PaginationNumbers from "@/components/PaginationNumbers";
 import Link from "next/link";
 import Head from "next/head";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   paginatedPosts: IPaginatedPostsResponse | null;
@@ -17,9 +18,7 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
   const { asPath } = useRouter();
   const pageParamIsInUrl = /\/page\/\d+/.test(asPath);
   const pageNumber = pageParamIsInUrl ? parseInt(asPath.split("/page/")[1]) : 1;
-  const frontendOrigin = `http${
-    process.env.NODE_ENV === "production" ? "s" : ""
-  }://${process.env.NEXT_PUBLIC_FE_DOMAIN}`;
+
   const nextLink = useMemo<string>(() => {
     if (!pageParamIsInUrl) {
       return `${frontendOrigin}${asPath}${
@@ -30,7 +29,7 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
       `/page/${pageNumber}`,
       `/page/${pageNumber + 1}`
     )}`;
-  }, [asPath, pageParamIsInUrl, pageNumber, frontendOrigin]);
+  }, [asPath, pageParamIsInUrl, pageNumber]);
   const prevLink = useMemo<string>(() => {
     if (pageNumber === 2) {
       return `${frontendOrigin}${asPath.replace(`/page/${pageNumber}`, "/")}`;
@@ -40,7 +39,7 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
       `/page/${pageNumber}`,
       `/page/${pageNumber - 1}`
     )}`;
-  }, [asPath, pageNumber, frontendOrigin]);
+  }, [asPath, pageNumber]);
 
   return (
     <>
@@ -81,7 +80,6 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
         }
         isReviewPage={isReviewPage}
         pageParamIsInUrl={pageParamIsInUrl}
-        frontendOrigin={frontendOrigin}
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasPrevious && (
@@ -105,7 +103,6 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
           }
           isReviewPage={isReviewPage}
           pageParamIsInUrl={pageParamIsInUrl}
-          frontendOrigin={frontendOrigin}
         />
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasMore && (
           <Link
