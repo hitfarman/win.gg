@@ -1,0 +1,7 @@
+User-agent: *
+Sitemap: https://api.win.gg/sitemap_index.xml
+
+Disallow: /?s=
+Disallow: /?s=*
+Disallow: /search/
+Disallow: /search/*
