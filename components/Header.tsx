@@ -12,7 +12,7 @@ import SearchInput from "./SearchInput";
 import { Transition } from "@headlessui/react";
 
 export const navItems: INavItem[] = [
-  { title: "CSGO", href: "/csgo" },
+  { title: "CSGO", href: "/counter-strike" },
   { title: "DOTA 2", href: "/dota2" },
   { title: "LOL", href: "/lol" },
   { title: "VALORANT", href: "/valorant" },

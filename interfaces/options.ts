@@ -37,9 +37,9 @@ export type FeaturedArticles = IOptionFeaturedPost[] | false;
 export type FeaturedOptionTags = IOptionTag[] | false;
 
 export interface IAllOptionsResponse {
-  "csgo-description": string;
-  "csgo-featured-articles": FeaturedArticles;
-  "csgo-tags": FeaturedOptionTags;
+  "counter-strike-description": string;
+  "counter-strike-featured-articles": FeaturedArticles;
+  "counter-strike-tags": FeaturedOptionTags;
 
   "default-tags": FeaturedOptionTags;
 

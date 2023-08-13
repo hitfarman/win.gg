@@ -2,7 +2,7 @@ import { IAllOptionsResponse } from "@/interfaces/options";
 
 export const getFeaturedOptionKeyNamesByCategorySlug = (slug: string) => {
   const specialSlugs = [
-    "csgo",
+    "counter-strike",
     "dota2",
     "movies-tv",
     "lol",
