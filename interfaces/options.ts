@@ -49,9 +49,9 @@ export interface IAllOptionsResponse {
 
   "general-tags": FeaturedOptionTags;
 
-  "gta-description": string;
-  "gta-featured-articles": FeaturedArticles;
-  "gta-tags": FeaturedOptionTags;
+  "movies-tv-description": string;
+  "movies-tv-featured-articles": FeaturedArticles;
+  "movies-tv-tags": FeaturedOptionTags;
 
   "homepage-description": string;
   "homepage-featured-articles": FeaturedArticles;

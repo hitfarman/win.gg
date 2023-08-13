@@ -4,7 +4,7 @@ export const getFeaturedOptionKeyNamesByCategorySlug = (slug: string) => {
   const specialSlugs = [
     "csgo",
     "dota2",
-    "gta",
+    "movies-tv",
     "lol",
     "pokemon",
     "reviews",
@@ -14,7 +14,7 @@ export const getFeaturedOptionKeyNamesByCategorySlug = (slug: string) => {
   ];
 
   if (specialSlugs.includes(slug)) {
-    // Have to do this because of gta category
+    // TODO: Re-evaluate if we still have to do this because of gta category (which is gone now)
     if (slug === "general") {
       return {
         description: null,

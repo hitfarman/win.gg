@@ -17,7 +17,7 @@ export const navItems: INavItem[] = [
   { title: "LOL", href: "/lol" },
   { title: "VALORANT", href: "/valorant" },
   { title: "POKÉMON", href: "/pokemon" },
-  { title: "GTA", href: "/gta" },
+  { title: "MOVIES & TV", href: "/movies-tv" },
   { title: "TWITCH", href: "/twitch" },
   { title: "REVIEWS", href: "/reviews", variant: "button" }
 ];
