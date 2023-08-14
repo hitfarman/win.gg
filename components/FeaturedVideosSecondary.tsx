@@ -20,7 +20,6 @@ const FeaturedVideosSecondary: FC<Props> = ({ featuredVideos }) => {
           sizesForNextImg="(max-width: 768px) 100vw, 33vw"
         />
       ))}
-      <InsertedAd id="video-inset-ad" className="min-h-[250px]" />
       {featuredVideos.slice(2).map((video) => (
         <LazyYoutubeVideo
           key={video.url}
