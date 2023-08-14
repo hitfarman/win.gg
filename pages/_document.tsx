@@ -21,7 +21,7 @@ export default function Document() {
           type="module"
           src="https://spn-v1.revampcdn.com/publishers/win-gg.js?modern=1"
         />
-        <script src="https://spn-v1.revampcdn.com/publishers/win-gg.js" />
+        <script async src="https://spn-v1.revampcdn.com/publishers/win-gg.js" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
