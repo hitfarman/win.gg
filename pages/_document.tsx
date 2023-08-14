@@ -1,28 +1,27 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <Script
+        <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-W3YZ88PL2C"
         />
-        <Script
+        <script
           async
           src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
         />
-        <Script
+        <script
           async
           src="https://spn-v1.revampcdn.com/prebid/win-gg/prebid-client.js"
         />
-        <Script
+        <script
           async
           type="module"
           src="https://spn-v1.revampcdn.com/publishers/win-gg.js?modern=1"
         />
-        <Script src="https://spn-v1.revampcdn.com/publishers/win-gg.js" />
+        <script src="https://spn-v1.revampcdn.com/publishers/win-gg.js" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
