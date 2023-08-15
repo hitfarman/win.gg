@@ -11,7 +11,7 @@ const FeaturedVideosSecondary: FC<Props> = ({ featuredVideos }) => {
   return (
     <div className="grid grid-cols-1 gap-5">
       <InsertedAd id="direct-ad-above-video" className="min-h-[250px]" />
-      {featuredVideos.slice(2).map((video) => (
+      {featuredVideos.slice(3).map((video) => (
         <LazyYoutubeVideo
           key={video.url}
           url={video.url}
