@@ -26,7 +26,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import parse from "html-react-parser";
-import { parseWpContent } from "@/utils/parseWpContent";
 import RecommendedPosts from "@/components/RecommendedPosts";
 import Head from "next/head";
 import { calculateReadingTime } from "@/utils/calculateReadingTime";
@@ -49,13 +48,19 @@ import {
   DEFAULT_REVALIDATION_TIME,
   DEFAULT_VIDEO_LOOKUP_CATEGORY
 } from "@/constants/posts";
-import { insertVideoAds } from "@/utils/insertVideoAds";
 import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
 });
+const ParsedPostContent = dynamic(
+  () => import("@/components/ParsedPostContent"),
+  {
+    ssr: false
+  }
+);
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -223,15 +228,12 @@ const PostPage: NextPage<Props> = ({
             </div>
           </div>
 
-          <div
-            className={`parsed-wp-content ${
-              isReviewPage ? "yellow-links" : ""
-            }`}
-          >
-            {parse(insertVideoAds(post.content, postCategory), {
-              replace: parseWpContent
-            })}
-          </div>
+          <ParsedPostContent
+            isReviewPage={isReviewPage}
+            postCategory={postCategory}
+            postContent={post.content}
+          />
+
           <Reactions key={post.databaseId} postId={post.databaseId} />
         </div>
         <div className="md:w-5/12 lg:w-4/12">

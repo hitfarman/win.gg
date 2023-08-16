@@ -52,5 +52,22 @@ export const parseWpContent = (domNode: DOMNode) => {
     );
   }
 
+  if (name === "iframe" && attribs.src && /youtube.com/.test(attribs.src)) {
+    if (attribs.frameborder) {
+      delete attribs.frameborder;
+    }
+    if (attribs.allowfullscreen || attribs.allowfullscreen === "") {
+      delete attribs.allowfullscreen;
+    }
+
+    return (
+      <div className="flex justify-center py-5">
+        <iframe className="w-full" {...attribs} frameBorder="0" allowFullScreen>
+          {children}
+        </iframe>
+      </div>
+    );
+  }
+
   return domNode;
 };
