@@ -14,20 +14,18 @@ type Props = {
   featuredTags: IFeaturedTag[];
   featuredVideos: IFeaturedVideo[];
   featuredReviews: IFeaturedReview[];
-  isReviewPage?: boolean;
 };
 
 const FeaturedSidebar: FC<Props> = ({
   featuredReviews,
   featuredTags,
-  featuredVideos,
-  isReviewPage
+  featuredVideos
 }) => {
   return (
     <div>
-      <FeaturedTags tags={featuredTags} isReviewPage={isReviewPage} />
+      <FeaturedTags tags={featuredTags} />
       <InsertedAd id="td-top-mpu-1" className="mb-5 min-h-[250px]" />
-      <FeaturedReviews reviews={featuredReviews} isReviewPage={isReviewPage} />
+      <FeaturedReviews reviews={featuredReviews} />
       <FeaturedVideosSecondary featuredVideos={featuredVideos} />
     </div>
   );

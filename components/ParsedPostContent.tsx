@@ -4,18 +4,13 @@ import { FC } from "react";
 import parse from "html-react-parser";
 
 type Props = {
-  isReviewPage: boolean;
   postContent: string;
   postCategory: string;
 };
 
-const ParsedPostContent: FC<Props> = ({
-  isReviewPage,
-  postCategory,
-  postContent
-}) => {
+const ParsedPostContent: FC<Props> = ({ postCategory, postContent }) => {
   return (
-    <div className={`parsed-wp-content ${isReviewPage ? "yellow-links" : ""}`}>
+    <div className="parsed-wp-content">
       {parse(insertVideoAds(postContent, postCategory), {
         replace: parseWpContent
       })}

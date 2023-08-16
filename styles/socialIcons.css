@@ -6,12 +6,3 @@
   @apply scale-110;
   @apply transition-transform;
 }
-
-.win-social-icon-yellow circle {
-  @apply fill-win-yellow-hover;
-}
-
-.win-social-icon-yellow:hover {
-  @apply scale-110;
-  @apply transition-transform;
-}

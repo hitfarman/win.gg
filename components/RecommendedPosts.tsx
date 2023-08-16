@@ -4,10 +4,9 @@ import PostCard from "./PostCard";
 
 type Props = {
   posts: IFeaturedPost[];
-  isReviewPage?: boolean;
 };
 
-const RecommendedPosts: FC<Props> = ({ posts, isReviewPage }) => {
+const RecommendedPosts: FC<Props> = ({ posts }) => {
   return (
     <div className="full-bleed-gray bg-win-gray py-10">
       <h3 className="mb-10 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
@@ -19,7 +18,6 @@ const RecommendedPosts: FC<Props> = ({ posts, isReviewPage }) => {
             post={post}
             variant="fixed-vertical"
             key={`${i}-recommended-post`}
-            isReviewPage={isReviewPage}
           />
         ))}
       </div>

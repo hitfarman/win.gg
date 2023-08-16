@@ -5,13 +5,6 @@
   @apply transition-colors;
 }
 
-.parsed-wp-content.yellow-links a {
-  @apply text-win-yellow;
-  @apply cursor-pointer;
-  @apply hover:text-win-yellow-hover;
-  @apply transition-colors;
-}
-
 .parsed-wp-content h1 {
   @apply font-header;
   @apply text-4xl;

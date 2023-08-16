@@ -4,10 +4,9 @@ import React, { FC } from "react";
 
 type Props = {
   tags: IFeaturedTag[];
-  isReviewPage?: boolean;
 };
 
-const FeaturedTags: FC<Props> = ({ tags, isReviewPage }) => {
+const FeaturedTags: FC<Props> = ({ tags }) => {
   return (
     <div>
       <h3 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
@@ -18,9 +17,7 @@ const FeaturedTags: FC<Props> = ({ tags, isReviewPage }) => {
           <Link
             key={tag.term_id}
             href={`/${tag.slug}`}
-            className={
-              isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
-            }
+            className="win-tag-button"
           >
             {tag.name}
           </Link>

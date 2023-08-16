@@ -10,7 +10,6 @@ type Props = {
   pageNumber: number;
   total: number;
   className?: string;
-  isReviewPage?: boolean;
   pageParamIsInUrl: boolean;
 };
 
@@ -19,7 +18,7 @@ const PaginationNumbers: FC<Props> = ({
   siblingCount,
   total,
   className,
-  isReviewPage,
+
   pageParamIsInUrl
 }) => {
   const { asPath } = useRouter();
@@ -36,11 +35,7 @@ const PaginationNumbers: FC<Props> = ({
               key={`${page}-pagination-button-${
                 typeof page === "string" ? i : ""
               }`}
-              className={`${
-                isReviewPage
-                  ? "win-secondary-button-yellow"
-                  : "win-secondary-button"
-              }`}
+              className="win-secondary-button"
             >
               {page}
             </button>
@@ -52,16 +47,8 @@ const PaginationNumbers: FC<Props> = ({
             key={`${page}-pagination-button-${
               typeof page === "string" ? i : ""
             }`}
-            className={`${
-              isReviewPage
-                ? "win-secondary-button-yellow"
-                : "win-secondary-button"
-            } ${
-              page === pageNumber
-                ? isReviewPage
-                  ? "bg-win-yellow-hover"
-                  : "bg-win-primary-hover"
-                : ""
+            className={`win-secondary-button ${
+              page === pageNumber ? "bg-win-primary-hover" : ""
             }`}
             href={`${frontendOrigin}${calculateNavLink({
               asPath: asPath,

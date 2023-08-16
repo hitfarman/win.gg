@@ -9,15 +9,9 @@ type Props = {
   featuredPost: IFeaturedPost;
   className?: string;
   variant: "main" | "secondary";
-  isReviewPage?: boolean;
 };
 
-const FeaturedPostItem: FC<Props> = ({
-  featuredPost,
-  className,
-  variant,
-  isReviewPage
-}) => {
+const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
   const authorName = `${featuredPost.author.node.firstName} ${featuredPost.author.node.lastName}`;
   const date = formatDate(featuredPost.date);
   const outerLinkRef = useRef<HTMLAnchorElement | null>(null);
@@ -58,9 +52,7 @@ const FeaturedPostItem: FC<Props> = ({
             <Link
               key={`${category.slug}-featured-post-id`}
               href={`/${category.slug}`}
-              className={`${
-                isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
-              } w-max`}
+              className="win-tag-button w-max"
               onClick={(e) => e.stopPropagation()}
             >
               {category.name}
@@ -68,9 +60,9 @@ const FeaturedPostItem: FC<Props> = ({
           ))}
         </div>
         <Link
-          className={`cursor-pointer font-header  font-semibold transition-colors ${
-            isReviewPage ? "hover:text-win-yellow" : "hover:text-win-primary"
-          } ${variant === "main" ? "text-4xl" : "text-base"}`}
+          className={`cursor-pointer font-header  font-semibold transition-colors hover:text-win-primary  ${
+            variant === "main" ? "text-4xl" : "text-base"
+          }`}
           href={`/news/${featuredPost.slug}`}
           onClick={(e) => e.stopPropagation()}
         >

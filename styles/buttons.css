@@ -26,22 +26,6 @@
   @apply text-sm;
 }
 
-.win-tag-button-yellow {
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-  @apply px-2;
-  @apply py-1;
-  @apply text-xs;
-  @apply bg-win-yellow;
-  @apply hover:bg-win-yellow-hover;
-  @apply text-white;
-  @apply transition-colors;
-  @apply border;
-  @apply border-transparent;
-  @apply text-sm;
-}
-
 .win-primary-button {
   @apply flex;
   @apply items-center;
@@ -56,20 +40,6 @@
   @apply border-transparent;
 }
 
-.win-primary-button-yellow {
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-  @apply px-2;
-  @apply py-1;
-  @apply bg-transparent;
-  @apply hover:bg-win-yellow-hover;
-  @apply text-win-white;
-  @apply transition-colors;
-  @apply border;
-  @apply border-win-yellow;
-  @apply hover:border-win-yellow-hover;
-}
 .win-secondary-button {
   @apply flex;
   @apply items-center;
@@ -82,19 +52,6 @@
   @apply transition-colors;
   @apply border;
   @apply border-win-primary;
-}
-.win-secondary-button-yellow {
-  @apply flex;
-  @apply items-center;
-  @apply justify-center;
-  @apply px-2;
-  @apply py-1;
-  @apply bg-transparent;
-  @apply hover:bg-win-yellow-hover;
-  @apply text-white;
-  @apply transition-colors;
-  @apply border;
-  @apply border-win-yellow;
 }
 
 .svg-icon-button {

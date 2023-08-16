@@ -10,10 +10,9 @@ import { frontendOrigin } from "@/constants/general";
 type Props = {
   paginatedPosts: IPaginatedPostsResponse | null;
   title?: string;
-  isReviewPage?: boolean;
 };
 
-const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
+const PostList: FC<Props> = ({ paginatedPosts, title }) => {
   // Constant
   const { asPath } = useRouter();
   const pageParamIsInUrl = /\/page\/\d+/.test(asPath);
@@ -60,11 +59,7 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
       <div>
         {paginatedPosts ? (
           paginatedPosts?.posts.edges.map((post) => (
-            <PostCard
-              key={post.node.id}
-              post={post.node}
-              isReviewPage={isReviewPage}
-            />
+            <PostCard key={post.node.id} post={post.node} />
           ))
         ) : (
           <p>Sorry, there are currently no posts available!</p>
@@ -78,19 +73,11 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
         total={
           paginatedPosts?.posts.pageInfo.offsetPagination.total || pageNumber
         }
-        isReviewPage={isReviewPage}
         pageParamIsInUrl={pageParamIsInUrl}
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasPrevious && (
-          <Link
-            className={
-              isReviewPage
-                ? "win-secondary-button-yellow"
-                : "win-secondary-button"
-            }
-            href={prevLink}
-          >
+          <Link className="win-secondary-button" href={prevLink}>
             Previous
           </Link>
         )}
@@ -101,18 +88,10 @@ const PostList: FC<Props> = ({ paginatedPosts, title, isReviewPage }) => {
           total={
             paginatedPosts?.posts.pageInfo.offsetPagination.total || pageNumber
           }
-          isReviewPage={isReviewPage}
           pageParamIsInUrl={pageParamIsInUrl}
         />
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasMore && (
-          <Link
-            className={
-              isReviewPage
-                ? "win-secondary-button-yellow"
-                : "win-secondary-button"
-            }
-            href={nextLink}
-          >
+          <Link className="win-secondary-button" href={nextLink}>
             Next
           </Link>
         )}

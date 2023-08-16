@@ -8,10 +8,9 @@ import { truncateExcerpt } from "@/utils/truncateExcerpt";
 type Props = {
   post: IPost;
   variant?: "fixed-vertical";
-  isReviewPage?: boolean;
 };
 
-const PostCard: FC<Props> = ({ post, variant, isReviewPage }) => {
+const PostCard: FC<Props> = ({ post, variant }) => {
   return (
     <div
       className={`grid grid-cols-1 grid-rows-[275px_1fr] gap-10 pb-5 ${
@@ -35,9 +34,7 @@ const PostCard: FC<Props> = ({ post, variant, isReviewPage }) => {
         <div className="flex flex-wrap gap-2">
           {post.categories.nodes.map((category) => (
             <Link
-              className={
-                isReviewPage ? "win-tag-button-yellow" : "win-tag-button"
-              }
+              className="win-tag-button"
               href={`/${category.slug}`}
               key={category.name}
             >
@@ -46,9 +43,7 @@ const PostCard: FC<Props> = ({ post, variant, isReviewPage }) => {
           ))}
         </div>
         <Link
-          className={`cursor-pointer font-header text-2xl font-semibold transition-colors ${
-            isReviewPage ? "hover:text-win-yellow" : "hover:text-win-primary"
-          }`}
+          className="cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-primary"
           href={`/news/${post.slug}`}
         >
           <h3>{post.title}</h3>
