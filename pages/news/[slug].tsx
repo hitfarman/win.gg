@@ -21,12 +21,12 @@ import {
   GetStaticPropsContext,
   NextPage
 } from "next";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import parse from "html-react-parser";
-import { replaceImage } from "@/utils/replaceImage";
+import { parseWpContent } from "@/utils/parseWpContent";
 import RecommendedPosts from "@/components/RecommendedPosts";
 import Head from "next/head";
 import { calculateReadingTime } from "@/utils/calculateReadingTime";
@@ -45,8 +45,11 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
-import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
-
+import {
+  DEFAULT_REVALIDATION_TIME,
+  DEFAULT_VIDEO_LOOKUP_CATEGORY
+} from "@/constants/posts";
+import { insertVideoAds } from "@/utils/insertVideoAds";
 import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
@@ -74,6 +77,12 @@ const PostPage: NextPage<Props> = ({
   const isReviewPage = !!post.categories.edges.find(
     (category) => category.node.slug === "reviews"
   );
+  const postCategory = useMemo<string>(() => {
+    if (post.categories.edges.length > 0) {
+      return post.categories.edges[0].node.slug;
+    }
+    return DEFAULT_VIDEO_LOOKUP_CATEGORY;
+  }, [post]);
 
   useEffect(() => {
     const twitterScript = document.createElement("script");
@@ -219,7 +228,9 @@ const PostPage: NextPage<Props> = ({
               isReviewPage ? "yellow-links" : ""
             }`}
           >
-            {parse(post.content, { replace: replaceImage })}
+            {parse(insertVideoAds(post.content, postCategory), {
+              replace: parseWpContent
+            })}
           </div>
           <Reactions key={post.databaseId} postId={post.databaseId} />
         </div>

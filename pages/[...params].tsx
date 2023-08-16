@@ -27,7 +27,7 @@ import {
 } from "next";
 import React from "react";
 import parse from "html-react-parser";
-import { replaceImage } from "@/utils/replaceImage";
+import { parseWpContent } from "@/utils/parseWpContent";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
@@ -88,7 +88,7 @@ const CategoryPage: NextPage<Props> = ({
       </div>
 
       <div className="parsed-wp-content my-5">
-        {parse(categoryDescription, { replace: replaceImage })}
+        {parse(categoryDescription, { replace: parseWpContent })}
       </div>
     </>
   );

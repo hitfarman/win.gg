@@ -2,7 +2,7 @@ import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
 import { DOMNode } from "html-react-parser";
 import Image from "next/image";
 
-export const replaceImage = (domNode: DOMNode) => {
+export const parseWpContent = (domNode: DOMNode) => {
   // DOMnode type is not correct
   const { name, attribs, children } = domNode as any;
 

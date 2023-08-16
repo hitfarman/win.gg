@@ -4,7 +4,7 @@ import FeaturedPosts from "@/components/FeaturedPosts";
 import FeaturedVideos from "@/components/FeaturedVideos";
 import PostList from "@/components/PostList";
 import parse from "html-react-parser";
-import { replaceImage } from "@/utils/replaceImage";
+import { parseWpContent } from "@/utils/parseWpContent";
 import Head from "next/head";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "./FeaturedSidebar";
@@ -36,7 +36,7 @@ const HomePage: FC<IHomePageProps> = ({
         </div>
       </div>
       <div className="parsed-wp-content my-5">
-        {parse(homeDescription, { replace: replaceImage })}
+        {parse(homeDescription, { replace: parseWpContent })}
       </div>
     </>
   );
