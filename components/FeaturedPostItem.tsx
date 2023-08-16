@@ -38,7 +38,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
       />
 
       <div
-        className={`absolute inset-x-0 bottom-0 z-20 flex flex-col bg-gradient-to-t from-black/90 from-25% ${
+        className={`absolute inset-x-0 bottom-0 z-20 flex flex-col bg-gradient-to-t from-black/80 from-50% ${
           variant === "main" ? "gap-3 p-8" : " gap-1.5 p-4"
         }`}
         onClick={() => {
