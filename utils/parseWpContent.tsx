@@ -62,7 +62,12 @@ export const parseWpContent = (domNode: DOMNode) => {
 
     return (
       <div className="flex justify-center py-5">
-        <iframe className="w-full" {...attribs} frameBorder="0" allowFullScreen>
+        <iframe
+          className="youtube-iframe"
+          {...attribs}
+          frameBorder="0"
+          allowFullScreen
+        >
           {children}
         </iframe>
       </div>
