@@ -12,7 +12,7 @@ import SearchInput from "./SearchInput";
 import { Transition } from "@headlessui/react";
 
 export const navItems: INavItem[] = [
-  { title: "CSGO", href: "/counter-strike" },
+  { title: "COUNTER-STRIKE", href: "/counter-strike" },
   { title: "DOTA 2", href: "/dota2" },
   { title: "LOL", href: "/lol" },
   { title: "VALORANT", href: "/valorant" },
@@ -89,7 +89,7 @@ const Header = () => {
             </Link>
 
             {/* Navigation */}
-            <nav className="hidden h-full flex-1 items-center justify-center gap-4 md:flex ">
+            <nav className="hidden h-full flex-1 items-center justify-center gap-4 lg:flex ">
               {navItems.map((item) => (
                 <NavItem
                   key={item.title}
