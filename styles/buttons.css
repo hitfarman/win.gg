@@ -32,13 +32,13 @@
   @apply justify-center;
   @apply px-2;
   @apply py-1;
-  @apply bg-transparent;
+  @apply text-xs;
+  @apply bg-win-yellow;
   @apply hover:bg-win-yellow-hover;
-  @apply text-win-white;
+  @apply text-white;
   @apply transition-colors;
   @apply border;
-  @apply border-win-yellow;
-  @apply hover:border-win-yellow-hover;
+  @apply border-transparent;
   @apply text-sm;
 }
 
