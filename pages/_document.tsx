@@ -31,20 +31,20 @@ export default function Document() {
           src="https://spn-v1.revampcdn.com/prebid/win-gg/prebid-client.js"
         />
         <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           type="module"
           src="https://spn-v1.revampcdn.com/publishers/win-gg.js?modern=1"
         />
         <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           src="https://spn-v1.revampcdn.com/publishers/win-gg.js"
         />
         <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-W3YZ88PL2C"
         />
         <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
         />
       </body>
