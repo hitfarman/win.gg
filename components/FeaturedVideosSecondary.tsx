@@ -1,7 +1,10 @@
 import { IFeaturedVideo } from "@/interfaces/videos";
 import React, { FC } from "react";
 import LazyYoutubeVideo from "./LazyYoutubeVideo";
-import InsertedAd from "@/components/InsertedAd";
+import dynamic from "next/dynamic";
+const InsertedAd = dynamic(() => import("@/components/InsertedAd"), {
+  ssr: false
+});
 
 type Props = {
   featuredVideos: IFeaturedVideo[];

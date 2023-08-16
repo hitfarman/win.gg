@@ -1,7 +1,11 @@
 import { FC, ReactNode } from "react";
 import Header from "@/components/Header";
 import Footer from "./Footer";
-import InsertedAd from "./InsertedAd";
+
+import dynamic from "next/dynamic";
+const InsertedAd = dynamic(() => import("@/components/InsertedAd"), {
+  ssr: false
+});
 
 type Props = {
   children: ReactNode;

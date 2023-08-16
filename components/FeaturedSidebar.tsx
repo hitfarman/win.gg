@@ -5,7 +5,10 @@ import React, { FC } from "react";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
-import InsertedAd from "@/components/InsertedAd";
+import dynamic from "next/dynamic";
+const InsertedAd = dynamic(() => import("@/components/InsertedAd"), {
+  ssr: false
+});
 
 type Props = {
   featuredTags: IFeaturedTag[];

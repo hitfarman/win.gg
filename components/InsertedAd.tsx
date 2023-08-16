@@ -8,7 +8,7 @@ type Props = {
 const InsertedAd: FC<Props> = ({ className, id }) => {
   return (
     <div id={id} className={`relative flex items-center ${className}`}>
-      <p className="absolute inset-0 flex items-center justify-center -z-10">
+      <p className="absolute inset-0 -z-10 flex items-center justify-center">
         Advertisement
       </p>
     </div>
