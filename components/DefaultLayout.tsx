@@ -19,7 +19,7 @@ const DefaultLayout: FC<Props> = ({ children }) => {
         id="td-top-leaderboard-1"
         className="hidden md:flex full-bleed-black mt-16 md:min-h-[110px] bg-black py-2"
       />
-      <main className="flex-[1_1_0] pt-12">{children}</main>
+      <main className="flex-[1_1_0] pt-24 md:pt-12">{children}</main>
       <Footer />
     </div>
   );
