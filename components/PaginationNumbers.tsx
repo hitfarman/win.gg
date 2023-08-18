@@ -50,7 +50,7 @@ const PaginationNumbers: FC<Props> = ({
             className={`win-secondary-button ${
               page === pageNumber ? "bg-win-primary-hover" : ""
             }`}
-            href={`${frontendOrigin}${calculateNavLink({
+            href={`${calculateNavLink({
               asPath: asPath,
               to: page,
               pageNumber,

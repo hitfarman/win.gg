@@ -20,21 +20,20 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
 
   const nextLink = useMemo<string>(() => {
     if (!pageParamIsInUrl) {
-      return `${frontendOrigin}${asPath}${
-        asPath[asPath.length - 1] === "/" ? "" : "/"
-      }page/2`;
+      return `${asPath}page/2`;
     }
-    return `${frontendOrigin}${asPath.replace(
+    return `${asPath.replace(
       `/page/${pageNumber}`,
       `/page/${pageNumber + 1}`
     )}`;
   }, [asPath, pageParamIsInUrl, pageNumber]);
   const prevLink = useMemo<string>(() => {
     if (pageNumber === 2) {
-      return `${frontendOrigin}${asPath.replace(`/page/${pageNumber}`, "/")}`;
+      // There is no / before page only here because of trailingSlash
+      return `${asPath.replace(`/page/${pageNumber}`, "")}`;
     }
 
-    return `${frontendOrigin}${asPath.replace(
+    return `${asPath.replace(
       `/page/${pageNumber}`,
       `/page/${pageNumber - 1}`
     )}`;
@@ -44,10 +43,10 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
     <>
       <Head>
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasMore && (
-          <link rel="next" href={nextLink} />
+          <link rel="next" href={frontendOrigin + nextLink} />
         )}
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasPrevious && (
-          <link rel="prev" href={prevLink} />
+          <link rel="prev" href={frontendOrigin + prevLink} />
         )}
       </Head>
       {title && (
