@@ -1,10 +1,7 @@
 import { IFeaturedVideo } from "@/interfaces/videos";
 import React, { FC } from "react";
-import LazyYoutubeVideo from "./LazyYoutubeVideo";
-import dynamic from "next/dynamic";
-const InsertedAd = dynamic(() => import("@/components/InsertedAd"), {
-  ssr: false
-});
+import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
+import InsertedAd from "@/components/InsertedAd";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -13,7 +10,6 @@ type Props = {
 const FeaturedVideosSecondary: FC<Props> = ({ featuredVideos }) => {
   return (
     <div className="grid grid-cols-1 gap-5">
-      <InsertedAd id="direct-ad-above-video" className="z-0 min-h-[250px]" />
       {featuredVideos.slice(3).map((video) => (
         <LazyYoutubeVideo
           key={video.url}
