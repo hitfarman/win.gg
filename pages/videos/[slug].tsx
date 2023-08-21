@@ -36,6 +36,7 @@ import { getVideoBySlug } from "@/apollo/videos";
 import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -217,5 +218,5 @@ export const getServerSideProps: GetServerSideProps = async ({
           video
         }
       }
-    : { notFound: true };
+    : { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
 };

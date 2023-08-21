@@ -303,5 +303,5 @@ export const getStaticProps: GetStaticProps = async ({
         },
         revalidate: DEFAULT_REVALIDATION_TIME
       }
-    : { notFound: true };
+    : { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
 };

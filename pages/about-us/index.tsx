@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   if (!pageInfo) {
-    return { notFound: true };
+    return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
   }
 
   return {

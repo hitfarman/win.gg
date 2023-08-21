@@ -2,7 +2,7 @@ import { getPaginatedPosts } from "@/apollo/posts";
 import { getAuthorBySlug } from "@/apollo/users";
 import { getAllOptions } from "@/axios/options";
 import PostList from "@/components/PostList";
-import { POSTS_PER_PAGE } from "@/constants/posts";
+import { DEFAULT_REVALIDATION_TIME, POSTS_PER_PAGE } from "@/constants/posts";
 import { IAllOptionsResponse } from "@/interfaces/options";
 import { IPaginatedPostsResponse } from "@/interfaces/posts";
 import { IFeaturedReview } from "@/interfaces/reviews";
@@ -116,7 +116,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   if (!author) {
-    return { notFound: true };
+    return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
   }
 
   try {
