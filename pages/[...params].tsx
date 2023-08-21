@@ -140,7 +140,10 @@ export const getStaticProps: GetStaticProps = async (
   try {
     categoryInfo = await getCategoryInfoBySlug(slug);
   } catch (e) {
-    console.log("Fetching category info failed with cause:", e);
+    console.log(
+      `Fetching category info for category: ${slug} failed with cause:`,
+      e
+    );
   }
 
   try {
@@ -204,11 +207,14 @@ export const getStaticProps: GetStaticProps = async (
 
     try {
       categoryInfo = await getTagInfoBySlug(slug);
-      categoryInfo.seo.breadcrumbs = [
-        { text: categoryInfo.name, url: `/${slug}` }
-      ];
+
+      if (categoryInfo) {
+        categoryInfo.seo.breadcrumbs = [
+          { text: categoryInfo.name, url: `/${slug}` }
+        ];
+      }
     } catch (e) {
-      console.log("Fetching category info failed with cause:", e);
+      console.log(`Fetching tag info for tag:${slug} failed with cause:`, e);
     }
 
     if (!categoryInfo) {
