@@ -21,7 +21,7 @@ import {
   GetStaticPropsContext,
   NextPage
 } from "next";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useLayoutEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
@@ -51,9 +51,13 @@ import {
 import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
-import ParsedPostContent from "@/components/ParsedPostContent";
-import { getScriptToInsert } from "@/utils/insertVideoAds";
 
+const ParsedPostContent = dynamic(
+  () => import("@/components/ParsedPostContent"),
+  {
+    ssr: false
+  }
+);
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
 });
@@ -95,48 +99,11 @@ const PostPage: NextPage<Props> = ({
     twitchScript.async = true;
     document.body.appendChild(twitchScript);
 
-    // Inline video script
-    let inlineScriptHtml = "<div></div>";
-    if (post.categories.edges.length > 0) {
-      inlineScriptHtml = getScriptToInsert(post.categories.edges[0].node.slug);
-    }
-
-    const inlineVideoScript = document
-      .createRange()
-      .createContextualFragment(inlineScriptHtml);
-
-    const inlineVideoPlaceholderDiv =
-      document.getElementById("inline-video-ad");
-
-    if (
-      inlineVideoPlaceholderDiv &&
-      inlineVideoPlaceholderDiv.children.length === 0
-    ) {
-      inlineVideoPlaceholderDiv.append(inlineVideoScript);
-    }
-
-    // Ending video script
-    let endingSciptHtml = `<script class="rvloader">!function(){var t="td-incontent-"+Math.floor(Math.random()*Date.now()),e=document.getElementsByClassName("rvloader"),n=e[e.length-1].parentNode;undefined==n.getAttribute("id")&&(n.setAttribute("id",t),revamp.displaySlots([t]))}();</script>`;
-
-    const endingVideoScript = document
-      .createRange()
-      .createContextualFragment(endingSciptHtml);
-
-    const endingVideoPlaceholderDiv =
-      document.getElementById("ending-video-ad");
-
-    if (
-      endingVideoPlaceholderDiv &&
-      endingVideoPlaceholderDiv.children.length === 0
-    ) {
-      endingVideoPlaceholderDiv.append(endingVideoScript);
-    }
-
     return () => {
       document.body.removeChild(twitterScript);
       document.body.removeChild(twitchScript);
     };
-  }, [asPath, post]);
+  }, [asPath]);
 
   return (
     <>
