@@ -1,7 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const NotFoundPage = () => {
+  useEffect(() => {
+    document.head.querySelector('link[rel="canonical"]')?.remove();
+  });
   return (
     <div className="flex h-full items-center justify-center">
       <div className="flex flex-col items-center gap-5 pb-5 text-center">
