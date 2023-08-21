@@ -51,16 +51,12 @@ import {
 import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+import ParsedPostContent from "@/components/ParsedPostContent";
+import { getScriptToInsert } from "@/utils/insertVideoAds";
 
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
 });
-const ParsedPostContent = dynamic(
-  () => import("@/components/ParsedPostContent"),
-  {
-    ssr: false
-  }
-);
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -87,21 +83,60 @@ const PostPage: NextPage<Props> = ({
   }, [post]);
 
   useEffect(() => {
+    // twitterScript
     const twitterScript = document.createElement("script");
     twitterScript.src = "https://platform.twitter.com/widgets.js";
     twitterScript.async = true;
     document.body.appendChild(twitterScript);
 
+    // twitchScript
     const twitchScript = document.createElement("script");
     twitchScript.src = "https://player.twitch.tv/js/embed/v1.js";
     twitchScript.async = true;
     document.body.appendChild(twitchScript);
 
+    // Inline video script
+    let inlineScriptHtml = "<div></div>";
+    if (post.categories.edges.length > 0) {
+      inlineScriptHtml = getScriptToInsert(post.categories.edges[0].node.slug);
+    }
+
+    const inlineVideoScript = document
+      .createRange()
+      .createContextualFragment(inlineScriptHtml);
+
+    const inlineVideoPlaceholderDiv =
+      document.getElementById("inline-video-ad");
+
+    if (
+      inlineVideoPlaceholderDiv &&
+      inlineVideoPlaceholderDiv.children.length === 0
+    ) {
+      inlineVideoPlaceholderDiv.append(inlineVideoScript);
+    }
+
+    // Ending video script
+    let endingSciptHtml = `<script class="rvloader">!function(){var t="td-incontent-"+Math.floor(Math.random()*Date.now()),e=document.getElementsByClassName("rvloader"),n=e[e.length-1].parentNode;undefined==n.getAttribute("id")&&(n.setAttribute("id",t),revamp.displaySlots([t]))}();</script>`;
+
+    const endingVideoScript = document
+      .createRange()
+      .createContextualFragment(endingSciptHtml);
+
+    const endingVideoPlaceholderDiv =
+      document.getElementById("ending-video-ad");
+
+    if (
+      endingVideoPlaceholderDiv &&
+      endingVideoPlaceholderDiv.children.length === 0
+    ) {
+      endingVideoPlaceholderDiv.append(endingVideoScript);
+    }
+
     return () => {
       document.body.removeChild(twitterScript);
       document.body.removeChild(twitchScript);
     };
-  }, [asPath]);
+  }, [asPath, post]);
 
   return (
     <>

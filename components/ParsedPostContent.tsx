@@ -11,7 +11,7 @@ type Props = {
 const ParsedPostContent: FC<Props> = ({ postCategory, postContent }) => {
   return (
     <div className="parsed-wp-content">
-      {parse(insertVideoAds(postContent, postCategory), {
+      {parse(insertVideoAds(postContent), {
         replace: parseWpContent
       })}
     </div>

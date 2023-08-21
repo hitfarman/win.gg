@@ -38,20 +38,9 @@ const insertAfterNth = (
 
 const pTagPattern = /<p\b[^>]*>(.*?)<\/p>/gi;
 
-export const insertVideoAds = (wpContent: string, category: string): string => {
-  let videoAdToInsert = "";
+export const insertVideoAds = (wpContent: string): string => {
+  let videoAdToInsert = `<div class="py-8" id="inline-video-ad"></div>`;
   let contentResult = wpContent;
-
-  if (Math.random() > 0.5) {
-    // truvid provider
-    videoAdToInsert = `<div class="py-8"><script data-cfasync="false" async type="text/javascript" src="//go.trvdp.com/init/7597.js?pid=5977"></script></div>`;
-  } else {
-    // primist provider
-    const adSrc = lookupAdLink[category]
-      ? lookupAdLink[category]
-      : lookupAdLink[DEFAULT_VIDEO_LOOKUP_CATEGORY];
-    videoAdToInsert = `<div class="py-8"><script type="text/javascript" language="javascript" src="${adSrc}"></script></div>`;
-  }
 
   // Inserting ads into content
   const pTags = wpContent.match(pTagPattern);
@@ -77,7 +66,7 @@ export const insertVideoAds = (wpContent: string, category: string): string => {
       );
 
       if (nextPTagIndex !== -1) {
-        const insertTag = `<div class="py-8"><script class="rvloader">!function(){var t="td-incontent-"+Math.floor(Math.random()*Date.now()),e=document.getElementsByClassName("rvloader"),n=e[e.length-1].parentNode;undefined==n.getAttribute("id")&&(n.setAttribute("id",t),revamp.displaySlots([t]))}();</script></div>`;
+        const insertTag = `<div class="py-8" id="ending-video-ad"></div>`;
 
         const modifiedContent = insertAfterNth(
           "<p>",
@@ -93,4 +82,22 @@ export const insertVideoAds = (wpContent: string, category: string): string => {
   }
 
   return contentResult;
+};
+
+export const getScriptToInsert = (category: string): string => {
+  if (Math.random() > 0.5) {
+    // truvid provider
+    return `<script
+        data-cfasync="false"
+        async
+        type="text/javascript"
+        src="//go.trvdp.com/init/7597.js?pid=5977"
+      ></script>`;
+  } else {
+    // primist provider
+    const adSrc = lookupAdLink[category]
+      ? lookupAdLink[category]
+      : lookupAdLink[DEFAULT_VIDEO_LOOKUP_CATEGORY];
+    return `<script type="text/javascript" src="${adSrc}"}></script>`;
+  }
 };
