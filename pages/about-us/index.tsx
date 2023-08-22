@@ -21,10 +21,10 @@ type Props = {
 
 const aboutUsCards: IAboutUsCardInfo[] = [
   {
-    name: "Stephen Shoemaker",
+    name: "Tim Chen",
     position: "CEO",
     image: ceoImg,
-    email: "stephen@win.gg"
+    email: "tim@win.gg"
   },
   {
     name: "Marta Juras",
