@@ -19,7 +19,11 @@ const FeaturedVideosSecondary: FC<Props> = ({ featuredVideos }) => {
           sizesForNextImg="(max-width: 768px) 100vw, 33vw"
         />
       ))}
-      <InsertedAd id="td-bottom-mpu-1" className="z-0 min-h-[250px]" />
+      <InsertedAd
+        id="td-bottom-mpu-1"
+        className="z-0 min-h-[250px]"
+        placeholderClassName="max-h-[300px]"
+      />
     </div>
   );
 };
