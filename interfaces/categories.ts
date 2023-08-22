@@ -19,6 +19,7 @@ export interface ICategoryInfo {
   seo: {
     breadcrumbs: IBreadcrumb[];
     fullHead: string;
+    title: string;
   };
   name: string;
 }

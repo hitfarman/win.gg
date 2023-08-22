@@ -25,6 +25,7 @@ import {
   GetStaticPropsContext,
   NextPage
 } from "next";
+import Head from "next/head";
 import React from "react";
 import parse from "html-react-parser";
 import { parseWpContent } from "@/utils/parseWpContent";
@@ -55,6 +56,11 @@ const CategoryPage: NextPage<Props> = ({
 }) => {
   return (
     <>
+      {categoryInfo?.seo && (
+        <Head>
+          <title>{categoryInfo.seo.title}</title>
+        </Head>
+      )}
       <CategorySeo categoryInfo={categoryInfo} />
       {featuredPosts.length > 0 && (
         <FeaturedPosts featuredPosts={featuredPosts} />

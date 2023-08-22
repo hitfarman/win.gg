@@ -41,6 +41,7 @@ export interface IPostDetails {
   slug: string;
   seo: {
     fullHead: string;
+    title: string;
   };
   title: string;
   date: string;

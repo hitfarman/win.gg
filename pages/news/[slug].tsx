@@ -111,6 +111,7 @@ const PostPage: NextPage<Props> = ({
         {parse(post.seo.fullHead, {
           replace: parseSeo
         })}
+        <title>{post.seo.title}</title>
       </Head>
       <Breadcrumbs
         crumbs={[

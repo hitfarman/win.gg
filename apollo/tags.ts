@@ -30,6 +30,7 @@ const GET_TAG_INFO_BY_SLUG = gql`
           url
         }
         fullHead
+        title
       }
       slug
       name

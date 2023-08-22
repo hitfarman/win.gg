@@ -15,6 +15,7 @@ const GET_USERS_BY_SLUG = gql`
           name
           seo {
             fullHead
+            title
           }
           slug
         }

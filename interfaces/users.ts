@@ -7,6 +7,7 @@ export interface IAuthor {
   name: string;
   seo: {
     fullHead: string;
+    title: string;
   };
   slug: string;
 }

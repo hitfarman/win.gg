@@ -31,6 +31,7 @@ const GET_CATEGORY_INFO_BY_SLUG = gql`
           url
         }
         fullHead
+        title
       }
     }
   }

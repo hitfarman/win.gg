@@ -43,6 +43,7 @@ const AuthorPage: NextPage<Props> = ({
         {parse(author.seo.fullHead || "", {
           replace: parseSeo
         })}
+        <title>{author.seo.title}</title>
       </Head>
       <div className="my-10">
         <Breadcrumbs
