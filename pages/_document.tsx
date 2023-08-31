@@ -37,7 +37,7 @@ export default function Document() {
         />
         <Script
           strategy="lazyOnload"
-          nomodule
+          noModule
           src="https://spn-v1.revampcdn.com/publishers/win-gg.js"
         />
         <Script
