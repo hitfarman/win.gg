@@ -59,6 +59,12 @@ const nextConfig = {
         permanent: false,
         basePath: false
       },
+      {
+      	source: '/feed/',
+      	destination: 'https://api.win.gg/feed/',
+      	permanent: true,
+      	basePath: false
+      },
     ]
   },
   output: process.env.BUILD_STANDALONE === "true" ? "standalone" : undefined,
