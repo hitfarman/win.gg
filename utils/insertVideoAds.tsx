@@ -66,7 +66,7 @@ export const insertVideoAds = (wpContent: string): string => {
       );
 
       if (nextPTagIndex !== -1) {
-        const insertTag = `<div class="py-8" id="ending-video-ad"></div>`;
+        const insertTag = `<div class="py-8" id="interstitial-ad"></div>`;
 
         const modifiedContent = insertAfterNth(
           "<p>",

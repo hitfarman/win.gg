@@ -38,14 +38,14 @@ const ParsedPostContent: FC<Props> = ({ postContent, postCategory }) => {
     }
 
     // Ending video script
-    let endingSciptHtml = `<script class="rvloader">!function(){var t="td-incontent-"+Math.floor(Math.random()*Date.now()),e=document.getElementsByClassName("rvloader"),n=e[e.length-1].parentNode;undefined==n.getAttribute("id")&&(n.setAttribute("id",t),revamp.displaySlots([t]))}();</script>`;
+    let endingSciptHtml = `<div><script class="rvloader">!function(){var t="td-incontent-"+Math.floor(Math.random()*Date.now()),e=document.getElementsByClassName("rvloader"),n=e[e.length-1].parentNode;undefined==n.getAttribute("id")&&(n.setAttribute("id",t),revamp.displaySlots([t]))}();</script></div>`;
 
     const endingVideoScript = document
       .createRange()
       .createContextualFragment(endingSciptHtml);
 
     const endingVideoPlaceholderDiv =
-      document.getElementById("ending-video-ad");
+      document.getElementById("interstitial-ad");
 
     if (
       endingVideoPlaceholderDiv &&
