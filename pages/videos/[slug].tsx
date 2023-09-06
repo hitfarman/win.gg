@@ -37,6 +37,7 @@ import LazyYoutubeVideo from "@/components/LazyYoutubeVideo";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
+import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -54,7 +55,8 @@ const PostPage: NextPage<Props> = ({
   video
 }) => {
   const { asPath } = useRouter();
-  const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
+  const cleanAsPath = stripQueryFromPath(asPath);
+  const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${cleanAsPath}`;
 
   return (
     <>

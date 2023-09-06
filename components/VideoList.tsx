@@ -6,6 +6,7 @@ import VideoCard from "@/components/VideoCard";
 import Link from "next/link";
 import Head from "next/head";
 import { frontendOrigin } from "@/constants/general";
+import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 
 type Props = {
   paginatedVideos: IPaginatedVideosResponse | null;
@@ -14,29 +15,32 @@ type Props = {
 
 const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
   const { asPath } = useRouter();
-  const pageParamIsInUrl = /\/page\/\d+/.test(asPath);
-  const pageNumber = pageParamIsInUrl ? parseInt(asPath.split("/page/")[1]) : 1;
+  const cleanAsPath = stripQueryFromPath(asPath);
+  const pageParamIsInUrl = /\/page\/\d+/.test(cleanAsPath);
+  const pageNumber = pageParamIsInUrl
+    ? parseInt(cleanAsPath.split("/page/")[1])
+    : 1;
 
   const nextLink = useMemo<string>(() => {
     if (!pageParamIsInUrl) {
-      return `${asPath}page/2`;
+      return `${cleanAsPath}page/2`;
     }
-    return `${asPath.replace(
+    return `${cleanAsPath.replace(
       `/page/${pageNumber}`,
       `/page/${pageNumber + 1}`
     )}`;
-  }, [asPath, pageParamIsInUrl, pageNumber]);
+  }, [cleanAsPath, pageParamIsInUrl, pageNumber]);
   const prevLink = useMemo<string>(() => {
     if (pageNumber === 2) {
       // There is no / before page only here because of trailingSlash
-      return `${asPath.replace(`/page/${pageNumber}`, "")}`;
+      return `${cleanAsPath.replace(`/page/${pageNumber}`, "")}`;
     }
 
-    return `${asPath.replace(
+    return `${cleanAsPath.replace(
       `/page/${pageNumber}`,
       `/page/${pageNumber - 1}`
     )}`;
-  }, [asPath, pageNumber]);
+  }, [cleanAsPath, pageNumber]);
 
   return (
     <>

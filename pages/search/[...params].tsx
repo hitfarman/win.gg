@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { searchByQuery } from "@/apollo/search";
 import Head from "next/head";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -48,7 +49,7 @@ const SearchPage: NextPage<Props> = ({
           crumbs={[
             {
               text: `Search for "${searchQuery}"` || "search",
-              url: router.asPath
+              url: stripQueryFromPath(router.asPath)
             }
           ]}
         />

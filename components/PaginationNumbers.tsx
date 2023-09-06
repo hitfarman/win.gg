@@ -1,6 +1,7 @@
 import { frontendOrigin } from "@/constants/general";
 import { calculateNavLink } from "@/utils/calculateNavLink";
 import { generatePageNumbers } from "@/utils/generatePageNumbers";
+import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
@@ -22,6 +23,7 @@ const PaginationNumbers: FC<Props> = ({
   pageParamIsInUrl
 }) => {
   const { asPath } = useRouter();
+  const cleanAsPath = stripQueryFromPath(asPath);
   return (
     <div className={className || ""}>
       {generatePageNumbers({
@@ -51,7 +53,7 @@ const PaginationNumbers: FC<Props> = ({
               page === pageNumber ? "bg-win-primary-hover" : ""
             }`}
             href={`${calculateNavLink({
-              asPath: asPath,
+              asPath: cleanAsPath,
               to: page,
               pageNumber,
               pageParamIsInUrl

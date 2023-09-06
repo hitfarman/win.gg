@@ -51,6 +51,7 @@ import {
 import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 
 const ParsedPostContent = dynamic(
   () => import("@/components/ParsedPostContent"),
@@ -78,7 +79,8 @@ const PostPage: NextPage<Props> = ({
   post
 }) => {
   const { asPath } = useRouter();
-  const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${asPath}`;
+  const cleanAsPath = stripQueryFromPath(asPath);
+  const shareUrl = `https://${process.env.NEXT_PUBLIC_FE_DOMAIN}${cleanAsPath}`;
   const postCategory = useMemo<string>(() => {
     if (post.categories.edges.length > 0) {
       return post.categories.edges[0].node.slug;
@@ -103,7 +105,7 @@ const PostPage: NextPage<Props> = ({
       document.body.removeChild(twitterScript);
       document.body.removeChild(twitchScript);
     };
-  }, [asPath]);
+  }, [cleanAsPath]);
 
   return (
     <>
