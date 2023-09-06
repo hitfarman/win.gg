@@ -27,6 +27,7 @@ const BaseLayout: FC<Props> = ({ children }) => {
         >
           {children}
         </div>
+        <Script async src="//static.getclicky.com/101362758.js" />
       </ApolloProvider>
     </ErrorBoundary>
   );
