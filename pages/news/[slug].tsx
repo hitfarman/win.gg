@@ -52,13 +52,8 @@ import dynamic from "next/dynamic";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
+import ParsedPostContent from "@/components/ParsedPostContent";
 
-const ParsedPostContent = dynamic(
-  () => import("@/components/ParsedPostContent"),
-  {
-    ssr: false
-  }
-);
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
 });

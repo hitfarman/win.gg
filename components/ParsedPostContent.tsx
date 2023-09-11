@@ -1,6 +1,6 @@
 import { getScriptToInsert, insertVideoAds } from "@/utils/insertVideoAds";
 import { parseWpContent } from "@/utils/parseWpContent";
-import { FC, useLayoutEffect, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import parse from "html-react-parser";
 
 type Props = {
@@ -17,7 +17,7 @@ const ParsedPostContent: FC<Props> = ({ postContent, postCategory }) => {
     [postContent]
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // Inline video script
     let inlineScriptHtml = "<div></div>";
 
