@@ -5,3 +5,6 @@ Disallow: /?s=
 Disallow: /?s=*
 Disallow: /search/
 Disallow: /search/*
+Disallow: /?p=
+Disallow: /feed/$
+Disallow: /*/feed/$
