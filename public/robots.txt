@@ -8,3 +8,6 @@ Disallow: /search/*
 Disallow: /?p=
 Disallow: /feed/$
 Disallow: /*/feed/$
+
+User-agent: GPTBot
+Disallow: /
