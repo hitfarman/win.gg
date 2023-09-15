@@ -21,6 +21,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Image from "next/image";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+import { hasInvalidPageParams } from "@/utils/hasInvalidPageParams";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -97,6 +98,9 @@ export const getServerSideProps: GetServerSideProps = async (
     "public, s-maxage=300, stale-while-revalidate=30"
   );
   const { params } = context.params as { params: string[] };
+  if (hasInvalidPageParams(params)) {
+    return { notFound: true };
+  }
   const authorNiceName = params[0];
   const pageNumber = params[2];
 

@@ -18,6 +18,7 @@ import { searchByQuery } from "@/apollo/search";
 import Head from "next/head";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
+import { hasInvalidPageParams } from "@/utils/hasInvalidPageParams";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -83,6 +84,9 @@ export const getServerSideProps: GetServerSideProps = async (
     "public, s-maxage=300, stale-while-revalidate=30"
   );
   const { params } = context.params as { params: string[] };
+  if (hasInvalidPageParams(params)) {
+    return { notFound: true };
+  }
   const searchQuery = params[0];
   const pageNumber = params[2];
 

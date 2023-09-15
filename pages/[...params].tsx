@@ -34,6 +34,7 @@ import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
+import { hasInvalidPageParams } from "@/utils/hasInvalidPageParams";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -131,6 +132,9 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const { params } = context.params as { params: string[] };
+  if (hasInvalidPageParams(params)) {
+    return { notFound: true };
+  }
   const slug = params[0];
   const pageNumber = params[2];
 

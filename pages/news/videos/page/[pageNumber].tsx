@@ -42,6 +42,9 @@ export const getStaticProps: GetStaticProps<IVideosPageProps> = async ({
   params
 }: GetStaticPropsContext) => {
   const { pageNumber } = params as { pageNumber: string };
+  if (isNaN(Number(pageNumber))) {
+    return { notFound: true };
+  }
 
   let featuredVideos: IFeaturedVideo[] = [];
   let featuredReviews: IFeaturedReview[] = [];

@@ -21,7 +21,7 @@ import {
   GetStaticPropsContext,
   NextPage
 } from "next";
-import React, { useEffect, useLayoutEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
