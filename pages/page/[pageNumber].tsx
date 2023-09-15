@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async ({
         Number(pageNumber)
       )
     ) {
-      return { notFound: true };
+      return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
     }
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);

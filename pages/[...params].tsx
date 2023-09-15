@@ -240,7 +240,7 @@ export const getStaticProps: GetStaticProps = async (
       Number(pageNumber)
     )
   ) {
-    return { notFound: true };
+    return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
   }
 
   return {
