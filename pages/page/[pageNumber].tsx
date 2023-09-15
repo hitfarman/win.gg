@@ -14,6 +14,7 @@ import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import { extractFeaturedReviews } from "@/utils/extractFeaturedReviews";
 import { extractFeaturedTags } from "@/utils/extractFeaturedTags";
 import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
+import { hasTooHighPagenumber } from "@/utils/hasTooHighPagenumber";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -88,6 +89,16 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async ({
       size: POSTS_PER_PAGE,
       offset: calculatePaginationOffset(Number(pageNumber))
     });
+
+    if (
+      paginatedPosts &&
+      hasTooHighPagenumber(
+        paginatedPosts.posts.pageInfo.offsetPagination.total,
+        Number(pageNumber)
+      )
+    ) {
+      return { notFound: true };
+    }
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);
   }

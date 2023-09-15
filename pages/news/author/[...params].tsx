@@ -22,6 +22,7 @@ import Image from "next/image";
 import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { hasInvalidPageParams } from "@/utils/hasInvalidPageParams";
+import { hasTooHighPagenumber } from "@/utils/hasTooHighPagenumber";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -145,6 +146,16 @@ export const getServerSideProps: GetServerSideProps = async (
       offset: pageNumber ? calculatePaginationOffset(Number(pageNumber)) : 0,
       authorName: authorNiceName
     });
+
+    if (
+      paginatedPosts &&
+      hasTooHighPagenumber(
+        paginatedPosts.posts.pageInfo.offsetPagination.total,
+        Number(pageNumber)
+      )
+    ) {
+      return { notFound: true };
+    }
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);
   }

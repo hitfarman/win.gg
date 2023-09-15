@@ -35,6 +35,7 @@ import { extractFeaturedVideos } from "@/utils/extractFeaturedVideos";
 import { extractFeaturedPosts } from "@/utils/extractFeaturedPosts";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { hasInvalidPageParams } from "@/utils/hasInvalidPageParams";
+import { hasTooHighPagenumber } from "@/utils/hasTooHighPagenumber";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -230,6 +231,16 @@ export const getStaticProps: GetStaticProps = async (
     if (!categoryInfo) {
       return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
     }
+  }
+
+  if (
+    paginatedPosts &&
+    hasTooHighPagenumber(
+      paginatedPosts.posts.pageInfo.offsetPagination.total,
+      Number(pageNumber)
+    )
+  ) {
+    return { notFound: true };
   }
 
   return {

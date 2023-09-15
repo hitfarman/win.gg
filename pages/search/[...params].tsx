@@ -19,6 +19,7 @@ import Head from "next/head";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 import { hasInvalidPageParams } from "@/utils/hasInvalidPageParams";
+import { hasTooHighPagenumber } from "@/utils/hasTooHighPagenumber";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -117,6 +118,15 @@ export const getServerSideProps: GetServerSideProps = async (
       offset: pageNumber ? calculatePaginationOffset(Number(pageNumber)) : 0,
       search: searchQuery
     });
+    if (
+      paginatedPosts &&
+      hasTooHighPagenumber(
+        paginatedPosts.posts.pageInfo.offsetPagination.total,
+        Number(pageNumber)
+      )
+    ) {
+      return { notFound: true };
+    }
   } catch (e) {
     console.log(
       "Fetching paginated posts for search query failed with cause:",
