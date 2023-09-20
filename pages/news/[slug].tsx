@@ -158,9 +158,9 @@ const PostPage: NextPage<Props> = ({
             ))}
           </div>
 
-          <h2 className="mb-5 font-header text-2xl font-semibold">
+          <h1 className="mb-5 font-header text-2xl font-semibold">
             {post.title}
-          </h2>
+          </h1>
 
           <div className="mb-5 flex gap-2 text-sm font-bold text-gray-500">
             <Link
