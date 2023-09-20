@@ -164,7 +164,7 @@ const PostPage: NextPage<Props> = ({
 
           <div className="mb-5 flex gap-2 text-sm font-bold text-gray-500">
             <Link
-              href={`/news/author/${post.author.node.slug}`}
+              href={`/author/${post.author.node.slug}`}
               className="transition-colors hover:text-gray-300"
             >
               By {`${post.author.node.firstName} ${post.author.node.lastName}`}

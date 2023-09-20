@@ -40,7 +40,7 @@ const VideoCard: FC<Props> = ({ video }) => {
 
         <div className="flex gap-2 text-sm font-bold text-gray-500">
           <Link
-            href={`/news/author/${video.author.node.slug}`}
+            href={`/author/${video.author.node.slug}`}
             className="transition-colors hover:text-gray-300"
           >
             By {`${video.author.node.firstName} ${video.author.node.lastName}`}
