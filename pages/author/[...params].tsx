@@ -49,7 +49,7 @@ const AuthorPage: NextPage<Props> = ({
       </Head>
       <div className="my-10">
         <Breadcrumbs
-          crumbs={[{ text: author.name, url: `/news/author/${author.slug}` }]}
+          crumbs={[{ text: author.name, url: `/author/${author.slug}` }]}
         />
       </div>
       <h1 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
