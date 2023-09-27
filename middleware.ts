@@ -1,8 +1,17 @@
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { allowedQueryParams } from "./constants/queryParams";
 
 export default function middleware(request: NextRequest) {
   const nextUrl = request.nextUrl;
+
+  if (
+    ![...request.nextUrl.searchParams.keys()].every((queryParam) =>
+      allowedQueryParams.has(queryParam)
+    )
+  ) {
+    return NextResponse.rewrite(new URL("/404", request.url));
+  }
 
   const needsStripAndRedirect =
     nextUrl.searchParams.has("showDisqus") ||
