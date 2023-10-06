@@ -55,7 +55,7 @@ const nextConfig = {
     return [
       {
         source: '/ads.txt',
-        destination: 'https://spn-v1.revampcdn.com/publishers/win-gg/ads.txt',
+        destination: 'https://srv.adstxtmanager.com/35051/win.gg',
         permanent: false,
         basePath: false
       },
