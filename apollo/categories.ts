@@ -13,6 +13,7 @@ const GET_CATEGORY_SLUGS = gql`
     categories(first: 100) {
       edges {
         node {
+          name
           slug
         }
       }

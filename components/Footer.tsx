@@ -9,7 +9,8 @@ const footerNavItems: INavItem[] = [
   { title: "About", href: "/about-us" },
   { title: "Contact", href: "/contact" },
   { title: "Privacy", href: "/privacy-policy" },
-  { title: "Terms", href: "/terms-of-service" }
+  { title: "Terms", href: "/terms-of-service" },
+  { title: "Sitemap", href: "/sitemap" }
 ];
 
 const Footer = () => {

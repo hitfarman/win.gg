@@ -2,6 +2,7 @@ import { IBreadcrumb } from "./navigation";
 
 export interface ICategorySlug {
   node: {
+    name: string;
     slug: string;
   };
 }

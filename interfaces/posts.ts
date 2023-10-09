@@ -10,6 +10,14 @@ export interface IPost {
   categories: { nodes: { name: string; slug: string }[] };
 }
 
+export interface IPostByCategoryAndDateResponse {
+  posts: {
+    nodes: {
+      id: string;
+    }[];
+  };
+}
+
 export interface IPaginatedPostsResponse {
   posts: {
     edges: { node: IPost }[];
@@ -95,4 +103,6 @@ export interface IPostQueryVariables {
   categoryName?: string;
   tag?: string;
   authorName?: string;
+  year?: number;
+  month?: number;
 }

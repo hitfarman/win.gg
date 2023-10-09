@@ -3,6 +3,7 @@ import { client } from "@/apollo/init";
 import {
   IFeaturedPost,
   IPaginatedPostsResponse,
+  IPostByCategoryAndDateResponse,
   IPostBySlugResponse,
   IPostDetails,
   IPostQueryVariables
@@ -23,6 +24,85 @@ export const GET_PAGINATED_POSTS = gql`
         categoryName: $categoryName
         offsetPagination: { offset: $offset, size: $size }
         authorName: $authorName
+      }
+    ) {
+      pageInfo {
+        offsetPagination {
+          hasMore
+          hasPrevious
+          total
+        }
+      }
+      edges {
+        node {
+          id
+          databaseId
+          title
+          slug
+          date
+          excerpt
+          author {
+            node {
+              slug
+              firstName
+              lastName
+            }
+          }
+          featuredImage {
+            node {
+              altText
+              sourceUrl
+            }
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_FIRST_POST_IN_CATEGORY_BY_YEAR_AND_MONTH = gql`
+  query getFirstPostInCategoryByYearAndMonth(
+    $month: Int = 0
+    $year: Int = 0
+    $categoryName: String = ""
+  ) {
+    posts(
+      where: {
+        dateQuery: { month: $month, year: $year }
+        categoryName: $categoryName
+      }
+      first: 1
+    ) {
+      nodes {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_PAGINATED_POSTS_FILTERED_BY_DATE = gql`
+  query getPaginatedPosts(
+    $offset: Int = 0
+    $size: Int = ${POSTS_PER_PAGE}
+    $categoryName: String = ""
+    $tag: String = ""
+    $authorName: String = ""
+    $month: Int = 0
+    $year: Int = 0
+  ) {
+    posts(
+      where: {
+        tag: $tag
+        categoryName: $categoryName
+        offsetPagination: { offset: $offset, size: $size }
+        authorName: $authorName
+        dateQuery: { year: $year, month: $month }
       }
     ) {
       pageInfo {
@@ -141,11 +221,32 @@ const GET_FEATURED_POST_BY_SLUG = gql`
   }
 `;
 
+export const getFirstPostInCategoryByYearAndMonth = async (
+  variables: IPostQueryVariables
+): Promise<IPostByCategoryAndDateResponse> => {
+  const response = await client.query<IPostByCategoryAndDateResponse>({
+    query: GET_FIRST_POST_IN_CATEGORY_BY_YEAR_AND_MONTH,
+    variables
+  });
+
+  return response.data;
+};
+
 export const getPaginatedPosts = async (
   variables: IPostQueryVariables
 ): Promise<IPaginatedPostsResponse> => {
   const response = await client.query({
     query: GET_PAGINATED_POSTS,
+    variables
+  });
+  return response.data as IPaginatedPostsResponse;
+};
+
+export const getPaginatedPostsFilteredByDate = async (
+  variables: IPostQueryVariables
+): Promise<IPaginatedPostsResponse> => {
+  const response = await client.query({
+    query: GET_PAGINATED_POSTS_FILTERED_BY_DATE,
     variables
   });
   return response.data as IPaginatedPostsResponse;
