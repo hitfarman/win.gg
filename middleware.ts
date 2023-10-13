@@ -1,13 +1,19 @@
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { allowedQueryParams } from "./constants/queryParams";
+import {
+  allowedQueryParams,
+  sanitizedQueryParams
+} from "./constants/queryParams";
 
 export default function middleware(request: NextRequest) {
   const nextUrl = request.nextUrl;
-
   if (
-    ![...request.nextUrl.searchParams.keys()].every((queryParam) =>
-      allowedQueryParams.has(queryParam)
+    ![...nextUrl.searchParams.keys()].every(
+      (queryParam) =>
+        allowedQueryParams.has(queryParam) ||
+        (sanitizedQueryParams.has(queryParam) &&
+          nextUrl.searchParams.get(queryParam) !== null &&
+          nextUrl.pathname.includes(nextUrl.searchParams.get(queryParam) ?? ""))
     )
   ) {
     return NextResponse.rewrite(new URL("/404", request.url));
@@ -36,6 +42,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)"
+    "/((?!api|_next/static|_next/image|_next/data|favicon.ico).*)"
   ]
 };

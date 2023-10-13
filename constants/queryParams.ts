@@ -5,6 +5,7 @@ export const allowedQueryParams = new Set([
   "utm_id",
   "utm_term",
   "utm_content",
-  "fbclid",
-  "params"
+  "fbclid"
 ]);
+
+export const sanitizedQueryParams = new Set(["params", "slug"]);
