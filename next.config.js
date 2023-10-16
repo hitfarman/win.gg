@@ -75,6 +75,11 @@ const nextConfig = {
       	destination: '/author/:slug',
       	permanent: true
       },
+      {
+      	source: "/sitemap_index.xml",
+      	destination: 'https://api.win.gg/sitemap_index.xml',
+      	permanent: true
+      }
     ]
   },
   output: process.env.BUILD_STANDALONE === "true" ? "standalone" : undefined,
