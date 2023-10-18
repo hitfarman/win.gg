@@ -5,8 +5,21 @@ import {
   sanitizedQueryParams
 } from "./constants/queryParams";
 
+const oldImageUrlRegex = /uploads\/(\d+)\/(\d+)\/(.*)/g;
+
 export default function middleware(request: NextRequest) {
   const nextUrl = request.nextUrl;
+
+  const oldImageUrl = nextUrl.pathname.match(oldImageUrlRegex);
+  if (oldImageUrl) {
+    return NextResponse.rewrite(
+      new URL(
+        oldImageUrl.join("/"),
+        `https://${process.env.NEXT_PUBLIC_WP_API_DOMAIN}/wp-content/`
+      )
+    );
+  }
+
   if (
     ![...nextUrl.searchParams.keys()].every(
       (queryParam) =>
