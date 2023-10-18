@@ -74,11 +74,6 @@ const nextConfig = {
       	source: '/news/author/:slug',
       	destination: '/author/:slug',
       	permanent: true
-      },
-      {
-      	source: "/sitemap_index.xml",
-      	destination: 'https://api.win.gg/sitemap_index.xml',
-      	permanent: true
       }
     ]
   },

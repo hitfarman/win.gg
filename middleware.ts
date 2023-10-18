@@ -20,6 +20,19 @@ export default function middleware(request: NextRequest) {
     );
   }
 
+  if (nextUrl.pathname.endsWith(".xml") || nextUrl.pathname.endsWith(".xsl")) {
+    console.log(nextUrl.pathname);
+    return fetch(
+      new URL(
+        nextUrl.pathname,
+        `https://${process.env.NEXT_PUBLIC_WP_API_DOMAIN}`
+      )
+    ).then((value: Response) => {
+      value.headers.append("Access-Control-Allow-Origin", "*");
+      return value;
+    });
+  }
+
   if (
     ![...nextUrl.searchParams.keys()].every(
       (queryParam) =>
