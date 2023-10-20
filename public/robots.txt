@@ -1,5 +1,4 @@
 User-agent: *
-Sitemap: https://api.win.gg/sitemap_index.xml
 Sitemap: https://win.gg/sitemap_index.xml
 
 Disallow: /?s=
