@@ -74,7 +74,12 @@ const nextConfig = {
       	source: '/news/author/:slug',
       	destination: '/author/:slug',
       	permanent: true
-      }
+      },
+      {
+      	source: '/csgo/',
+      	destination: '/counter-strike/',
+      	permanent: true
+      },
     ]
   },
   output: process.env.BUILD_STANDALONE === "true" ? "standalone" : undefined,
