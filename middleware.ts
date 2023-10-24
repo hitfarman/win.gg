@@ -10,6 +10,15 @@ const oldImageUrlRegex = /uploads\/(\d+)\/(\d+)\/(.*)/g;
 export default function middleware(request: NextRequest) {
   const nextUrl = request.nextUrl;
 
+  if (nextUrl.searchParams.has("news-page")) {
+    return NextResponse.redirect(
+      new URL(
+        `${nextUrl.pathname}page/${nextUrl.searchParams.get("news-page")}/`,
+        request.url
+      )
+    );
+  }
+
   const oldImageUrl = nextUrl.pathname.match(oldImageUrlRegex);
   if (oldImageUrl) {
     return NextResponse.rewrite(
@@ -21,7 +30,6 @@ export default function middleware(request: NextRequest) {
   }
 
   if (nextUrl.pathname.endsWith(".xml") || nextUrl.pathname.endsWith(".xsl")) {
-    console.log(nextUrl.pathname);
     return fetch(
       new URL(
         nextUrl.pathname,
