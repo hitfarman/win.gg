@@ -2,24 +2,6 @@ import { DEFAULT_VIDEO_LOOKUP_CATEGORY } from "@/constants/posts";
 
 const characterLimit = 1800;
 
-const lookupAdLink: Record<string, string> = {
-  [DEFAULT_VIDEO_LOOKUP_CATEGORY]:
-    "https://live.primis.tech/live/liveView.php?s=104669&vp_content=plembed2011pzhljmiu",
-  lol: "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed2062kwmhujyt",
-  "counter-strike":
-    "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed2064zrksmgtu",
-  dota2:
-    "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed20d9nusxpvim",
-  valorant:
-    "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed2119zmhxqslp",
-  overwatch:
-    "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed211axlhzskoy",
-  fortnite:
-    "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed211fltyvnrwg",
-  pokemon:
-    "https://live.primis.tech/live/liveView.php?s=104169&vp_content=plembed2d48lvuhgqpn"
-};
-
 const insertAfterNth = (
   opener: string,
   target: string,
@@ -85,19 +67,10 @@ export const insertVideoAds = (wpContent: string): string => {
 };
 
 export const getScriptToInsert = (category: string): string => {
-  if (Math.random() > 0.5) {
-    // truvid provider
-    return `<script
-        data-cfasync="false"
-        async
-        type="text/javascript"
-        src="//go.trvdp.com/init/7597.js?pid=5977"
-      ></script>`;
-  } else {
-    // primist provider
-    const adSrc = lookupAdLink[category]
-      ? lookupAdLink[category]
-      : lookupAdLink[DEFAULT_VIDEO_LOOKUP_CATEGORY];
-    return `<script type="text/javascript" src="${adSrc}"}></script>`;
-  }
+  return `<script
+      data-cfasync="false"
+      async
+      type="text/javascript"
+      src="//go.trvdp.com/init/7597.js?pid=5977"
+    ></script>`;
 };
