@@ -38,31 +38,6 @@ export const insertVideoAds = (wpContent: string): string => {
     contentResult = modifiedWpContent;
   }
 
-  // Inserting ad if content is longer than 1800
-  if (wpContent.length > characterLimit) {
-    const pTagMatches = Array.from(wpContent.matchAll(/<\/p>/g));
-
-    if (pTagMatches.length > 0) {
-      const nextPTagIndex = pTagMatches.findIndex(
-        (match) => match.index! > characterLimit
-      );
-
-      if (nextPTagIndex !== -1) {
-        const insertTag = `<div class="py-8" id="interstitial-ad"></div>`;
-
-        const modifiedContent = insertAfterNth(
-          "<p>",
-          "</p>",
-          nextPTagIndex,
-          insertTag,
-          contentResult
-        );
-
-        contentResult = modifiedContent;
-      }
-    }
-  }
-
   return contentResult;
 };
 

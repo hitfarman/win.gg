@@ -36,23 +36,6 @@ const ParsedPostContent: FC<Props> = ({ postContent, postCategory }) => {
     ) {
       inlineVideoPlaceholderDiv.append(inlineVideoScript);
     }
-
-    // Ending video script
-    let endingSciptHtml = `<div><script class="rvloader">!function(){var t="td-incontent-"+Math.floor(Math.random()*Date.now()),e=document.getElementsByClassName("rvloader"),n=e[e.length-1].parentNode;undefined==n.getAttribute("id")&&(n.setAttribute("id",t),revamp.displaySlots([t]))}();</script></div>`;
-
-    const endingVideoScript = document
-      .createRange()
-      .createContextualFragment(endingSciptHtml);
-
-    const endingVideoPlaceholderDiv =
-      document.getElementById("interstitial-ad");
-
-    if (
-      endingVideoPlaceholderDiv &&
-      endingVideoPlaceholderDiv.children.length === 0
-    ) {
-      endingVideoPlaceholderDiv.append(endingVideoScript);
-    }
   }, [parsedContent, postCategory]);
 
   return <div className="parsed-wp-content">{parsedContent}</div>;
