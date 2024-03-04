@@ -26,7 +26,7 @@ const BaseLayout: FC<Props> = ({ children }) => {
           <link rel="canonical" href={`${frontendOrigin}${cleanAsPath}`} />
         </Head>
         <div
-          className={`bg-win-black text-white ${montserrat.variable} ${roboto.variable} font-body`}
+          className={`bg-win-black ${montserrat.variable} ${roboto.variable} font-body`}
         >
           {children}
         </div>

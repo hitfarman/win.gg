@@ -23,7 +23,7 @@ const SearchInput: FC<Props> = ({ closeSearch }) => {
     >
       <input
         placeholder={"Search..."}
-        className={`w-full flex-1 border border-transparent border-b-white bg-transparent py-1.5 text-white ring-0 transition-colors hover:border-b-win-primary focus:border-white focus:outline-none focus:ring-0 sm:text-sm sm:leading-6`}
+        className={`w-full flex-1 border border-transparent border-b-win-primary bg-transparent py-1.5 text-white ring-0 transition-colors hover:border-b-win-primary focus:border-white focus:outline-none focus:ring-0 sm:text-sm sm:leading-6`}
         type="text"
         value={search}
         onChange={(e) => {

@@ -23,7 +23,7 @@ const TermsAndServicesPage: NextPage<Props> = ({ pageInfo }) => {
       <Breadcrumbs
         crumbs={[{ text: "Terms of service", url: "/terms-of-service" }]}
       />
-      <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h1 className="mb-10 mt-5 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Terms of Service
       </h1>
 

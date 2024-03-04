@@ -43,21 +43,21 @@ const PostCard: FC<Props> = ({ post, variant }) => {
           ))}
         </div>
         <Link
-          className="cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-primary"
+          className="cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-slate"
           href={`/news/${post.slug}`}
         >
           <h3>{post.title}</h3>
         </Link>
         <div
-          className="max-h-16 overflow-hidden text-sm text-gray-300"
+          className="max-h-16 overflow-hidden text-sm text-win-primary"
           dangerouslySetInnerHTML={{
             __html: truncateExcerpt(post.excerpt)
           }}
         />
-        <div className="flex gap-2 text-sm font-bold text-gray-500">
+        <div className="flex gap-2 text-sm font-bold text-win-slate">
           <Link
             href={`/author/${post.author.node.slug}`}
-            className="transition-colors hover:text-gray-300"
+            className="transition-colors hover:text-win-primary"
           >
             By {`${post.author.node.firstName} ${post.author.node.lastName}`}
           </Link>

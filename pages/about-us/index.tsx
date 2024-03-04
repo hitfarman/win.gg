@@ -49,7 +49,7 @@ const AboutUsPage: NextPage<Props> = ({ pageInfo }) => {
         })}
       </Head>
       <Breadcrumbs crumbs={[{ text: "About us", url: "/about-us" }]} />
-      <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h1 className="mb-10 mt-5 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         About us
       </h1>
       <div className="parsed-wp-content mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -79,7 +79,7 @@ const AboutUsPage: NextPage<Props> = ({ pageInfo }) => {
           </Link>
         </div>
       </div>
-      <h2 className="mb-10 mt-16 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h2 className="mb-10 mt-16 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Team members
       </h2>
       <div className="mb-10 grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-5">

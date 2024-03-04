@@ -54,7 +54,7 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
         )}
       </Head>
       {title && (
-        <h3 className="mb-10 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+        <h3 className="mb-10 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
           {title}
         </h3>
       )}

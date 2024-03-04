@@ -21,7 +21,7 @@ const Textarea: ForwardRefRenderFunction<HTMLTextAreaElement, Props> = (
           id={name}
           name={name}
           placeholder={label}
-          className={`block w-full border border-b-white bg-transparent py-1.5 text-white 
+          className={`block w-full border border-b-win-primary bg-transparent py-1.5 text-white 
            ring-0 transition-colors focus:border-white focus:outline-none focus:ring-0 sm:text-sm sm:leading-6 ${
              error
                ? "border-red-900 text-red-900 hover:border-b-red-900"

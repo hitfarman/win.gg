@@ -47,8 +47,9 @@
   @apply px-2;
   @apply py-1;
   @apply bg-transparent;
-  @apply hover:bg-win-primary-hover;
-  @apply text-white;
+  @apply hover:bg-win-primary;
+  @apply text-win-primary;
+  @apply hover:text-win-black;
   @apply transition-colors;
   @apply border;
   @apply border-win-primary;
@@ -56,7 +57,7 @@
 
 .svg-icon-button {
   @apply cursor-pointer;
-  @apply hover:bg-slate-200/30;
+  @apply hover:bg-win-primary;
   @apply p-2;
   @apply rounded-full;
   @apply transition-colors;

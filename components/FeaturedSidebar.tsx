@@ -5,7 +5,6 @@ import React, { FC } from "react";
 import FeaturedTags from "@/components/FeaturedTags";
 import FeaturedReviews from "@/components/FeaturedReviews";
 import FeaturedVideosSecondary from "@/components/FeaturedVideosSecondary";
-import InsertedAd from "@/components/InsertedAd";
 
 type Props = {
   featuredTags: IFeaturedTag[];
@@ -21,7 +20,6 @@ const FeaturedSidebar: FC<Props> = ({
   return (
     <div>
       <FeaturedTags tags={featuredTags} />
-      <InsertedAd id="td-top-mpu-1" className="z-0 mb-5 min-h-[250px]" />
       <FeaturedReviews reviews={featuredReviews} />
       <FeaturedVideosSecondary featuredVideos={featuredVideos} />
     </div>

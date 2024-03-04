@@ -15,7 +15,7 @@ const footerNavItems: INavItem[] = [
 
 const Footer = () => {
   return (
-    <footer className="full-bleed-black bg-black py-5">
+    <footer className="full-bleed-black bg-black py-5 text-white">
       <div className="mb-5 flex flex-wrap items-center justify-between border-b-2 border-b-white">
         {/* Logo */}
         <Link href="/" className="cursor-pointer">
@@ -33,7 +33,7 @@ const Footer = () => {
             <Link
               key={`${navItem.href}-footer-nav`}
               href={navItem.href}
-              className="text-sm font-semibold transition-colors hover:text-gray-400"
+              className="text-sm font-semibold transition-colors hover:text-win-primary"
             >
               {navItem.title}
             </Link>

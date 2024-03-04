@@ -19,7 +19,7 @@ const SitemapPage: NextPage<Props> = ({ categories }) => {
         <meta name="robots" content="index, follow" />
       </Head>
       <Breadcrumbs crumbs={[{ text: "Sitemap", url: "/sitemap/" }]} />
-      <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h1 className="mb-10 mt-5 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Sitemap
       </h1>
       <div className="my-10 flex flex-col gap-5 md:grid md:grid-cols-2">

@@ -8,11 +8,11 @@ module.exports = {
   theme: {
     extend: {
      colors: {
-      "win-primary": "#6D67E4",
-      "win-primary-hover":"#5851E0",
-      "win-black": "#151515",
-      "win-gray": "#272727",
-      "win-slate": "#B5B5B5",
+      "win-primary": "#171717",
+      "win-primary-hover":"#757575",
+      "win-black": "#FAF9F6",
+      "win-gray": "#E3E3E3",
+      "win-slate": "#3A4149",
       "win-white": "#F5F5F5"
      },
      fontFamily: {

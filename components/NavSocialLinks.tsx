@@ -26,7 +26,7 @@ const socialMediaLinks: ISocialMediaLink[] = [
 
 const NavSocialLinks = () => {
   return (
-    <div className="mb-3 flex flex-wrap items-center justify-center gap-2">
+    <div className="mb-3 flex flex-wrap items-center justify-center gap-2 ">
       {socialMediaLinks.map((link) => (
         <SocialMediaLink key={link.href} {...link} />
       ))}

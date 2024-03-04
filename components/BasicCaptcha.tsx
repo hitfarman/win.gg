@@ -41,7 +41,7 @@ const BasicCaptcha: FC<Props> = ({ setCaptchaIsMatching, captchaError }) => {
       <canvas ref={canvasRef} width={220} height={100} />
       <input
         placeholder={"What are the numbers on the picture?"}
-        className={`block w-full border border-transparent border-b-white bg-transparent py-1.5 
+        className={`block w-full border border-transparent border-b-win-primary bg-transparent py-1.5 
            text-white ring-0 transition-colors hover:border-b-win-primary focus:border-white focus:outline-none focus:ring-0 sm:text-sm sm:leading-6`}
         type="text"
         value={userNumbers}

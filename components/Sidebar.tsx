@@ -50,23 +50,23 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                 </div>
                 <button
                   type="button"
-                  className="rounded-full p-1 transition-colors hover:bg-slate-200/30 "
+                  className="rounded-full p-1 transition-colors hover:bg-win-primary"
                   onClick={closeSidebar}
                 >
                   <span className="sr-only">Close sidebar</span>
                   <XMarkIcon
-                    className="h-5 w-5 text-white"
+                    className="h-5 w-5 text-win-primary hover:text-win-black"
                     aria-hidden="true"
                   />
                 </button>
               </div>
 
-              <nav className="mt-10 flex flex-1 flex-col gap-5 font-header text-white">
+              <nav className="mt-10 flex flex-1 flex-col gap-2 font-header text-win-primary">
                 {navItems.map((item) => (
                   <Link
                     key={item.title}
                     href={`${item.href}`}
-                    className="px-2 py-1 font-semibold transition-colors hover:bg-win-primary/90"
+                    className="border border-transparent px-2 py-1 font-semibold transition-colors hover:border-win-primary"
                     onClick={closeSidebar}
                   >
                     {item.title}

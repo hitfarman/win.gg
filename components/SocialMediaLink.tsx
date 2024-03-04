@@ -4,7 +4,11 @@ import React, { FC } from "react";
 
 const SocialMediaLink: FC<ISocialMediaLink> = ({ href, icon }) => {
   return (
-    <Link href={href} target="_blank" className="svg-icon-button">
+    <Link
+      href={href}
+      target="_blank"
+      className="svg-icon-button hover:fill-win-black"
+    >
       {icon}
     </Link>
   );

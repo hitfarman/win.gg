@@ -50,7 +50,9 @@ const Header = () => {
 
   return (
     <>
-      <header className={"fixed left-0 top-0 z-40 h-20 w-screen bg-black"}>
+      <header
+        className={"fixed left-0 top-0 z-40 h-20 w-screen bg-black text-white"}
+      >
         <div>
           <Transition
             as={"div"}

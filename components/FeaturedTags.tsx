@@ -9,7 +9,7 @@ type Props = {
 const FeaturedTags: FC<Props> = ({ tags }) => {
   return (
     <div>
-      <h3 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h3 className="border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Tags
       </h3>
       <div className="flex flex-wrap gap-3 py-10">

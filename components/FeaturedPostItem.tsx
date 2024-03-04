@@ -18,7 +18,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
 
   return (
     <div
-      className={`group relative cursor-pointer overflow-hidden ${
+      className={`group relative cursor-pointer overflow-hidden text-win-black ${
         className || ""
       }`}
     >
@@ -60,7 +60,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           ))}
         </div>
         <Link
-          className={`cursor-pointer font-header  font-semibold transition-colors hover:text-win-primary  ${
+          className={`cursor-pointer font-header  font-semibold  transition-colors hover:text-win-gray  ${
             variant === "main" ? "text-4xl" : "text-base"
           }`}
           href={`/news/${featuredPost.slug}`}
@@ -81,7 +81,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           <p className="pb-0.5">|</p>
           <Link
             href={`/author/${featuredPost.author.node.slug}`}
-            className="transition-colors hover:text-gray-300"
+            className="transition-colors hover:text-win-slate"
             onClick={(e) => e.stopPropagation()}
           >
             {authorName}

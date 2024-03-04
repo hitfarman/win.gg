@@ -23,7 +23,7 @@ const ContactPage: NextPage<Props> = ({ pageInfo }) => {
         })}
       </Head>
       <Breadcrumbs crumbs={[{ text: "Contact", url: "/contact" }]} />
-      <h1 className="mb-10 mt-5 border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h1 className="mb-10 mt-5 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Contact
       </h1>
       <div className="my-10 flex flex-col gap-5 md:grid md:grid-cols-2">

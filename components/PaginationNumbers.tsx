@@ -50,7 +50,7 @@ const PaginationNumbers: FC<Props> = ({
               typeof page === "string" ? i : ""
             }`}
             className={`win-secondary-button ${
-              page === pageNumber ? "bg-win-primary-hover" : ""
+              page === pageNumber ? "bg-win-primary text-win-black" : ""
             }`}
             href={`${calculateNavLink({
               asPath: cleanAsPath,

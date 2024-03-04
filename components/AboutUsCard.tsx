@@ -18,7 +18,7 @@ const AboutUsCard: FC<Props> = ({ info }) => {
       />
       <div className="parsed-wp-content">
         <h3>{info.name}</h3>
-        <h4 className="text-gray-400">{info.position}</h4>
+        <h4 className="text-win-primary">{info.position}</h4>
         <a href={`mailto:${info.email}`}>{info.email}</a>
       </div>
     </div>

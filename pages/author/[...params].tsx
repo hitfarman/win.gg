@@ -52,10 +52,10 @@ const AuthorPage: NextPage<Props> = ({
           crumbs={[{ text: author.name, url: `/author/${author.slug}` }]}
         />
       </div>
-      <h1 className="border-b-2 border-b-white pb-5 font-header text-4xl font-semibold">
+      <h1 className="border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         {author.name}
       </h1>
-      <div className="flex flex-col gap-5 border-b-2 border-b-white py-10 md:flex-row">
+      <div className="flex flex-col gap-5 border-b-2 border-b-win-primary py-10 md:flex-row">
         <Image
           src={author.avatar.url}
           alt={author.name}

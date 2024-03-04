@@ -13,7 +13,7 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
       <ol role="list" className="flex items-center space-x-1 sm:space-x-4">
         <li>
           <div>
-            <Link href="/" className="text-gray-400 hover:text-gray-500">
+            <Link href="/" className="text-win-primary hover:text-gray-500">
               <HomeIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </Link>
@@ -23,15 +23,15 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
           <li key={`${text}-breadcrumb`}>
             <div className="flex items-center">
               <ChevronDoubleRightIcon
-                className="h-5 w-5 shrink-0 text-gray-400"
+                className="h-5 w-5 shrink-0 text-win-primary"
                 aria-hidden="true"
               />
               <Link
                 href={url}
                 className={`ml-1 text-xs font-medium transition-colors sm:ml-4 sm:text-sm ${
                   i === crumbs.length - 1
-                    ? "text-gray-300 hover:text-gray-500"
-                    : "text-gray-500 hover:text-gray-700"
+                    ? "text-win-primary hover:text-gray-500"
+                    : "text-win-slate hover:text-gray-700"
                 }`}
                 aria-current={i === crumbs.length - 1 ? "page" : undefined}
               >
