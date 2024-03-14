@@ -58,7 +58,6 @@
   list-style: initial;
   @apply pl-4;
   @apply pb-5;
-  @apply font-light;
 }
 
 .parsed-wp-content
