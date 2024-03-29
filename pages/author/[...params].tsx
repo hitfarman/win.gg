@@ -122,7 +122,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   if (!author) {
-    return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
+    return { notFound: true };
   }
 
   try {
@@ -154,7 +154,7 @@ export const getServerSideProps: GetServerSideProps = async (
         Number(pageNumber)
       )
     ) {
-      return { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
+      return { notFound: true };
     }
   } catch (e) {
     console.log("Fetching paginated posts failed with cause:", e);

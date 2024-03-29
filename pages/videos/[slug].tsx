@@ -220,5 +220,5 @@ export const getServerSideProps: GetServerSideProps = async ({
           video
         }
       }
-    : { notFound: true, revalidate: DEFAULT_REVALIDATION_TIME };
+    : { notFound: true };
 };
