@@ -53,7 +53,7 @@ const PaginationNumbers: FC<Props> = ({
               page === pageNumber ? "bg-win-primary text-win-black" : ""
             }`}
             href={`${calculateNavLink({
-              asPath: cleanAsPath,
+              asPath: frontendOrigin + cleanAsPath,
               to: page,
               pageNumber,
               pageParamIsInUrl

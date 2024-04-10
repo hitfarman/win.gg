@@ -2,6 +2,7 @@ import { IBreadcrumb } from "@/interfaces/navigation";
 import { HomeIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React, { FC } from "react";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   crumbs: IBreadcrumb[];
@@ -27,7 +28,7 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
                 aria-hidden="true"
               />
               <Link
-                href={url}
+                href={frontendOrigin + url}
                 className={`ml-1 text-xs font-medium transition-colors sm:ml-4 sm:text-sm ${
                   i === crumbs.length - 1
                     ? "text-win-primary hover:text-gray-500"

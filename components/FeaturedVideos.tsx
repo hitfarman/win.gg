@@ -2,6 +2,7 @@ import { IFeaturedVideo } from "@/interfaces/videos";
 import React, { FC } from "react";
 import LazyYoutubeVideo from "./LazyYoutubeVideo";
 import Link from "next/link";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   featuredVideos: IFeaturedVideo[];
@@ -21,7 +22,10 @@ const FeaturedVideos: FC<Props> = ({ featuredVideos }) => {
         ))}
       </div>
 
-      <Link href="/news/videos" className="win-primary-button mx-auto w-max">
+      <Link
+        href={`${frontendOrigin}/news/videos`}
+        className="win-primary-button mx-auto w-max"
+      >
         Show more videos
       </Link>
     </div>

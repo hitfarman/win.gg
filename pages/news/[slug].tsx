@@ -53,6 +53,7 @@ import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
 import ParsedPostContent from "@/components/ParsedPostContent";
+import { frontendOrigin } from "@/constants/general";
 
 const Reactions = dynamic(() => import("@/components/Reactions"), {
   ssr: false
@@ -141,7 +142,7 @@ const PostPage: NextPage<Props> = ({
             {post.categories.edges.map((category) => (
               <Link
                 key={`${category.node.name}-category-btn`}
-                href={`/${category.node.slug}`}
+                href={`${frontendOrigin}/${category.node.slug}`}
                 className="win-tag-button"
               >
                 {category.node.name}
@@ -150,7 +151,7 @@ const PostPage: NextPage<Props> = ({
             {post.tags.nodes.map((tag) => (
               <Link
                 key={`${tag.name}-tag-btn`}
-                href={`/${tag.slug}`}
+                href={`${frontendOrigin}/${tag.slug}`}
                 className="win-tag-button"
               >
                 {tag.name}
@@ -164,7 +165,7 @@ const PostPage: NextPage<Props> = ({
 
           <div className="mb-5 flex gap-2 text-sm font-bold text-gray-500">
             <Link
-              href={`/author/${post.author.node.slug}`}
+              href={`${frontendOrigin}/author/${post.author.node.slug}`}
               className="transition-colors hover:text-gray-300"
             >
               By {`${post.author.node.firstName} ${post.author.node.lastName}`}

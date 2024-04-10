@@ -1,3 +1,4 @@
+import { frontendOrigin } from "@/constants/general";
 import { IFeaturedTag } from "@/interfaces/tags";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -16,7 +17,7 @@ const FeaturedTags: FC<Props> = ({ tags }) => {
         {tags.map((tag) => (
           <Link
             key={tag.term_id}
-            href={`/${tag.slug}`}
+            href={`${frontendOrigin}/${tag.slug}`}
             className="win-tag-button"
           >
             {tag.name}

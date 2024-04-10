@@ -6,6 +6,7 @@ import { FC, Fragment } from "react";
 import winLogo from "@/assets/img/win-gg-white.png";
 import Image from "next/image";
 import NavSocialLinks from "./NavSocialLinks";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   isSidebarOpen: boolean;
@@ -65,7 +66,7 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                 {navItems.map((item) => (
                   <Link
                     key={item.title}
-                    href={`${item.href}`}
+                    href={`${frontendOrigin}/${item.href}`}
                     className="border border-transparent px-2 py-1 font-semibold transition-colors hover:border-win-primary"
                     onClick={closeSidebar}
                   >
@@ -78,14 +79,14 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                 <div className="mb-8 flex justify-center gap-5">
                   <Link
                     onClick={closeSidebar}
-                    href="/about-us"
+                    href={`${frontendOrigin}/about-us`}
                     className="win-secondary-button"
                   >
                     About
                   </Link>
                   <Link
                     onClick={closeSidebar}
-                    href="/contact"
+                    href={`${frontendOrigin}/contact`}
                     className="win-secondary-button"
                   >
                     Contact

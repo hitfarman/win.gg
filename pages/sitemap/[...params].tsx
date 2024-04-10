@@ -22,6 +22,7 @@ import { calculatePaginationOffset } from "@/utils/calculatePaginationOffset";
 import { hasTooHighPagenumber } from "@/utils/hasTooHighPagenumber";
 import PostList from "@/components/PostList";
 import Link from "next/link";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   categoryInfo: ICategoryInfo & {
@@ -43,25 +44,25 @@ const SitemapPage: NextPage<Props> = ({
   let crumbs = [
     {
       text: "Sitemap",
-      url: "/sitemap/"
+      url: `${frontendOrigin}//sitemap/`
     },
     {
       text: `${categoryInfo.name}`,
-      url: `/sitemap/${categoryInfo.slug}`
+      url: `${frontendOrigin}/sitemap/${categoryInfo.slug}`
     }
   ];
 
   if (year) {
     crumbs.push({
       text: `${year}`,
-      url: `/sitemap/${categoryInfo.slug}/${year}`
+      url: `${frontendOrigin}/sitemap/${categoryInfo.slug}/${year}`
     });
   }
 
   if (month) {
     crumbs.push({
       text: `${month}`,
-      url: `/sitemap/${categoryInfo.slug}/${year}/${month}`
+      url: `${frontendOrigin}/sitemap/${categoryInfo.slug}/${year}/${month}`
     });
   }
 
@@ -275,7 +276,7 @@ function getSitemapContent(
           .map((month) => (
             <Link
               key={month.month}
-              href={`/sitemap/${categoryInfo.slug}/${year}/${
+              href={`${frontendOrigin}/sitemap/${categoryInfo.slug}/${year}/${
                 englishMonthNames[month.month - 1]
               }`}
               className="win-tag-button w-max uppercase"
@@ -297,7 +298,7 @@ function getSitemapContent(
       {years.map((year) => (
         <Link
           key={year}
-          href={`/sitemap/${categoryInfo.slug}/${year}/`}
+          href={`${frontendOrigin}/sitemap/${categoryInfo.slug}/${year}/`}
           className="win-tag-button w-max uppercase"
         >
           {year}

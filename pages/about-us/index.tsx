@@ -13,6 +13,7 @@ import Link from "next/link";
 import AboutUsCard from "@/components/AboutUsCard";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 import { parseSeo } from "@/utils/parseSeo";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   pageInfo: IPageInfo;
@@ -55,7 +56,7 @@ const AboutUsPage: NextPage<Props> = ({ pageInfo }) => {
           <p>
             First of all, we love that you’re interested in learning more about
             us! If you’re looking to contact us, please visit our{" "}
-            <Link href="/contact">contact page</Link>.
+            <Link href={`${frontendOrigin}/contact`}>contact page</Link>.
           </p>
           <p>
             WIN.gg is a video gaming media platform that brings gamers all the
@@ -67,7 +68,7 @@ const AboutUsPage: NextPage<Props> = ({ pageInfo }) => {
             for supporting us!
           </p>
           <p>WIN.gg is a proud member of Final Boss Entertainment.</p>
-          <Link href="/contact">
+          <Link href={`${frontendOrigin}/contact`}>
             <button className="win-primary-button mx-auto mt-5">Contact</button>
           </Link>
         </div>

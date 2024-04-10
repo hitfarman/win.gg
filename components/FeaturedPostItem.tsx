@@ -4,6 +4,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 import { truncateExcerpt } from "@/utils/truncateExcerpt";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   featuredPost: IFeaturedPost;
@@ -33,7 +34,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
 
       <Link
         className={`absolute inset-0 z-10 flex items-end`}
-        href={`/news/${featuredPost.slug}`}
+        href={`${frontendOrigin}/news/${featuredPost.slug}`}
         ref={outerLinkRef}
       />
 
@@ -51,7 +52,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           {featuredPost.categories.nodes.map((category) => (
             <Link
               key={`${category.slug}-featured-post-id`}
-              href={`/${category.slug}`}
+              href={`${frontendOrigin}/${category.slug}`}
               className="win-tag-button w-max"
               onClick={(e) => e.stopPropagation()}
             >
@@ -63,7 +64,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           className={`cursor-pointer font-header  font-semibold  transition-colors hover:text-win-gray  ${
             variant === "main" ? "text-4xl" : "text-base"
           }`}
-          href={`/news/${featuredPost.slug}`}
+          href={`${frontendOrigin}/news/${featuredPost.slug}`}
           onClick={(e) => e.stopPropagation()}
         >
           {featuredPost.title}
@@ -80,7 +81,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           <p>{date}</p>
           <p className="pb-0.5">|</p>
           <Link
-            href={`/author/${featuredPost.author.node.slug}`}
+            href={`${frontendOrigin}/author/${featuredPost.author.node.slug}`}
             className="transition-colors hover:text-win-slate"
             onClick={(e) => e.stopPropagation()}
           >

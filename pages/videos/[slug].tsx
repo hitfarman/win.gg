@@ -38,6 +38,7 @@ import { parseSeo } from "@/utils/parseSeo";
 import FeaturedSidebar from "@/components/FeaturedSidebar";
 import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 import { stripQueryFromPath } from "@/utils/stripQueryFromPath";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   featuredPosts: IFeaturedPost[];
@@ -83,7 +84,7 @@ const PostPage: NextPage<Props> = ({
             {video.categories.nodes.map((category) => (
               <Link
                 key={`${category.name}-category-btn`}
-                href={`/${category.slug}`}
+                href={`${frontendOrigin}/${category.slug}`}
                 className="win-tag-button"
               >
                 {category.name}
@@ -92,7 +93,7 @@ const PostPage: NextPage<Props> = ({
             {video.tags.nodes.map((tag) => (
               <Link
                 key={`${tag.name}-tag-btn`}
-                href={`/${tag.slug}`}
+                href={`${frontendOrigin}/${tag.slug}`}
                 className="win-tag-button"
               >
                 {tag.name}
@@ -106,7 +107,7 @@ const PostPage: NextPage<Props> = ({
 
           <div className="mb-2 flex gap-2 text-sm font-bold text-gray-500">
             <Link
-              href={`/author/${video.author.node.slug}`}
+              href={`${frontendOrigin}/author/${video.author.node.slug}`}
               className="transition-colors hover:text-gray-300"
             >
               By{" "}

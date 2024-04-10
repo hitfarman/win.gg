@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import { truncateExcerpt } from "@/utils/truncateExcerpt";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   post: IPost;
@@ -19,7 +20,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
           : "lg:grid-cols-2 lg:grid-rows-1"
       }`}
     >
-      <Link href={`/news/${post.slug}`} className="h-full">
+      <Link href={`${frontendOrigin}/news/${post.slug}`} className="h-full">
         <Image
           alt={post.featuredImage?.node.altText}
           src={post.featuredImage?.node.sourceUrl}
@@ -35,7 +36,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
           {post.categories.nodes.map((category) => (
             <Link
               className="win-tag-button"
-              href={`/${category.slug}`}
+              href={`${frontendOrigin}/${category.slug}`}
               key={category.name}
             >
               {category.name}
@@ -44,7 +45,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         </div>
         <Link
           className="cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-slate"
-          href={`/news/${post.slug}`}
+          href={`${frontendOrigin}/news/${post.slug}`}
         >
           <h3>{post.title}</h3>
         </Link>
@@ -56,7 +57,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         />
         <div className="flex gap-2 text-sm font-bold text-win-slate">
           <Link
-            href={`/author/${post.author.node.slug}`}
+            href={`${frontendOrigin}/author/${post.author.node.slug}`}
             className="transition-colors hover:text-win-primary"
           >
             By {`${post.author.node.firstName} ${post.author.node.lastName}`}

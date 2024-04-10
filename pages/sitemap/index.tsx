@@ -6,6 +6,7 @@ import { DEFAULT_REVALIDATION_TIME } from "@/constants/posts";
 import { ICategorySlug } from "@/interfaces/categories";
 import { getCategorySlugs } from "@/apollo/categories";
 import Link from "next/link";
+import { frontendOrigin } from "@/constants/general";
 
 type Props = {
   categories: ICategorySlug[];
@@ -18,7 +19,9 @@ const SitemapPage: NextPage<Props> = ({ categories }) => {
         <title> Sitemap | WIN.gg</title>
         <meta name="robots" content="index, follow" />
       </Head>
-      <Breadcrumbs crumbs={[{ text: "Sitemap", url: "/sitemap/" }]} />
+      <Breadcrumbs
+        crumbs={[{ text: "Sitemap", url: `${frontendOrigin}/sitemap/` }]}
+      />
       <h1 className="mb-10 mt-5 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Sitemap
       </h1>
@@ -26,7 +29,7 @@ const SitemapPage: NextPage<Props> = ({ categories }) => {
         {categories.map((category) => (
           <Link
             key={category.node.slug}
-            href={`/sitemap/${category.node.slug}`}
+            href={`${frontendOrigin}/${category.node.slug}`}
           >
             {category.node.name}
           </Link>

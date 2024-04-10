@@ -4,13 +4,14 @@ import winLogo from "@/assets/img/win-gg-white.png";
 import React from "react";
 import { INavItem } from "@/interfaces/navigation";
 import NavSocialLinks from "@/components/NavSocialLinks";
+import { frontendOrigin } from "@/constants/general";
 
 const footerNavItems: INavItem[] = [
-  { title: "About", href: "/about-us" },
-  { title: "Contact", href: "/contact" },
-  { title: "Privacy", href: "/privacy-policy" },
-  { title: "Terms", href: "/terms-of-service" },
-  { title: "Sitemap", href: "/sitemap" }
+  { title: "About", href: `${frontendOrigin}/about-us` },
+  { title: "Contact", href: `${frontendOrigin}//contact` },
+  { title: "Privacy", href: `${frontendOrigin}//privacy-policy` },
+  { title: "Terms", href: `${frontendOrigin}//terms-of-service` },
+  { title: "Sitemap", href: `${frontendOrigin}//sitemap` }
 ];
 
 const Footer = () => {
