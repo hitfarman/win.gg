@@ -28,7 +28,7 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
                 aria-hidden="true"
               />
               <Link
-                href={frontendOrigin + url}
+                href={frontendOrigin + url + "/"}
                 className={`ml-1 text-xs font-medium transition-colors sm:ml-4 sm:text-sm ${
                   i === crumbs.length - 1
                     ? "text-win-primary hover:text-gray-500"

@@ -20,7 +20,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
           : "lg:grid-cols-2 lg:grid-rows-1"
       }`}
     >
-      <Link href={`${frontendOrigin}/news/${post.slug}`} className="h-full">
+      <Link href={`${frontendOrigin}/news/${post.slug}/`} className="h-full">
         <Image
           alt={post.featuredImage?.node.altText}
           src={post.featuredImage?.node.sourceUrl}
@@ -36,7 +36,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
           {post.categories.nodes.map((category) => (
             <Link
               className="win-tag-button"
-              href={`${frontendOrigin}/${category.slug}`}
+              href={`${frontendOrigin}/${category.slug}/`}
               key={category.name}
             >
               {category.name}
@@ -45,7 +45,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         </div>
         <Link
           className="cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-slate"
-          href={`${frontendOrigin}/news/${post.slug}`}
+          href={`${frontendOrigin}/news/${post.slug}/`}
         >
           <h3>{post.title}</h3>
         </Link>

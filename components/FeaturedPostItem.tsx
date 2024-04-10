@@ -34,7 +34,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
 
       <Link
         className={`absolute inset-0 z-10 flex items-end`}
-        href={`${frontendOrigin}/news/${featuredPost.slug}`}
+        href={`${frontendOrigin}/news/${featuredPost.slug}/`}
         ref={outerLinkRef}
       />
 
@@ -52,7 +52,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           {featuredPost.categories.nodes.map((category) => (
             <Link
               key={`${category.slug}-featured-post-id`}
-              href={`${frontendOrigin}/${category.slug}`}
+              href={`${frontendOrigin}/${category.slug}/`}
               className="win-tag-button w-max"
               onClick={(e) => e.stopPropagation()}
             >
@@ -64,7 +64,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           className={`cursor-pointer font-header  font-semibold  transition-colors hover:text-win-gray  ${
             variant === "main" ? "text-4xl" : "text-base"
           }`}
-          href={`${frontendOrigin}/news/${featuredPost.slug}`}
+          href={`${frontendOrigin}/news/${featuredPost.slug}/`}
           onClick={(e) => e.stopPropagation()}
         >
           {featuredPost.title}
