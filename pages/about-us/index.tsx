@@ -7,8 +7,7 @@ import { GetStaticProps, NextPage } from "next";
 import parse from "html-react-parser";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import heroImg from "@/assets/img/about-us-hero.jpeg";
-import ceoImg from "@/assets/img/ceo.png";
-import contentManagerImg from "@/assets/img/content-manager.png";
+import ceoImg from "@/assets/img/ceo.jpg";
 import HeadOfVideoImg from "@/assets/img/head-of-video.png";
 import Link from "next/link";
 import AboutUsCard from "@/components/AboutUsCard";
@@ -25,12 +24,6 @@ const aboutUsCards: IAboutUsCardInfo[] = [
     position: "CEO",
     image: ceoImg,
     email: "tim@win.gg"
-  },
-  {
-    name: "Marta Juras",
-    position: "Head of Content and Operations",
-    image: contentManagerImg,
-    email: "marta@win.gg"
   },
   {
     name: "Marcin Rojek",
