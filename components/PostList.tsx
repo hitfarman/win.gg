@@ -80,7 +80,10 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasPrevious && (
-          <Link className="win-secondary-button" href={prevLink}>
+          <Link
+            className="win-secondary-button"
+            href={frontendOrigin + prevLink}
+          >
             Previous
           </Link>
         )}
@@ -94,7 +97,10 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
           pageParamIsInUrl={pageParamIsInUrl}
         />
         {paginatedPosts?.posts.pageInfo.offsetPagination.hasMore && (
-          <Link className="win-secondary-button" href={nextLink}>
+          <Link
+            className="win-secondary-button"
+            href={frontendOrigin + nextLink}
+          >
             Next
           </Link>
         )}

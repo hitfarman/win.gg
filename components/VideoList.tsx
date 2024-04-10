@@ -78,7 +78,10 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
       />
       <div className="mt-5 flex justify-center gap-5">
         {paginatedVideos?.videos.pageInfo.offsetPagination.hasPrevious && (
-          <Link className="win-secondary-button" href={prevLink}>
+          <Link
+            className="win-secondary-button"
+            href={frontendOrigin + prevLink}
+          >
             Previous
           </Link>
         )}
@@ -93,7 +96,10 @@ const VideoList: FC<Props> = ({ paginatedVideos, title }) => {
           pageParamIsInUrl={pageParamIsInUrl}
         />
         {paginatedVideos?.videos.pageInfo.offsetPagination.hasMore && (
-          <Link className="win-secondary-button" href={nextLink}>
+          <Link
+            className="win-secondary-button"
+            href={frontendOrigin + nextLink}
+          >
             Next
           </Link>
         )}
