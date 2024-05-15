@@ -84,7 +84,7 @@ const PostPage: NextPage<Props> = ({
             {video.categories.nodes.map((category) => (
               <Link
                 key={`${category.name}-category-btn`}
-                href={`${frontendOrigin}/${category.slug}`}
+                href={`${frontendOrigin}/${category.slug}/`}
                 className="win-tag-button"
               >
                 {category.name}
@@ -93,7 +93,7 @@ const PostPage: NextPage<Props> = ({
             {video.tags.nodes.map((tag) => (
               <Link
                 key={`${tag.name}-tag-btn`}
-                href={`${frontendOrigin}/${tag.slug}`}
+                href={`${frontendOrigin}/${tag.slug}/`}
                 className="win-tag-button"
               >
                 {tag.name}

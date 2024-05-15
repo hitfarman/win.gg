@@ -19,9 +19,7 @@ const SitemapPage: NextPage<Props> = ({ categories }) => {
         <title> Sitemap | WIN.gg</title>
         <meta name="robots" content="index, follow" />
       </Head>
-      <Breadcrumbs
-        crumbs={[{ text: "Sitemap", url: `${frontendOrigin}/sitemap/` }]}
-      />
+      <Breadcrumbs crumbs={[{ text: "Sitemap", url: `/sitemap` }]} />
       <h1 className="mb-10 mt-5 border-b-2 border-b-win-primary pb-5 font-header text-4xl font-semibold">
         Sitemap
       </h1>
@@ -29,7 +27,7 @@ const SitemapPage: NextPage<Props> = ({ categories }) => {
         {categories.map((category) => (
           <Link
             key={category.node.slug}
-            href={`${frontendOrigin}/${category.node.slug}`}
+            href={`${frontendOrigin}/${category.node.slug}/`}
           >
             {category.node.name}
           </Link>

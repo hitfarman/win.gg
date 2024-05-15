@@ -44,25 +44,25 @@ const SitemapPage: NextPage<Props> = ({
   let crumbs = [
     {
       text: "Sitemap",
-      url: `${frontendOrigin}//sitemap/`
+      url: `/sitemap`
     },
     {
       text: `${categoryInfo.name}`,
-      url: `${frontendOrigin}/sitemap/${categoryInfo.slug}`
+      url: `/sitemap/${categoryInfo.slug}`
     }
   ];
 
   if (year) {
     crumbs.push({
       text: `${year}`,
-      url: `${frontendOrigin}/sitemap/${categoryInfo.slug}/${year}`
+      url: `/sitemap/${categoryInfo.slug}/${year}`
     });
   }
 
   if (month) {
     crumbs.push({
       text: `${month}`,
-      url: `${frontendOrigin}/sitemap/${categoryInfo.slug}/${year}/${month}`
+      url: `/sitemap/${categoryInfo.slug}/${year}/${month}`
     });
   }
 

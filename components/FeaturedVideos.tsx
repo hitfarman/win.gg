@@ -23,7 +23,7 @@ const FeaturedVideos: FC<Props> = ({ featuredVideos }) => {
       </div>
 
       <Link
-        href={`${frontendOrigin}/news/videos`}
+        href={`${frontendOrigin}/news/videos/`}
         className="win-primary-button mx-auto w-max"
       >
         Show more videos

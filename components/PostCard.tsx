@@ -57,7 +57,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
         />
         <div className="flex gap-2 text-sm font-bold text-win-slate">
           <Link
-            href={`${frontendOrigin}/author/${post.author.node.slug}`}
+            href={`${frontendOrigin}/author/${post.author.node.slug}/`}
             className="transition-colors hover:text-win-primary"
           >
             By {`${post.author.node.firstName} ${post.author.node.lastName}`}

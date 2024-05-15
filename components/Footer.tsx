@@ -7,11 +7,11 @@ import NavSocialLinks from "@/components/NavSocialLinks";
 import { frontendOrigin } from "@/constants/general";
 
 const footerNavItems: INavItem[] = [
-  { title: "About", href: `${frontendOrigin}/about-us` },
-  { title: "Contact", href: `${frontendOrigin}/contact` },
-  { title: "Privacy", href: `${frontendOrigin}/privacy-policy` },
-  { title: "Terms", href: `${frontendOrigin}/terms-of-service` },
-  { title: "Sitemap", href: `${frontendOrigin}/sitemap` }
+  { title: "About", href: `${frontendOrigin}/about-us/` },
+  { title: "Contact", href: `${frontendOrigin}/contact/` },
+  { title: "Privacy", href: `${frontendOrigin}/privacy-policy/` },
+  { title: "Terms", href: `${frontendOrigin}/terms-of-service/` },
+  { title: "Sitemap", href: `${frontendOrigin}/sitemap/` }
 ];
 
 const Footer = () => {

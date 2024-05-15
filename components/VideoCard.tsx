@@ -25,7 +25,7 @@ const VideoCard: FC<Props> = ({ video }) => {
           {video.categories.nodes.map((category) => (
             <Link
               className="win-tag-button"
-              href={`${frontendOrigin}/${category.slug}`}
+              href={`${frontendOrigin}/${category.slug}/`}
               key={category.name}
             >
               {category.name}
@@ -34,14 +34,14 @@ const VideoCard: FC<Props> = ({ video }) => {
         </div>
         <Link
           className={`cursor-pointer font-header text-2xl font-semibold transition-colors hover:text-win-primary`}
-          href={`${frontendOrigin}/videos/${video.slug}`}
+          href={`${frontendOrigin}/videos/${video.slug}/`}
         >
           <h3>{video.title}</h3>
         </Link>
 
         <div className="flex gap-2 text-sm font-bold text-gray-500">
           <Link
-            href={`${frontendOrigin}/author/${video.author.node.slug}`}
+            href={`${frontendOrigin}/author/${video.author.node.slug}/`}
             className="transition-colors hover:text-gray-300"
           >
             By {`${video.author.node.firstName} ${video.author.node.lastName}`}
