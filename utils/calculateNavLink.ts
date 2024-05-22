@@ -16,8 +16,8 @@ export const calculateNavLink = ({
   }
 
   if (!pageParamIsInUrl) {
-    return `${asPath}page/${to}`;
+    return `${asPath}page/${to}/`;
   }
 
-  return asPath.replace(`/page/${pageNumber}`, `/page/${to}`);
+  return asPath.replace(`/page/${pageNumber}`, `/page/${to}/`);
 };
