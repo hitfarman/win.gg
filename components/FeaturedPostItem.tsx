@@ -81,7 +81,7 @@ const FeaturedPostItem: FC<Props> = ({ featuredPost, className, variant }) => {
           <p>{date}</p>
           <p className="pb-0.5">|</p>
           <Link
-            href={`${frontendOrigin}/author/${featuredPost.author.node.slug}`}
+            href={`${frontendOrigin}/author/${featuredPost.author.node.slug}/`}
             className="transition-colors hover:text-win-slate"
             onClick={(e) => e.stopPropagation()}
           >
