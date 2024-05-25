@@ -24,7 +24,7 @@ const PostList: FC<Props> = ({ paginatedPosts, title }) => {
 
   const nextLink = useMemo<string>(() => {
     if (!pageParamIsInUrl) {
-      return `${cleanAsPath}page/2`;
+      return `${cleanAsPath}page/2/`;
     }
     return `${cleanAsPath.replace(
       `/page/${pageNumber}`,
