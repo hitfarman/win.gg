@@ -60,6 +60,12 @@
   @apply pb-5;
 }
 
+.parsed-wp-content ol {
+  list-style: decimal;
+  @apply pl-4;
+  @apply pb-5;
+}
+
 .parsed-wp-content
   figure.wp-block-embed.is-provider-twitter
   .wp-block-embed__wrapper {
