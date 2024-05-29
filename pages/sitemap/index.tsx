@@ -27,7 +27,7 @@ const SitemapPage: NextPage<Props> = ({ categories }) => {
         {categories.map((category) => (
           <Link
             key={category.node.slug}
-            href={`${frontendOrigin}/${category.node.slug}/`}
+            href={`${frontendOrigin}/sitemap/${category.node.slug}/`}
           >
             {category.node.name}
           </Link>
