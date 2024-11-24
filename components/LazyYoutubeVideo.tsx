@@ -25,7 +25,7 @@ const LazyYoutubeVideo: FC<Props> = ({
         src={`${getYoutubeEmbed(url)}?autoplay=true`}
         width={width}
         height={height}
-        className="aspect-[16/9] h-full w-full border-none p-0"
+        className="aspect-[16/9] size-full border-none p-0"
         allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Featured video"
@@ -42,11 +42,11 @@ const LazyYoutubeVideo: FC<Props> = ({
           alt="thumbnail"
           width={width}
           height={height}
-          className="h-full w-full object-cover"
+          className="size-full object-cover"
           sizes={sizesForNextImg}
         />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-black/40 px-2 py-1 text-white transition-all group-hover:scale-125 group-hover:bg-win-primary/70">
-          <PlayIcon className="h-10 w-10" />
+          <PlayIcon className="size-10" />
         </div>
       </div>
     );

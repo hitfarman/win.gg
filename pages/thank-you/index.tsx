@@ -6,7 +6,7 @@ const ThankYouPage = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="flex flex-col items-center gap-5 pb-5 text-center">
-        <CheckCircleIcon className="h-10 w-10 text-win-primary" />
+        <CheckCircleIcon className="size-10 text-win-primary" />
         <h1 className="font-header text-4xl font-semibold">
           Thank you for your application!
         </h1>

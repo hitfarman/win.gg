@@ -6,6 +6,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "api.win.gg",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: process.env.NEXT_PUBLIC_WP_API_DOMAIN,
         port: "",
         pathname: "/**",
@@ -27,7 +33,7 @@ const nextConfig = {
         hostname: "steamcdn-a.akamaihd.net",
         port: "",
         pathname: "/**",
-      },
+      }
     ]
   },
   async rewrites() {

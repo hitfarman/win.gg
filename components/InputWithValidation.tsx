@@ -36,7 +36,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
         {error && (
           <div className="pointer-events-none absolute inset-y-0 -right-0.5 flex items-center pr-3">
             <ExclamationCircleIcon
-              className="h-5 w-5 text-red-500"
+              className="size-5 text-red-500"
               aria-hidden="true"
             />
           </div>

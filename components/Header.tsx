@@ -105,11 +105,11 @@ const Header = () => {
             <div className="flex items-center gap-3">
               <MagnifyingGlassIcon
                 onClick={() => setIsSearchOpen(true)}
-                className="h-5 w-5 cursor-pointer"
+                className="size-5 cursor-pointer"
               />
               <Bars3Icon
                 onClick={() => setIsSidebarOpen(true)}
-                className="h-5 w-5 cursor-pointer"
+                className="size-5 cursor-pointer"
               />
             </div>
           </Transition>

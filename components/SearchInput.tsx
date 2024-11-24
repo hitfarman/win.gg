@@ -39,7 +39,7 @@ const SearchInput: FC<Props> = ({ closeSearch }) => {
         }}
       >
         <span className="sr-only">Close search</span>
-        <XMarkIcon className="h-5 w-5 text-white" aria-hidden="true" />
+        <XMarkIcon className="size-5 text-white" aria-hidden="true" />
       </button>
     </form>
   );

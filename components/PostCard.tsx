@@ -26,7 +26,7 @@ const PostCard: FC<Props> = ({ post, variant }) => {
           src={post.featuredImage?.node.sourceUrl}
           width={350}
           height={250}
-          className="h-full w-full object-cover transition-opacity hover:opacity-70"
+          className="size-full object-cover transition-opacity hover:opacity-70"
           sizes="(max-width: 1024px) 100vw, 25vw"
         />
       </Link>

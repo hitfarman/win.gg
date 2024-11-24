@@ -56,7 +56,7 @@ const Sidebar: FC<Props> = ({ isSidebarOpen, closeSidebar, navItems }) => {
                 >
                   <span className="sr-only">Close sidebar</span>
                   <XMarkIcon
-                    className="h-5 w-5 text-win-primary hover:text-win-black"
+                    className="size-5 text-win-primary hover:text-win-black"
                     aria-hidden="true"
                   />
                 </button>

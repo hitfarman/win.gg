@@ -15,7 +15,7 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
         <li>
           <div>
             <Link href="/" className="text-win-primary hover:text-gray-500">
-              <HomeIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <HomeIcon className="size-5 shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </Link>
           </div>
@@ -24,7 +24,7 @@ const Breadcrumbs: FC<Props> = ({ crumbs }) => {
           <li key={`${text}-breadcrumb`}>
             <div className="flex items-center">
               <ChevronDoubleRightIcon
-                className="h-5 w-5 shrink-0 text-win-primary"
+                className="size-5 shrink-0 text-win-primary"
                 aria-hidden="true"
               />
               <Link
